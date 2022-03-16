@@ -7,7 +7,6 @@ use Carp qw(croak confess);
 use Data::Dumper;
 use Digest::SHA qw(sha256_hex);
 use File::HomeDir;
-use HTML::Form;
 use HTTP::Request;
 use JSON;
 use MIME::Base64 qw(encode_base64url);
@@ -387,6 +386,9 @@ Tesla::API - Interface to Tesla's API
 =head1 DESCRIPTION
 
 This distribution provides access to the Tesla API.
+
+B<WARNING>: This is an initial, beta release. Barely any functionality has
+been implemented, and the authentication mechanism needs a lot of polishing.
 
 It's currently in its infancy, so the interface may change. Although there are
 very few public access methods available yet, all current and future ones behve
