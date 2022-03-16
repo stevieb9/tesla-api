@@ -374,10 +374,12 @@ Tesla::API - Interface to Tesla's API
 
     my $vehicles = $tesla->my_vehicles;
 
+    my $vehicle_name = $tesla->vehicle_name;
+
     my @endpoint_names = keys %{ $tesla->endpoints };
 
     # Using the internal api() until the complete interface
-    # of this distribution is complete
+    # of this distribution is done
 
     my $endpoint_name = 'VEHICLE_DATA';
 
@@ -390,9 +392,10 @@ This distribution provides access to the Tesla API.
 B<WARNING>: This is an initial, beta release. Barely any functionality has
 been implemented, and the authentication mechanism needs a lot of polishing.
 
-It's currently in its infancy, so the interface may change. Although there are
-very few public access methods available yet, all current and future ones behve
-the exact same way, by using the object's C<api()> method with an endpoint name.
+It's currently in its infancy, so the interface may^H^H^Hwill change. Although
+there are very few public access methods available yet, all current and future
+ones behave the exact same way, by using the object's C<api()> method with an
+endpoint name.
 
 Some endpoints require an ID sent in, so it must be provided for those calls as
 well.
