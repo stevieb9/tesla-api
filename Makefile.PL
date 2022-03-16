@@ -34,7 +34,7 @@ my %WriteMakefileArgs = (
         'File::HomeDir'     => 0,
         'HTTP::Request'     => 0,
         'JSON'              => 0,
-        'MIME::Base64'      => 0,
+        'MIME::Base64'      => '3.16',
         'WWW::Mechanize'    => 0,
         'URI'               => 0,
     },
