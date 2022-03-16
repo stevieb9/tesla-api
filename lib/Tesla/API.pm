@@ -201,6 +201,8 @@ sub _access_token {
     else {
         $self->{access_token} = $self->_access_token_fetch;
     }
+
+    return $self->{access_token};
 }
 sub _access_token_fetch {
     # Fetches the access token from the cache file
