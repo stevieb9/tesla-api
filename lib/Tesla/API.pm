@@ -13,7 +13,7 @@ use MIME::Base64 qw(encode_base64url);
 use WWW::Mechanize;
 use URI;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 my $home_dir;
 
@@ -46,7 +46,7 @@ sub new {
     $self->mech;
     $self->_access_token;
 
-    $self->my_vehicle_id($params{vehicle_id});
+#    $self->my_vehicle_id($params{vehicle_id});
 
     return $self;
 }
