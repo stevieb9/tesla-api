@@ -92,10 +92,6 @@ sub api {
         warn $response->status_line;
     }
 }
-sub data {
-    my ($self) = @_;
-    return $self->{data};
-}
 sub endpoints {
     my ($self, $endpoint) = @_;
 
@@ -134,54 +130,9 @@ sub mech {
 
     $self->{mech} = $www_mech;
 }
-sub my_vehicle_id {
-    my ($self, $id) = @_;
-
-    if (defined $id) {
-        $self->{data}{vehicle_id} = $id;
-    }
-    else {
-        my @vehicle_ids = keys %{$self->my_vehicles};
-
-        if (scalar @vehicle_ids == 1) {
-            $self->{data}{vehicle_id} = $vehicle_ids[0];
-        }
-    }
-
-    return $self->{data}{vehicle_id} || -1;
-}
-sub my_vehicle_name {
+sub object_data {
     my ($self) = @_;
-
-    if (! $self->my_vehicle_id) {
-        warn "You haven't set a vehicle ID yet";
-    }
-
-    return $self->my_vehicles->{$self->my_vehicle_id};
-}
-sub my_vehicles {
-    my ($self) = @_;
-
-    return $self->{vehicles} if $self->{vehicles};
-
-    my $vehicles = $self->api('VEHICLE_LIST');
-
-    for (@$vehicles) {
-        $self->{data}{vehicles}{$_->{id}} = $_->{display_name};
-    }
-
-    return $self->{data}{vehicles};
-}
-
-# Public Tesla API methods
-
-sub vehicle_data {
-    my ($self, $id) = @_;
-    return $self->api('VEHICLE_DATA', $self->_id($id));
-}
-sub wake {
-    my ($self, $id) = @_;
-    return $self->api('VEHICLE_DATA', $self->_id($id));
+    return $self->{data};
 }
 
 # Private methods
@@ -341,21 +292,6 @@ sub _useragent_string {
     my ($self) = @_;
     my $ua = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:98.0) Gecko/20100101 Firefox/98.0';
     return $ua;
-}
-sub _id {
-    # Tries to figure out the ID to use in API calls
-
-    my ($self, $id) = @_;
-
-    if (! defined $id) {
-        $id = $self->my_vehicle_id;
-    }
-
-    if (! $id) {
-        croak "vehicle_data() requires an \$id sent in";
-    }
-
-    return $id;
 }
 
 1;
