@@ -182,33 +182,37 @@ sub _access_token {
 
     my ($self) = @_;
 
-    return $self->{access_token} if $self->{access_token};
-
     if (! -e CACHE_FILE) {
         my $auth_code = $self->_authentication_code;
         $self->_access_token_generate($auth_code);
     }
-    else {
-        $self->{access_token} = $self->_access_token_fetch;
+
+    my $valid_token = $self->_access_token_validate;
+
+    if (! $valid_token) {
+        $self->_access_token_refresh;
     }
+
+    $self->{access_token} = $self->_access_token_data->{access_token};
 
     return $self->{access_token};
 }
-sub _access_token_fetch {
-    # Fetches the access token from the cache file
+sub _access_token_data {
+    # Fetches and stores the cache data file dat
 
-    my ($self) = @_;
+    my ($self, $data) = @_;
 
-    my $cache_data;
+    $self->{cache_data} = $data if defined $data;
+
+    return $self->{cache_data} if $self->{cache_data};
+
     {
-        open my $fh, '<', CACHE_FILE or croak "Can't open Tesla cache file " . CACHE_FILE . ": $!";
+        open my $fh, '<', CACHE_FILE or die "Can't open Tesla cache file " . CACHE_FILE . ": $!";
         my $json = <$fh>;
-        $cache_data = decode_json($json);
+        $self->{cache_data} = decode_json($json);
     }
 
-    my $access_token = $cache_data->{access_token};
-
-    return $access_token;
+    return $self->{cache_data};
 }
 sub _access_token_generate {
     # Generates an access token and stores it in the cache file
@@ -235,17 +239,98 @@ sub _access_token_generate {
     my $response = $self->mech->request($request);
 
     if ($response->is_success) {
-        open my $fh, '>', CACHE_FILE or die $!;
+        my $token_data = decode_json($response->decoded_content);
 
-        my $response_json = $response->decoded_content;
-        print $fh $response_json;
+        $token_data = $self->_access_token_set_expiry($token_data);
+        $self->_access_token_update($token_data);
 
-        my $response_struct = decode_json($response_json);
-        return $response_struct;
+        return $token_data;
     }
     else {
         croak $self->mech->response->status_line;
     }
+}
+sub _access_token_validate {
+    # Checks the validity of an existing token
+
+    my ($self) = @_;
+
+    my $token_expires_at = $self->_access_token_data->{expires_at};
+    my $token_expires_in = $self->_access_token_data->{expires_in};
+
+    my $valid = 0;
+
+    if (time + $token_expires_in < $token_expires_at) {
+        $valid = 1;
+    }
+
+    return $valid;
+}
+sub _access_token_set_expiry {
+    # Sets the access token expiry date/time after generation and
+    # renewal
+
+    my ($self, $token_data) = @_;
+
+    if (! defined $token_data || ref($token_data) ne 'HASH') {
+        croak "_access_token_set_expiry() needs a hash reference of token data";
+    }
+
+    my $expiry = time + $token_data->{expires_in};
+
+    $token_data->{expires_at} = $expiry;
+
+    return $token_data;
+}
+sub _access_token_refresh {
+    # Renews an expired/invalid access token
+
+    my ($self) = @_;
+
+    my $url = URI->new(TOKEN_URL);
+    my $header = ['Content-Type' => 'application/json; charset=UTF-8'];
+
+    my $refresh_token = $self->_access_token_data->{refresh_token};
+
+    my $request_data = {
+        grant_type    => "refresh_token",
+        refresh_token => $refresh_token,
+        client_id     => "ownerapi",
+    };
+
+    my $request = HTTP::Request->new('POST', $url, $header, encode_json($request_data));
+
+    my $response = $self->mech->request($request);
+
+    if ($response->is_success) {
+        my $token_data = decode_json($response->decoded_content);
+
+        # Re-add the existing refresh token; its still valid
+        $token_data->{refresh_token} = $refresh_token;
+
+        # Set the expiry time
+        $token_data = $self->_access_token_set_expiry($token_data);
+
+        # Update the cached token
+        $self->_access_token_update($token_data);
+    }
+    else {
+        croak $self->mech->response->status_line;
+    }
+}
+sub _access_token_update {
+    # Writes the new or updated token to the cache file
+
+    my ($self, $token_data) = @_;
+
+    if (! defined $token_data || ref($token_data) ne 'HASH') {
+        croak "_access_token_update() needs a hash reference of token data";
+    }
+
+    $self->_access_token_data($token_data);
+
+    open my $fh, '>', CACHE_FILE or die $!;
+    print $fh encode_json($token_data);
 }
 sub _authentication_code {
     # If an access token is unavailable, prompt the user with a URL to
@@ -270,11 +355,9 @@ sub _authentication_code {
     $auth_url->query_form(%params);
 
     print
-        qq~
-            Please follow the URL displayed below in your browser and log into Tesla,
-            then paste the URL from the resulting "Page Not Found" page's address bar,
-            then hit ENTER:\n";
-        ~;
+        "Please follow the URL displayed below in your browser and log into Tesla, " .
+        "then paste the URL from the resulting "Page Not Found" page's address bar, " .
+        "then hit ENTER:\n";
 
     print "\n$auth_url\n";
 

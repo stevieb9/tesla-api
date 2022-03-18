@@ -8,6 +8,8 @@ Revision history for Tesla-API
       classes must take care of this
     - Added full blown caching mechanism to cache endpoint/id pair data for
       each call through the Tesla API (closes #3)
+    - Access tokens now track their own expiry, and auto-refresh when needed
+      (closes #2)
 
 0.01    2022-03-16
     - Auto generated distribution with Dist::Mgr
