@@ -293,9 +293,9 @@ sub _access_token_refresh {
     my $refresh_token = $self->_access_token_data->{refresh_token};
 
     my $request_data = {
-        grant_type    => "refresh_token",
+        grant_type    => 'refresh_token',
         refresh_token => $refresh_token,
-        client_id     => "ownerapi",
+        client_id     => 'ownerapi',
     };
 
     my $request = HTTP::Request->new('POST', $url, $header, encode_json($request_data));
@@ -464,8 +464,7 @@ Tesla::API - Interface to Tesla's API
 
 This distribution provides access to the Tesla API.
 
-B<WARNING>: This is an initial, beta release. Barely any functionality has
-been implemented, and the authentication mechanism needs a lot of polishing.
+B<WARNING>: This is an initial, beta release. The interface *WILL* change.
 
 This class is designed to be subclassed. For example, I have already begun a
 new L<Tesla::Vehicle> distribution which will have access and update methods
@@ -703,6 +702,23 @@ Output (massively and significantly snipped for brevity):
 
 Steve Bertrand, C<< <steveb at cpan.org> >>
 
+=head1 ACKNOWLEDGEMENTS
+
+This distribution suite has been a long time in the works. For my other projects
+written in Perl previous to writing this code that required data from the Tesla
+API, I wrapped L<https://github.com/tdorssers|Tim Dorssers> wonderful
+L<https://github.com/tdorssers/TeslaPy|TeslaPy> Python project.
+
+Much of the code in this distribution is heavily influenced by the code his
+project, and currently, we're using a direct copy of its
+L<https://github.com/tdorssers/TeslaPy/blob/master/teslapy/endpoints.json|Tesla API endpoint file>.
+
+Thanks Tim, and great work!
+
+Also thanks goes out to L<https://teslaapi.io>, as a lot of the actual request
+parameter information and response data layout I learned from that site while
+implementing the actual REST calls to the Tesla API.
+
 =head1 LICENSE AND COPYRIGHT
 
 Copyright 2022 Steve Bertrand.
@@ -712,6 +728,10 @@ under the terms of the the Artistic License (2.0). You may obtain a
 copy of the full license at:
 
 L<http://www.perlfoundation.org/artistic_license_2_0>
+
+The copied endpoint code data borrowed from Tim's B<TeslaPy> project has been
+rebranded with the Perl license here, as permitted by the MIT license TeslaPy
+is licensed under.
 
 =cut
 
