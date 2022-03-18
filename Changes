@@ -1,6 +1,6 @@
 Revision history for Tesla-API
 
-0.02 UNREL
+0.02    2022-03-18
     - Removed all vehicle related stuff and moved it into a separate subclass
       distribution, Tesla::Vehicle. This distribution will only be for the
       managing of access tokens and speaking to the Tesla API directly

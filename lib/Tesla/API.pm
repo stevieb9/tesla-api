@@ -706,12 +706,12 @@ Steve Bertrand, C<< <steveb at cpan.org> >>
 
 This distribution suite has been a long time in the works. For my other projects
 written in Perl previous to writing this code that required data from the Tesla
-API, I wrapped L<https://github.com/tdorssers|Tim Dorssers> wonderful
-L<https://github.com/tdorssers/TeslaPy|TeslaPy> Python project.
+API, I wrapped L<Tim Dorssers|https://github.com/tdorssers> wonderful
+L<TeslaPy|https://github.com/tdorssers/TeslaPy> Python project.
 
 Much of the code in this distribution is heavily influenced by the code his
 project, and currently, we're using a direct copy of its
-L<https://github.com/tdorssers/TeslaPy/blob/master/teslapy/endpoints.json|Tesla API endpoint file>.
+L<Tesla API endpoint file|https://github.com/tdorssers/TeslaPy/blob/master/teslapy/endpoints.json>.
 
 Thanks Tim, and great work!
 
