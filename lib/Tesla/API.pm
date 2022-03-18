@@ -238,7 +238,7 @@ sub _access_token_generate {
         open my $fh, '>', CACHE_FILE or die $!;
 
         my $response_json = $response->decoded_content;
-        print $fh $response_jso;
+        print $fh $response_json;
 
         my $response_struct = decode_json($response_json);
         return $response_struct;
