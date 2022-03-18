@@ -236,12 +236,12 @@ sub _access_token_generate {
 
     if ($response->is_success) {
         open my $fh, '>', CACHE_FILE or die $!;
-        print $response->decoded_content;
-        print $fh $response->decoded_content;
 
-        my $response_data = decode_json($response->decoded_content);
+        my $response_json = $response->decoded_content;
+        print $fh $response_jso;
 
-        return $response_data;
+        my $response_struct = decode_json($response_json);
+        return $response_struct;
     }
     else {
         croak $self->mech->response->status_line;
@@ -292,7 +292,6 @@ sub _authentication_code {
         croak "Could not extract the authorization code from the URL";
     }
 
-    print "$code\n";
     return $code;
 }
 sub _authentication_code_verifier {
