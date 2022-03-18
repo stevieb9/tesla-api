@@ -356,7 +356,7 @@ sub _authentication_code {
 
     print
         "Please follow the URL displayed below in your browser and log into Tesla, " .
-        "then paste the URL from the resulting "Page Not Found" page's address bar, " .
+        "then paste the URL from the resulting 'Page Not Found' page's address bar, " .
         "then hit ENTER:\n";
 
     print "\n$auth_url\n";
