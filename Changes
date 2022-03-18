@@ -4,6 +4,8 @@ Revision history for Tesla-API
     - Removed all vehicle related stuff and moved it into a separate subclass
       distribution, Tesla::Vehicle. This distribution will only be for the
       managing of access tokens and speaking to the Tesla API directly
+    - Cleaned up documentation about "id" param in new(). The children
+      classes must take care of this
 
 0.01    2022-03-16
     - Auto generated distribution with Dist::Mgr

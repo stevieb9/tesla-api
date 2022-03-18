@@ -318,7 +318,7 @@ Tesla::API - Interface to Tesla's API
 
     my $endpoint_name = 'VEHICLE_DATA';
 
-    my $car_data = $tesla->api($endpoint_name, $tesla->vehicle_id);
+    my $car_data = $tesla->api($endpoint_name, $tesla->id);
 
 =head1 DESCRIPTION
 
@@ -329,16 +329,12 @@ been implemented, and the authentication mechanism needs a lot of polishing.
 
 This class is designed to be subclassed. For example, I have already begun a
 new L<Tesla::Vehicle> distribution which will have access and update methods
-that deal specifically with Tesla autos, then a LTesla::Powerwall>
+that deal specifically with Tesla autos, then a C<Tesla::Powerwall>
 distribution for their battery storage etc.
 
 Some endpoints require an ID sent in, so it must be provided for those calls
 as well. Some endpoints also require additional parameters for setting
 attributes, but I haven't got that far yet.
-
-B<< NOTE >>: The 'wake' function has not yet been fully impemented, so if a
-Tesla API call times out, its likely you'll have to use the official Tesla
-App to wake the car up.
 
 =head1 METHODS
 
@@ -368,20 +364,6 @@ All parameters are to be sent in the form of a hash.
 
 I<Optional, Bool>: Set to true to bypass the access token generation.
 
-Default: False.
-
-    vehicle_id
-
-I<Optional, Integer>: If sent in, we'll use this ID for all calls to endpoints
-that require one.
-
-If not sent in, we'll check how many vehicles you own under your account, and
-if there's only one, we'll use that ID instead.
-
-If you have more than one Tesla vehicle registered and you don't supply this
-parameter, you will have to supply the ID to each method call that requires it,
-or set it in C<vehicle_id($id)> after instantiation.
-
 I<Default>: C<undef>
 
 =head2 api($endpoint, $id)
@@ -399,14 +381,15 @@ found in the C<t/test_data/endpoints.json> file for the time being.
     $id
 
 I<Optional, Integer>: Some endpoints require an ID sent in (eg. vehicle ID,
-powerwall ID etc).
+Powerwall ID etc).
 
 I<Return>: Hash or array reference, depending on the endpoint.
 
 =head2 object_data
 
 Returns a hash reference of the data we've collected for you and stashed
-within the object. This does not reflect the entire object.
+within the object. This does not reflect the entire object, just the data
+returned from Tesla's API.
 
 =head2 endpoints
 
@@ -438,7 +421,7 @@ To get a list of endpoint names:
 
 =head2 mech
 
-Returns the L<WWW::Mechanze> object we've instantiated internally.
+Returns the L<WWW::Mechanize> object we've instantiated internally.
 
 =head2 EXAMPLE USAGE
 
