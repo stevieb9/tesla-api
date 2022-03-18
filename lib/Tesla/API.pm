@@ -29,8 +29,8 @@ BEGIN {
 }
 
 use constant {
+    DEBUG_CACHE                 => 0,
     API_CACHE_TIMEOUT_SECONDS   => 2,
-    DEBUG_CACHE                 => 1,
     CACHE_FILE                  => "$home_dir/tesla_api_cache.json",
     AUTH_URL                    => 'https://auth.tesla.com/oauth2/v3/authorize',
     TOKEN_URL                   => 'https://auth.tesla.com/oauth2/v3/token',
@@ -85,10 +85,11 @@ sub api {
     if ($self->api_cache_time) {
         if (time - $api_cache_time <= $self->api_cache_time) {
             if ($self->_cache(endpoint => $endpoint_name, id => $id)) {
-                print "Returning cache...\n" if DEBUG_CACHE;
+                print "Returning cache for $endpoint_name/$id pair...\n" if DEBUG_CACHE;
                 return $self->_cache(endpoint => $endpoint_name, id => $id);
             }
         }
+        print "No cache present for $endpoint_name/$id pair...\n" if DEBUG_CACHE;
     }
 
     my $url = URI->new(API_URL . $uri);
