@@ -17,15 +17,24 @@ our $VERSION = '0.02';
 
 my $home_dir;
 
+# The %api_cache hash is a cache for Tesla API call data across all objects.
+# The $api_cache_time is a timestamp of last cache write for a particular
+# endpoint/ID pair, and is relative to API_CACHE_TIMEOUT_SECONDS
+
+my %api_cache;
+my $api_cache_time = time;
+
 BEGIN {
     $home_dir = File::HomeDir->my_home;
 }
 
 use constant {
-    CACHE_FILE  => "$home_dir/tesla_api_cache.json",
-    AUTH_URL    => 'https://auth.tesla.com/oauth2/v3/authorize',
-    TOKEN_URL   => 'https://auth.tesla.com/oauth2/v3/token',
-    API_URL     => 'https://owner-api.teslamotors.com/',
+    API_CACHE_TIMEOUT_SECONDS   => 2,
+    DEBUG_CACHE                 => 1,
+    CACHE_FILE                  => "$home_dir/tesla_api_cache.json",
+    AUTH_URL                    => 'https://auth.tesla.com/oauth2/v3/authorize',
+    TOKEN_URL                   => 'https://auth.tesla.com/oauth2/v3/token',
+    API_URL                     => 'https://owner-api.teslamotors.com/',
 };
 
 # Public object methods
@@ -43,14 +52,15 @@ sub new {
         return $self;
     }
 
+    $self->api_cache_time($params{api_cache_time});
+
     $self->mech;
     $self->_access_token;
-
-#    $self->my_vehicle_id($params{vehicle_id});
 
     return $self;
 }
 sub api {
+
     my ($self, $endpoint_name, $id) = @_;
 
     if (! defined $endpoint_name) {
@@ -70,6 +80,17 @@ sub api {
         $uri =~ s/\{.*?\}/$id/;
     }
 
+    # Return early if all cache mechanisms check out
+
+    if ($self->api_cache_time) {
+        if (time - $api_cache_time <= $self->api_cache_time) {
+            if ($self->_cache(endpoint => $endpoint_name, id => $id)) {
+                print "Returning cache...\n" if DEBUG_CACHE;
+                return $self->_cache(endpoint => $endpoint_name, id => $id);
+            }
+        }
+    }
+
     my $url = URI->new(API_URL . $uri);
 
     my $request;
@@ -86,11 +107,28 @@ sub api {
     my $response = $self->mech->request($request);
 
     if ($response->is_success) {
-        return _decode($response->decoded_content)->{response};
+        my $response_data = _decode($response->decoded_content)->{response};
+
+        $self->_cache(
+            endpoint => $endpoint_name,
+            id       => $id,
+            data     => $response_data
+        );
+
+        return $response_data;
     }
     else {
         warn $response->status_line;
     }
+}
+sub api_cache_time {
+    my ($self, $cache_seconds) = @_;
+
+    if (defined $cache_seconds) {
+        $self->{api_cache_time} = $cache_seconds;
+    }
+
+    return $self->{cache_api_data} // API_CACHE_TIMEOUT_SECONDS;
 }
 sub endpoints {
     my ($self, $endpoint) = @_;
@@ -272,6 +310,25 @@ sub _authentication_code_verifier {
 
     return $self->{authentication_code_verifier} = $code_verifier;
 }
+sub _cache {
+    # Stores the Tesla API fetched data
+    my ($self, %params) = @_;
+
+    my $endpoint = $params{endpoint};
+    my $id = $params{id} // 0;
+    my $data = $params{data};
+
+    if (! $endpoint) {
+        croak "_cache() requires an endpoint name sent in";
+    }
+
+    if ($data) {
+        $api_cache{$endpoint}{$id} = $data;
+        $api_cache_time = time;
+    }
+
+    return $api_cache{$endpoint}{$id};
+}
 sub _decode {
     # Decode JSON to Perl
     my ($json) = @_;
@@ -366,6 +423,18 @@ I<Optional, Bool>: Set to true to bypass the access token generation.
 
 I<Default>: C<undef>
 
+    api_cache_time
+
+I<Optional, Integer>: By default, we cache the fetched data from the Tesla API
+for two seconds. If you make calls that have already been called within that
+time, we will return the cached data.
+
+Send in the number of seconds you'd like to cache the data for. A value of zero
+(C<0>) will disable caching and all calls through this library will go directly
+to Tesla every time.
+
+I<Return>: Integer, the number of seconds we're caching Tesla API data for.
+
 =head2 api($endpoint, $id)
 
 Responsible for disseminating the endpoints and retrieving data through the
@@ -384,6 +453,25 @@ I<Optional, Integer>: Some endpoints require an ID sent in (eg. vehicle ID,
 Powerwall ID etc).
 
 I<Return>: Hash or array reference, depending on the endpoint.
+
+=head2 api_cache_time($cache_seconds)
+
+The number of seconds we will cache retrieved endpoint data from the Tesla API
+for, to reduce the number of successive calls to retrieve the same data.
+
+B<Parameters>:
+
+    $cache_seconds
+
+I<Optional, Integer>: By default, we cache the fetched data from the Tesla API
+for two seconds. If you make calls that have already been called within that
+time, we will return the cached data.
+
+Send in the number of seconds you'd like to cache the data for. A value of zero
+(C<0>) will disable caching and all calls through this library will go directly
+to Tesla every time.
+
+I<Return>: Integer, the number of seconds we're caching Tesla API data for.
 
 =head2 object_data
 

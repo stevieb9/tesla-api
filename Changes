@@ -6,6 +6,8 @@ Revision history for Tesla-API
       managing of access tokens and speaking to the Tesla API directly
     - Cleaned up documentation about "id" param in new(). The children
       classes must take care of this
+    - Added full blown caching mechanism to cache endpoint/id pair data for
+      each call through the Tesla API (closes #3)
 
 0.01    2022-03-16
     - Auto generated distribution with Dist::Mgr
