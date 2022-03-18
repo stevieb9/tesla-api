@@ -13,7 +13,7 @@ use MIME::Base64 qw(encode_base64url);
 use WWW::Mechanize;
 use URI;
 
-our $VERSION = '0.03';
+our $VERSION = '0.02';
 
 my $home_dir;
 
@@ -316,9 +316,6 @@ Tesla::API - Interface to Tesla's API
 
     my @endpoint_names = keys %{ $tesla->endpoints };
 
-    # Using the internal api() until the complete interface
-    # of this distribution is done
-
     my $endpoint_name = 'VEHICLE_DATA';
 
     my $car_data = $tesla->api($endpoint_name, $tesla->vehicle_id);
@@ -330,13 +327,14 @@ This distribution provides access to the Tesla API.
 B<WARNING>: This is an initial, beta release. Barely any functionality has
 been implemented, and the authentication mechanism needs a lot of polishing.
 
-It's currently in its infancy, so the interface may^H^H^Hwill change. Although
-there are very few public access methods available yet, all current and future
-ones behave the exact same way, by using the object's C<api()> method with an
-endpoint name.
+This class is designed to be subclassed. For example, I have already begun a
+new L<Tesla::Vehicle> distribution which will have access and update methods
+that deal specifically with Tesla autos, then a LTesla::Powerwall>
+distribution for their battery storage etc.
 
-Some endpoints require an ID sent in, so it must be provided for those calls as
-well.
+Some endpoints require an ID sent in, so it must be provided for those calls
+as well. Some endpoints also require additional parameters for setting
+attributes, but I haven't got that far yet.
 
 B<< NOTE >>: The 'wake' function has not yet been fully impemented, so if a
 Tesla API call times out, its likely you'll have to use the official Tesla
@@ -362,19 +360,19 @@ B<NOTE>: If you do not have a Tesla account, you can still instantiate a
 L<Tesla::API> object by supplying the C<< unauthenticated => 1 >> parameter
 to C<new()>.
 
-Parameters:
+B<Parameters>:
 
 All parameters are to be sent in the form of a hash.
 
     unauthenticated
 
-Optional, Bool: Set to true to bypass the access token generation.
+I<Optional, Bool>: Set to true to bypass the access token generation.
 
 Default: False.
 
     vehicle_id
 
-Optional, Integer: If sent in, we'll use this ID for all calls to endpoints
+I<Optional, Integer>: If sent in, we'll use this ID for all calls to endpoints
 that require one.
 
 If not sent in, we'll check how many vehicles you own under your account, and
@@ -384,14 +382,14 @@ If you have more than one Tesla vehicle registered and you don't supply this
 parameter, you will have to supply the ID to each method call that requires it,
 or set it in C<vehicle_id($id)> after instantiation.
 
-Default: C<undef>
+I<Default>: C<undef>
 
 =head2 api($endpoint, $id)
 
 Responsible for disseminating the endpoints and retrieving data through the
 Tesla API.
 
-Parameters:
+B<Parameters>:
 
     $endpoint
 
@@ -400,12 +398,12 @@ found in the C<t/test_data/endpoints.json> file for the time being.
 
     $id
 
-Optional, Integer: Some endpoints require an ID sent in (eg. vehicle ID,
+I<Optional, Integer>: Some endpoints require an ID sent in (eg. vehicle ID,
 powerwall ID etc).
 
-Return: Hash or array reference, depending on the endpoint.
+I<Return>: Hash or array reference, depending on the endpoint.
 
-=head2 data
+=head2 object_data
 
 Returns a hash reference of the data we've collected for you and stashed
 within the object. This does not reflect the entire object.
@@ -442,67 +440,20 @@ To get a list of endpoint names:
 
 Returns the L<WWW::Mechanze> object we've instantiated internally.
 
-=head2 my_vehicle_id($id)
-
-Sets/gets your primary vehicle ID. If set, we will use this in all API calls
-that require it.
-
-Parameters:
-
-    $id
-
-Optional, Integer: The vehicle ID you want to use in all API calls that require
-one, as opposed to sending it into every separate call.
-
-If you only have a single Tesla vehicle registered under your account, we will
-set C<my_vehicle_id()> to that ID when you instantiate the object.
-
-You can also have this auto-populated in C<new()> by sending it in with the
-C<< vehicle_id => $id >> parameter.
-
-=head2 my_vehicle_name
-
-Returns the name you associated with your vehicle under your Tesla account.
-
-L</my_vehicle_id($id)> must have already been set.
-
-=head2 my_vehicles
-
-Returns a hash reference of your listed vehicles. The key is the vehicle ID,
-and the value is the name you've assigned to that vehicle.
-
-Example:
-
-    {
-        1234567891011 => 'Dream Machine',
-        1234567891012 => 'Model S',
-    }
-
-=head2 vehicle_data($id)
-
-Returns a hash reference containing state data of a vehicle.
-
-C<croak()>s if an ID isn't sent in and we can't sort one out automatically.
-
-=head2 wake($id)
-
-NOT YET IMPLEMENTED FULLY.
-
 =head2 EXAMPLE USAGE
+
+See L<Tesla::Vehicle> for vehicle specific methods.
 
     use Data::Dumper;
     use Tesla::API;
     use feature 'say';
 
     my $tesla = Tesla::API->new;
+    my $vehicle_id = 1234238782349137;
 
-    say $tesla->my_vehicle_name;
-
-    print Dumper $tesla->vehicle_data;
+    print Dumper $tesla->api('VEHICLE_DATA', $vehicle_id);
 
 Output (massively and significantly snipped for brevity):
-
-    Dream machine
 
     $VAR1 = {
         'vehicle_config' => {
