@@ -12,7 +12,6 @@ use JSON;
 use MIME::Base64 qw(encode_base64url);
 use WWW::Mechanize;
 use URI;
-use URI::QueryParam;
 
 our $VERSION = '0.03';
 
