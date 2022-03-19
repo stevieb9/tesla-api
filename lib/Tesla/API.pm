@@ -452,30 +452,29 @@ Tesla::API - Interface to Tesla's API
 
     my $tesla = Tesla::API->new;
 
-    my $vehicles = $tesla->my_vehicles;
-
-    my $vehicle_name = $tesla->vehicle_name;
-
     my @endpoint_names = keys %{ $tesla->endpoints };
 
-    my $endpoint_name = 'VEHICLE_DATA';
+    # See Tesla::Vehicle for direct access to vehicle-related methods
 
-    my $car_data = $tesla->api($endpoint_name, $tesla->id);
+    my $endpoint_name   = 'VEHICLE_DATA';
+    my $vehicle_id      = 3234234242124;
+
+    my $car_data = $tesla->api($endpoint_name, $vehicle_id);
+
+    if ($tesla->api('ACTUATE_TRUNK', $vehicle_id, {which_trunk => 'rear'})) {
+        put_stuff_in_trunk();
+    }
 
 =head1 DESCRIPTION
 
 This distribution provides access to the Tesla API.
 
-B<WARNING>: This is an initial, beta release. The interface *WILL* change.
+B<WARNING>: This is an initial, beta release. The interface may change.
 
 This class is designed to be subclassed. For example, I have already begun a
 new L<Tesla::Vehicle> distribution which will have access and update methods
 that deal specifically with Tesla autos, then a C<Tesla::Powerwall>
 distribution for their battery storage etc.
-
-Some endpoints require an ID sent in, so it must be provided for those calls
-as well. Some endpoints also require additional parameters for setting
-attributes, but I haven't got that far yet.
 
 =head1 METHODS
 
