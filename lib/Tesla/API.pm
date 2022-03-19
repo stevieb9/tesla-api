@@ -122,7 +122,7 @@ sub api {
         warn $response->status_line;
     }
 }
-sub api_clear_cache {
+sub api_cache_clear {
     my ($self) = @_;
     %api_cache = ();
 }
