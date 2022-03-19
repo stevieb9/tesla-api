@@ -1,6 +1,6 @@
 Revision history for Tesla-API
 
-0.03 UNREL
+0.03    2022-03-19
     - Added api_clear_cache() for methods that need to daisy chain calls, but
       require fresh data between them
     - Added ability to send in an additional param, $api_params to api(), so
