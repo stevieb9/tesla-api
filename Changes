@@ -3,6 +3,9 @@ Revision history for Tesla-API
 0.03 UNREL
     - Added api_clear_cache() for methods that need to daisy chain calls, but
       require fresh data between them
+    - Added ability to send in an additional param, $api_params to api(), so
+      that we can send them to the API as JSON body content
+      (eg. $vehicle->trunk_actuate with 'which_trunk' => 'rear');
 
 0.02    2022-03-18
     - Removed all vehicle related stuff and moved it into a separate subclass

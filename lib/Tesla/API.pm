@@ -12,6 +12,7 @@ use JSON;
 use MIME::Base64 qw(encode_base64url);
 use WWW::Mechanize;
 use URI;
+use URI::QueryParam;
 
 our $VERSION = '0.03';
 
@@ -61,7 +62,7 @@ sub new {
 }
 sub api {
 
-    my ($self, $endpoint_name, $id) = @_;
+    my ($self, $endpoint_name, $id, $api_params) = @_;
 
     if (! defined $endpoint_name) {
         croak "Tesla::API::api() requires an endpoint name sent in";
@@ -74,8 +75,8 @@ sub api {
     my $uri = $endpoint->{URI};
 
     if ($uri =~ /\{/) {
-        if (! defined $id) {
-            croak "Endpoint $endpoint_name requires an \$id, but none sent in";
+        if (! defined $id || $id !~ /^\d+$/) {
+            croak "Endpoint $endpoint_name requires an \$id as an integer";
         }
         $uri =~ s/\{.*?\}/$id/;
     }
@@ -95,14 +96,16 @@ sub api {
     my $url = URI->new(API_URL . $uri);
 
     my $request;
+    my $header = ['Content-Type' => 'application/json; charset=UTF-8'];
 
     if ($auth) {
         my $token_string = "Bearer " . $self->_access_token;
-        my $header = ['Authorization' => $token_string];
-        $request = HTTP::Request->new($type, $url, $header);
+        push @$header, 'Authorization' => $token_string;
+
+        $request = HTTP::Request->new($type, $url, $header, encode_json($api_params));
     }
     else {
-        $request = HTTP::Request->new($type, $url);
+        $request = HTTP::Request->new($type, $url, $header, encode_json($api_params));
     }
 
     my $response = $self->mech->request($request);
@@ -521,7 +524,7 @@ to Tesla every time.
 
 I<Return>: Integer, the number of seconds we're caching Tesla API data for.
 
-=head2 api($endpoint, $id)
+=head2 api($endpoint, $id, $api_params)
 
 Responsible for disseminating the endpoints and retrieving data through the
 Tesla API.
@@ -530,13 +533,19 @@ B<Parameters>:
 
     $endpoint
 
-Mandatory, String: A valid Tesla API endpoint name. The entire list can be
+I<Mandatory, String>: A valid Tesla API endpoint name. The entire list can be
 found in the C<t/test_data/endpoints.json> file for the time being.
 
     $id
 
 I<Optional, Integer>: Some endpoints require an ID sent in (eg. vehicle ID,
 Powerwall ID etc).
+
+    $api_params
+
+I<Optional, Hash Reference>: Some API calls require additional parameters. Send
+in a hash reference where the keys are the API parameter name, and the value is,
+well, the value.
 
 I<Return>: Hash or array reference, depending on the endpoint.
 
