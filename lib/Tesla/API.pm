@@ -122,6 +122,10 @@ sub api {
         warn $response->status_line;
     }
 }
+sub api_clear_cache {
+    my ($self) = @_;
+    %api_cache = ();
+}
 sub api_cache_time {
     my ($self, $cache_seconds) = @_;
 
@@ -535,6 +539,18 @@ I<Optional, Integer>: Some endpoints require an ID sent in (eg. vehicle ID,
 Powerwall ID etc).
 
 I<Return>: Hash or array reference, depending on the endpoint.
+
+=head2 api_cache_clear
+
+Some methods chain method calls. For example, calling
+C<< $vehicle->doors_lock >> will poll the API, cache the state data, then make
+another call to C<< $vehicle->locked >> to return whether the doors are locked
+or not.
+
+If we don't clear the cache out between these two calls, we will be returned
+stale data.
+
+Takes no parameters, has no return.
 
 =head2 api_cache_time($cache_seconds)
 
