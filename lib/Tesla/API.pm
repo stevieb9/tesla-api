@@ -95,18 +95,14 @@ sub api {
 
     my $url = URI->new(API_URL . $uri);
 
-    my $request;
     my $header = ['Content-Type' => 'application/json; charset=UTF-8'];
 
     if ($auth) {
         my $token_string = "Bearer " . $self->_access_token;
         push @$header, 'Authorization' => $token_string;
+    }
 
-        $request = HTTP::Request->new($type, $url, $header, encode_json($api_params));
-    }
-    else {
-        $request = HTTP::Request->new($type, $url, $header, encode_json($api_params));
-    }
+    my $request = HTTP::Request->new($type, $url, $header, encode_json($api_params));
 
     my $response = $self->mech->request($request);
 
@@ -552,14 +548,17 @@ I<Return>: Hash or array reference, depending on the endpoint.
 =head2 api_cache_clear
 
 Some methods chain method calls. For example, calling
-C<< $vehicle->doors_lock >> will poll the API, cache the state data, then make
-another call to C<< $vehicle->locked >> to return whether the doors are locked
-or not.
+C<< $vehicle->doors_lock >> will poll the API, then cache the state data.
+
+if another call is made to C<< $vehicle->locked >> immediately thereafter to
+check whether the door is actually closed or not, the old cached data would
+normally be returned.
 
 If we don't clear the cache out between these two calls, we will be returned
 stale data.
 
-Takes no parameters, has no return.
+Takes no parameters, has no return. Only use this call in API calls that
+somehow manipulate the state of the object you're working with.
 
 =head2 api_cache_time($cache_seconds)
 
