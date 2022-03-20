@@ -18,18 +18,19 @@ our $VERSION = '0.04';
 my $home_dir;
 
 # The %api_cache hash is a cache for Tesla API call data across all objects.
-# The $api_cache_time is a timestamp of last cache write for a particular
+# The $api_cache_alive_time is a timestamp of last cache write for a particular
 # endpoint/ID pair, and is relative to API_CACHE_TIMEOUT_SECONDS
 
 my %api_cache;
-my $api_cache_time = time;
+my $api_cache_alive_time = time;
 
 BEGIN {
     $home_dir = File::HomeDir->my_home;
 }
 
 use constant {
-    DEBUG_CACHE                 => 0,
+    DEBUG_CACHE                 => 1,
+    API_CACHE_PERSIST           => 0,
     API_CACHE_TIMEOUT_SECONDS   => 2,
     CACHE_FILE                  => "$home_dir/tesla_api_cache.json",
     AUTH_URL                    => 'https://auth.tesla.com/oauth2/v3/authorize',
@@ -52,6 +53,7 @@ sub new {
         return $self;
     }
 
+    $self->api_cache_persist($params{api_cache_persist});
     $self->api_cache_time($params{api_cache_time});
 
     $self->mech;
@@ -81,8 +83,15 @@ sub api {
 
     # Return early if all cache mechanisms check out
 
-    if ($self->api_cache_time) {
-        if (time - $api_cache_time <= $self->api_cache_time) {
+    if ($self->api_cache_persist || $self->api_cache_time) {
+        if (DEBUG_CACHE) {
+            printf(
+                "Cache - Alive: $api_cache_alive_time, Timeout: %.2f, Persist: %d\n",
+                $self->api_cache_time,
+                $self->api_cache_persist
+            );
+        }
+        if ($self->api_cache_persist || time - $api_cache_alive_time <= $self->api_cache_time) {
             if ($self->_cache(endpoint => $endpoint_name, id => $id)) {
                 print "Returning cache for $endpoint_name/$id pair...\n" if DEBUG_CACHE;
                 return $self->_cache(endpoint => $endpoint_name, id => $id);
@@ -123,14 +132,19 @@ sub api_cache_clear {
     my ($self) = @_;
     %api_cache = ();
 }
+sub api_cache_persist {
+    my ($self, $persist) = @_;
+    if (defined $persist) {
+        $self->{api_cache_persist} = $persist;
+    }
+    return $self->{api_cache_persist} // API_CACHE_PERSIST;
+}
 sub api_cache_time {
     my ($self, $cache_seconds) = @_;
-
     if (defined $cache_seconds) {
         $self->{api_cache_time} = $cache_seconds;
     }
-
-    return $self->{cache_api_data} // API_CACHE_TIMEOUT_SECONDS;
+    return $self->{api_cache_time} // API_CACHE_TIMEOUT_SECONDS;
 }
 sub endpoints {
     my ($self, $endpoint) = @_;
@@ -408,7 +422,7 @@ sub _cache {
 
     if ($data) {
         $api_cache{$endpoint}{$id} = $data;
-        $api_cache_time = time;
+        $api_cache_alive_time = time;
     }
 
     return $api_cache{$endpoint}{$id};
@@ -505,6 +519,14 @@ I<Optional, Bool>: Set to true to bypass the access token generation.
 
 I<Default>: C<undef>
 
+    api_cache_persist
+
+I<Optional, Bool>: Set this to true if you want to make multiple calls against
+the same data set, where having the cache time out and re-populated between
+these calls would be non-beneficial.
+
+I<Default>: False
+
     api_cache_time
 
 I<Optional, Integer>: By default, we cache the fetched data from the Tesla API
@@ -556,6 +578,19 @@ stale data.
 
 Takes no parameters, has no return. Only use this call in API calls that
 somehow manipulate the state of the object you're working with.
+
+=head2 api_cache_persist($bool)
+
+    $bool
+
+I<Optional, Bool>: Set this to true if you want to make multiple calls against
+the same data set, where having the cache time out and re-populated between
+these calls would be non-beneficial.
+
+You can ensure fresh data for the set by making a call to C<api_cache_clear()>
+before the first call that fetches data.
+
+I<Default>: False
 
 =head2 api_cache_time($cache_seconds)
 
@@ -718,6 +753,114 @@ Output (massively and significantly snipped for brevity):
               'timestamp' => '1647461524710'
         }
     };
+
+=head1 API CACHING
+
+We've employed a complex caching mechanism for data received from Tesla's API.
+
+By default, we cache retrieved data for every endpoint/ID pair in the cache for
+two seconds (modifiable by C<api_cache_timeout()>, or C<api_cache_timeout> in
+new()).
+
+This means that if you call three methods in a row that all extract information
+from the data returned via a single endpoint/ID pair, you may get back the
+cached result, or if the cache has timed out, you'll get data from another call
+to the Tesla API. In some cases, having the data updated may be desirable,
+sometimes you want data from the same set.
+
+Here are some examples on how to deal with the caching mechanism. We will use
+a L<Tesla::Vehicle> object for this example:
+
+=head2 Store API cache for 10 seconds
+
+Again, by default, we cache and return data from the Tesla API for two seconds.
+Change it to 10:
+
+    my $api = Tesla::API->new(api_cache_timeout => 10);
+
+...or:
+
+    my $car = Tesla::Vehicle(api_cache_timeout => 10);
+
+...or:
+
+    $car->api_cache_timeout(10);
+
+=head2 Disable API caching
+
+    my $api = Tesla::API->new(api_cache_timeout => 0);
+
+...or:
+
+    my $car = Tesla::Vehicle(api_cache_timeout => 0);
+
+...or:
+
+    $car->api_cache_timeout(0);
+
+=head2 Flush the API cache
+
+    $api->api_cache_clear;
+
+...or:
+
+    $car->api_cache_clear;
+
+=head2 Permanently use the cached API data once it's been saved
+
+    my $api = Tesla::API->new(api_cache_persist => 1);
+
+...or:
+
+    my $car = Tesla::Vehicle(api_cache_persist => 1);
+
+...or:
+
+    $car->api_cache_persist(1);
+
+=head2 Use the cache for a period of time
+
+If making multiple calls to methods that use the same data set and want to be
+sure the data doesn't change until you're done, do this:
+
+    my $car = Tesla::Vehicle->new; # Default caching of 2 seconds
+
+    sub work {
+
+        # Clear the cache so it gets updated, but set it to persistent so once
+        # the cache data is updated, it remains
+
+        $car->api_cache_clear;
+        $car->api_cache_persist(1);
+
+        say $car->online;
+        say $car->lat;
+        say $car->lon;
+        say $car->battery_level;
+
+        # Now unset the persist flag so other parts of your program won't be
+        # affected by it
+
+        $car->api_cache_persist(0);
+    }
+
+If you are sure no other parts of your program will be affected by having a
+persistent cache, you can set it globally:
+
+    my $car = Tesla::Vehicle->new(api_cache_persist => 1);
+
+    while (1) {
+
+        # Clear the cache at the beginning of the loop so it gets updated,
+        # unless you never want new data after the first saving of data
+
+        $car->api_cache_clear;
+
+        say $car->online;
+        say $car->lat;
+        say $car->lon;
+        say $car->battery_level;
+    }
 
 =head1 AUTHOR
 
