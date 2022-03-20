@@ -489,7 +489,7 @@ new L<Tesla::Vehicle> distribution which will have access and update methods
 that deal specifically with Tesla autos, then a C<Tesla::Powerwall>
 distribution for their battery storage etc.
 
-=head1 CORE METHODS
+=head1 METHODS - CORE
 
 =head2 new(%params)
 
@@ -602,7 +602,7 @@ Returns a hash reference of the data we've collected for you and stashed
 within the object. This does not reflect the entire object, just the data
 returned from Tesla's API.
 
-=head2 API CACHE METHODS
+=head1 METHODS - API CACHE
 
 =head2 api_cache_clear
 

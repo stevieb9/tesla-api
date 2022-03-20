@@ -1,7 +1,7 @@
 Revision history for Tesla-API
 
-0.06 UNREL
-    -
+0.06    2022-03-20
+    - Made "API CACHE METHODS" section a head1 in POD
 
 0.05    2022-03-20
     - DEBUG_API_CACHE now retrieved from $ENV{DEBUG_TESLA_API_CACHE} instead of
