@@ -60,7 +60,6 @@ sub new {
     return $self;
 }
 sub api {
-
     my ($self, $endpoint_name, $id, $api_params) = @_;
 
     if (! defined $endpoint_name) {
