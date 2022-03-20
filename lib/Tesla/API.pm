@@ -806,7 +806,7 @@ Change it to 10:
 
     $car->api_cache_clear;
 
-=head2 Permanently use the cached API data once it's been saved
+=head2 Permanently use the cached data until manually flushed
 
     my $api = Tesla::API->new(api_cache_persist => 1);
 
