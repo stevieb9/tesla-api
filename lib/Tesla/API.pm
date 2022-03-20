@@ -649,111 +649,6 @@ To get a list of endpoint names:
 
 Returns the L<WWW::Mechanize> object we've instantiated internally.
 
-=head2 EXAMPLE USAGE
-
-See L<Tesla::Vehicle> for vehicle specific methods.
-
-    use Data::Dumper;
-    use Tesla::API;
-    use feature 'say';
-
-    my $tesla = Tesla::API->new;
-    my $vehicle_id = 1234238782349137;
-
-    print Dumper $tesla->api('VEHICLE_DATA', $vehicle_id);
-
-Output (massively and significantly snipped for brevity):
-
-    $VAR1 = {
-        'vehicle_config' => {
-            'car_type' => 'modelx',
-            'rear_seat_type' => 7,
-            'rear_drive_unit' => 'Small',
-            'wheel_type' => 'Turbine22Dark',
-            'timestamp' => '1647461524710',
-            'rear_seat_heaters' => 3,
-            'trim_badging' => '100d',
-            'headlamp_type' => 'Led',
-            'driver_assist' => 'TeslaAP3',
-        },
-        'id_s' => 'XXXXXXXXXXXXXXXXX',
-        'vehicle_id' => 'XXXXXXXXXX',
-        'charge_state' => {
-            'usable_battery_level' => 69,
-            'battery_range' => '189.58',
-            'charge_limit_soc_std' => 90,
-            'charge_amps' => 48,
-            'charge_limit_soc' => 90,
-            'battery_level' => 69,
-        },
-        'vin' => 'XXXXXXXX',
-        'in_service' => $VAR1->{'vehicle_config'}{'use_range_badging'},
-        'user_id' => 'XXXXXX',
-        'id' => 'XXXXXXXXXXXXX',
-        'drive_state' => {
-            'shift_state' => 'P',
-            'heading' => 92,
-            'longitude' => '-XXX.XXXXXX',
-            'latitude' => 'XX.XXXXXX',
-            'power' => 0,
-            'speed' => undef,
-        },
-        'api_version' => 34,
-        'display_name' => 'Dream machine',
-        'state' => 'online',
-        'access_type' => 'OWNER',
-        'option_codes' => 'AD15,MDL3,PBSB,RENA,BT37,ID3W,RF3G,S3PB,DRLH,DV2W,W39B,APF0,COUS,BC3B,CH07,PC30,FC3P,FG31,GLFR,HL31,HM31,IL31,LTPB,MR31,FM3B,RS3H,SA3P,STCP,SC04,SU3C,T3CA,TW00,TM00,UT3P,WR00,AU3P,APH3,AF00,ZCST,MI00,CDM0',
-        'vehicle_state' => {
-            'valet_mode' => $VAR1->{'vehicle_config'}{'use_range_badging'},
-            'vehicle_name' => 'Dream machine',
-            'sentry_mode_available' => $VAR1->{'vehicle_config'}{'plg'},
-            'sentry_mode' => $VAR1->{'vehicle_config'}{'use_range_badging'},
-            'car_version' => '2022.4.5.4 abcfac6bfcdc',
-            'homelink_device_count' => 3,
-            'is_user_present' => $VAR1->{'vehicle_config'}{'use_range_badging'},
-            'odometer' => 'XXXXXXX.233656',
-            'media_state' => {
-                'remote_control_enabled' => $VAR1->{'vehicle_config'}{'plg'}
-            },
-        },
-        'autopark_style' => 'dead_man',
-        'software_update' => {
-            'expected_duration_sec' => 2700,
-            'version' => ' ',
-            'status' => '',
-            'download_perc' => 0,
-            'install_perc' => 1
-        },
-        'speed_limit_mode' => {
-            'max_limit_mph' => 90,
-            'min_limit_mph' => '50',
-            'active' => $VAR1->{'vehicle_config'}{'use_range_badging'},
-            'current_limit_mph' => '80.029031',
-            'pin_code_set' => $VAR1->{'vehicle_config'}{'plg'}
-        },
-        'climate_state' => {
-               'passenger_temp_setting' => '20.5',
-               'driver_temp_setting' => '20.5',
-               'side_mirror_heaters' => $VAR1->{'vehicle_config'}{'use_range_badging'},
-               'is_climate_on' => $VAR1->{'vehicle_config'}{'use_range_badging'},
-               'fan_status' => 0,
-               'seat_heater_third_row_right' => 0,
-               'seat_heater_right' => 0,
-               'is_front_defroster_on' => $VAR1->{'vehicle_config'}{'use_range_badging'},
-               'battery_heater' => $VAR1->{'vehicle_config'}{'use_range_badging'},
-               'is_rear_defroster_on' => $VAR1->{'vehicle_config'}{'use_range_badging'},
-        },
-        'gui_settings' => {
-              'gui_temperature_units' => 'C',
-              'gui_charge_rate_units' => 'km/hr',
-              'gui_24_hour_time' => $VAR1->{'vehicle_config'}{'use_range_badging'},
-              'gui_range_display' => 'Ideal',
-              'show_range_units' => $VAR1->{'vehicle_config'}{'plg'},
-              'gui_distance_units' => 'km/hr',
-              'timestamp' => '1647461524710'
-        }
-    };
-
 =head1 API CACHING
 
 We've employed a complex caching mechanism for data received from Tesla's API.
@@ -861,6 +756,111 @@ persistent cache, you can set it globally:
         say $car->lon;
         say $car->battery_level;
     }
+
+=head2 EXAMPLE USAGE
+
+See L<Tesla::Vehicle> for vehicle specific methods.
+
+    use Data::Dumper;
+    use Tesla::API;
+    use feature 'say';
+
+    my $tesla = Tesla::API->new;
+    my $vehicle_id = 1234238782349137;
+
+    print Dumper $tesla->api('VEHICLE_DATA', $vehicle_id);
+
+Output (massively and significantly snipped for brevity):
+
+    $VAR1 = {
+        'vehicle_config' => {
+            'car_type' => 'modelx',
+            'rear_seat_type' => 7,
+            'rear_drive_unit' => 'Small',
+            'wheel_type' => 'Turbine22Dark',
+            'timestamp' => '1647461524710',
+            'rear_seat_heaters' => 3,
+            'trim_badging' => '100d',
+            'headlamp_type' => 'Led',
+            'driver_assist' => 'TeslaAP3',
+        },
+        'id_s' => 'XXXXXXXXXXXXXXXXX',
+        'vehicle_id' => 'XXXXXXXXXX',
+        'charge_state' => {
+            'usable_battery_level' => 69,
+            'battery_range' => '189.58',
+            'charge_limit_soc_std' => 90,
+            'charge_amps' => 48,
+            'charge_limit_soc' => 90,
+            'battery_level' => 69,
+        },
+        'vin' => 'XXXXXXXX',
+        'in_service' => $VAR1->{'vehicle_config'}{'use_range_badging'},
+        'user_id' => 'XXXXXX',
+        'id' => 'XXXXXXXXXXXXX',
+        'drive_state' => {
+            'shift_state' => 'P',
+            'heading' => 92,
+            'longitude' => '-XXX.XXXXXX',
+            'latitude' => 'XX.XXXXXX',
+            'power' => 0,
+            'speed' => undef,
+        },
+        'api_version' => 34,
+        'display_name' => 'Dream machine',
+        'state' => 'online',
+        'access_type' => 'OWNER',
+        'option_codes' => 'AD15,MDL3,PBSB,RENA,BT37,ID3W,RF3G,S3PB,DRLH,DV2W,W39B,APF0,COUS,BC3B,CH07,PC30,FC3P,FG31,GLFR,HL31,HM31,IL31,LTPB,MR31,FM3B,RS3H,SA3P,STCP,SC04,SU3C,T3CA,TW00,TM00,UT3P,WR00,AU3P,APH3,AF00,ZCST,MI00,CDM0',
+        'vehicle_state' => {
+            'valet_mode' => $VAR1->{'vehicle_config'}{'use_range_badging'},
+            'vehicle_name' => 'Dream machine',
+            'sentry_mode_available' => $VAR1->{'vehicle_config'}{'plg'},
+            'sentry_mode' => $VAR1->{'vehicle_config'}{'use_range_badging'},
+            'car_version' => '2022.4.5.4 abcfac6bfcdc',
+            'homelink_device_count' => 3,
+            'is_user_present' => $VAR1->{'vehicle_config'}{'use_range_badging'},
+            'odometer' => 'XXXXXXX.233656',
+            'media_state' => {
+                'remote_control_enabled' => $VAR1->{'vehicle_config'}{'plg'}
+            },
+        },
+        'autopark_style' => 'dead_man',
+        'software_update' => {
+            'expected_duration_sec' => 2700,
+            'version' => ' ',
+            'status' => '',
+            'download_perc' => 0,
+            'install_perc' => 1
+        },
+        'speed_limit_mode' => {
+            'max_limit_mph' => 90,
+            'min_limit_mph' => '50',
+            'active' => $VAR1->{'vehicle_config'}{'use_range_badging'},
+            'current_limit_mph' => '80.029031',
+            'pin_code_set' => $VAR1->{'vehicle_config'}{'plg'}
+        },
+        'climate_state' => {
+               'passenger_temp_setting' => '20.5',
+               'driver_temp_setting' => '20.5',
+               'side_mirror_heaters' => $VAR1->{'vehicle_config'}{'use_range_badging'},
+               'is_climate_on' => $VAR1->{'vehicle_config'}{'use_range_badging'},
+               'fan_status' => 0,
+               'seat_heater_third_row_right' => 0,
+               'seat_heater_right' => 0,
+               'is_front_defroster_on' => $VAR1->{'vehicle_config'}{'use_range_badging'},
+               'battery_heater' => $VAR1->{'vehicle_config'}{'use_range_badging'},
+               'is_rear_defroster_on' => $VAR1->{'vehicle_config'}{'use_range_badging'},
+        },
+        'gui_settings' => {
+              'gui_temperature_units' => 'C',
+              'gui_charge_rate_units' => 'km/hr',
+              'gui_24_hour_time' => $VAR1->{'vehicle_config'}{'use_range_badging'},
+              'gui_range_display' => 'Ideal',
+              'show_range_units' => $VAR1->{'vehicle_config'}{'plg'},
+              'gui_distance_units' => 'km/hr',
+              'timestamp' => '1647461524710'
+        }
+    };
 
 =head1 AUTHOR
 

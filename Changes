@@ -5,6 +5,8 @@ Revision history for Tesla-API
       api_cache_time()
     - Renamed $api_cache_time to $api_cache_alive_time to be non-ambiguous to
       the api_cache_time() method
+    - Added api_cache_persist() and api_cache_persist param. Allows temporarily
+      or permanently returning the cached Tesla API data
     - Added entire section in POD dealing exclusively with the API caching
       mechanism
 
