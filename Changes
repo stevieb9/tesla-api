@@ -1,5 +1,8 @@
 Revision history for Tesla-API
 
+0.06 UNREL
+    -
+
 0.05    2022-03-20
     - DEBUG_API_CACHE now retrieved from $ENV{DEBUG_TESLA_API_CACHE} instead of
       having it as a magic number (so we don't accidentally publish the code
