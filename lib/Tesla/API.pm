@@ -29,7 +29,7 @@ BEGIN {
 }
 
 use constant {
-    DEBUG_CACHE                 => 1,
+    DEBUG_CACHE                 => $ENV{DEBUG_TESLA_API_CACHE},
     API_CACHE_PERSIST           => 0,
     API_CACHE_TIMEOUT_SECONDS   => 2,
     CACHE_FILE                  => "$home_dir/tesla_api_cache.json",
@@ -489,7 +489,7 @@ new L<Tesla::Vehicle> distribution which will have access and update methods
 that deal specifically with Tesla autos, then a C<Tesla::Powerwall>
 distribution for their battery storage etc.
 
-=head1 METHODS
+=head1 CORE METHODS
 
 =head2 new(%params)
 
@@ -564,6 +564,46 @@ well, the value.
 
 I<Return>: Hash or array reference, depending on the endpoint.
 
+=head2 endpoints
+
+Returns a hash reference of hash references. Each key is the name of the
+endpoint, and its value contains data on how we process the call to Tesla.
+
+Example (snipped for brevity):
+
+    {
+        MEDIA_VOLUME_DOWN => {
+            TYPE => 'POST',
+            URI => 'api/1/vehicles/{vehicle_id}/command/media_volume_down'
+            AUTH => $VAR1->{'UPGRADES_CREATE_OFFLINE_ORDER'}{'AUTH'},
+        },
+        VEHICLE_DATA => {
+            TYPE => 'GET',
+            URI => 'api/1/vehicles/{vehicle_id}/vehicle_data',
+            AUTH => $VAR1->{'UPGRADES_CREATE_OFFLINE_ORDER'}{'AUTH'}
+        },
+    }
+
+Bracketed names in the URI (eg: C<{vehicle_id}>) are variable placeholders.
+It will be replaced with the ID sent in to the various method or C<api()>
+call.
+
+To get a list of endpoint names:
+
+    my @endpoint_names = keys %{ $tesla->endpoints };
+
+=head2 mech
+
+Returns the L<WWW::Mechanize> object we've instantiated internally.
+
+=head2 object_data
+
+Returns a hash reference of the data we've collected for you and stashed
+within the object. This does not reflect the entire object, just the data
+returned from Tesla's API.
+
+=head2 API CACHE METHODS
+
 =head2 api_cache_clear
 
 Some methods chain method calls. For example, calling
@@ -610,44 +650,6 @@ Send in the number of seconds you'd like to cache the data for. A value of zero
 to Tesla every time.
 
 I<Return>: Integer, the number of seconds we're caching Tesla API data for.
-
-=head2 object_data
-
-Returns a hash reference of the data we've collected for you and stashed
-within the object. This does not reflect the entire object, just the data
-returned from Tesla's API.
-
-=head2 endpoints
-
-Returns a hash reference of hash references. Each key is the name of the
-endpoint, and its value contains data on how we process the call to Tesla.
-
-Example (snipped for brevity):
-
-    {
-        MEDIA_VOLUME_DOWN => {
-            TYPE => 'POST',
-            URI => 'api/1/vehicles/{vehicle_id}/command/media_volume_down'
-            AUTH => $VAR1->{'UPGRADES_CREATE_OFFLINE_ORDER'}{'AUTH'},
-        },
-        VEHICLE_DATA => {
-            TYPE => 'GET',
-            URI => 'api/1/vehicles/{vehicle_id}/vehicle_data',
-            AUTH => $VAR1->{'UPGRADES_CREATE_OFFLINE_ORDER'}{'AUTH'}
-        },
-    }
-
-Bracketed names in the URI (eg: C<{vehicle_id}>) are variable placeholders.
-It will be replaced with the ID sent in to the various method or C<api()>
-call.
-
-To get a list of endpoint names:
-
-    my @endpoint_names = keys %{ $tesla->endpoints };
-
-=head2 mech
-
-Returns the L<WWW::Mechanize> object we've instantiated internally.
 
 =head1 API CACHING
 
@@ -757,7 +759,7 @@ persistent cache, you can set it globally:
         say $car->battery_level;
     }
 
-=head2 EXAMPLE USAGE
+=head1 EXAMPLE USAGE
 
 See L<Tesla::Vehicle> for vehicle specific methods.
 
