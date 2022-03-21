@@ -1,0 +1,1758 @@
+{
+   "TRIGGER_HOMELINK" : {
+      "URI" : "api/1/vehicles/{vehicle_id}/command/trigger_homelink",
+      "AUTH" : true,
+      "TYPE" : "POST"
+   },
+   "CREATE_VEHICLE_SHARE_INVITE" : {
+      "URI" : "api/1/vehicles/{vehicle_id}/invitations",
+      "AUTH" : true,
+      "TYPE" : "POST"
+   },
+   "ROADSIDE_INCIDENTS" : {
+      "URI" : "bff/v2/mobile-app/roadside/incidents",
+      "AUTH" : true,
+      "TYPE" : "GET"
+   },
+   "SCHEDULED_CHARGING" : {
+      "AUTH" : true,
+      "URI" : "api/1/vehicles/{vehicle_id}/command/set_scheduled_charging",
+      "TYPE" : "POST"
+   },
+   "WAKE_UP" : {
+      "TYPE" : "POST",
+      "AUTH" : true,
+      "URI" : "api/1/vehicles/{vehicle_id}/wake_up"
+   },
+   "SEND_NOTIFICATION_SUBSCRIPTIONS" : {
+      "AUTH" : true,
+      "URI" : "api/1/subscriptions",
+      "TYPE" : "POST"
+   },
+   "ONBOARDING_EXPERIENCE_PAGE" : {
+      "CONTENT" : "HTML",
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "onboarding_page"
+   },
+   "ENERGY_SITE_OPT_EVENT" : {
+      "AUTH" : true,
+      "URI" : "api/1/energy_sites/{site_id}/event",
+      "TYPE" : "POST"
+   },
+   "CHECK_ENERGY_PRODUCT_REGISTRATION" : {
+      "URI" : "api/1/energy_sites/registered",
+      "AUTH" : true,
+      "TYPE" : "GET"
+   },
+   "UPGRADES_GET_PURCHASED_UPGRADES_V2" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/upgrades/purchased/v2",
+      "TYPE" : "GET"
+   },
+   "SEND_NOTIFICATION_CONFIRMATION" : {
+      "AUTH" : true,
+      "URI" : "api/1/notification_confirmations",
+      "TYPE" : "POST"
+   },
+   "CHANGE_CHARGE_STANDARD" : {
+      "AUTH" : true,
+      "URI" : "api/1/vehicles/{vehicle_id}/command/charge_standard",
+      "TYPE" : "POST"
+   },
+   "NON_OWNER_SUPPORTED_PRODUCTS" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/user/supported-products",
+      "TYPE" : "GET"
+   },
+   "REVOKE_VEHICLE_SHARE_INVITE" : {
+      "URI" : "api/1/vehicles/{vehicle_id}/invitations/{invite_id}/revoke",
+      "AUTH" : true,
+      "TYPE" : "POST"
+   },
+   "MEDIA_TOGGLE_PLAYBACK" : {
+      "AUTH" : true,
+      "URI" : "api/1/vehicles/{vehicle_id}/command/media_toggle_playback",
+      "TYPE" : "POST"
+   },
+   "PRODUCT_LIST" : {
+      "URI" : "api/1/products",
+      "AUTH" : true,
+      "TYPE" : "GET"
+   },
+   "FINANCING_GET_SIGNED_TOKEN" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/financing/signed-token",
+      "TYPE" : "GET"
+   },
+   "HISTORY_DATA" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "api/1/energy_sites/{site_id}/history"
+   },
+   "SERVICE_CENTER_OPEN_SLOTS" : {
+      "TYPE" : "POST",
+      "URI" : "bff/v2/mobile-app/service/locations/center/slots",
+      "AUTH" : true
+   },
+   "CANCEL_SOFTWARE_UPDATE" : {
+      "TYPE" : "POST",
+      "URI" : "api/1/vehicles/{vehicle_id}/command/cancel_software_update",
+      "AUTH" : true
+   },
+   "COMMERCE_CAPTURE" : {
+      "TYPE" : "POST",
+      "AUTH" : true,
+      "URI" : "commerce-api/purchases/v1{locale}"
+   },
+   "CLIMATE_OFF" : {
+      "TYPE" : "POST",
+      "AUTH" : true,
+      "URI" : "api/1/vehicles/{vehicle_id}/command/auto_conditioning_stop"
+   },
+   "SUBSCRIPTIONS_GET_PURCHASED_SUBSCRIPTIONS" : {
+      "URI" : "bff/v2/mobile-app/subscriptions/purchased",
+      "AUTH" : true,
+      "TYPE" : "GET"
+   },
+   "FINANCING_LOOKUP_WALLET" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/financing/lookup-wallet",
+      "TYPE" : "GET"
+   },
+   "SERVICE_UPLOAD_FILE" : {
+      "URI" : "bff/v2/mobile-app/files",
+      "AUTH" : true,
+      "TYPE" : "POST"
+   },
+   "UPGRADES_PAGE" : {
+      "AUTH" : true,
+      "URI" : "upgrades_page",
+      "TYPE" : "GET",
+      "CONTENT" : "HTML"
+   },
+   "SET_CLIMATE_KEEPER_MODE" : {
+      "TYPE" : "POST",
+      "URI" : "api/1/vehicles/{vehicle_id}/command/set_climate_keeper_mode",
+      "AUTH" : true
+   },
+   "COMMERCE_POST_SERVICECENTERS" : {
+      "AUTH" : true,
+      "URI" : "commerce-api/servicecenters/v1{locale}",
+      "TYPE" : "POST"
+   },
+   "CHARGING_HISTORY_VEHICLES" : {
+      "TYPE" : "GET",
+      "URI" : "bff/v2/mobile-app/charging/vehicles",
+      "AUTH" : true
+   },
+   "BATTERY_SUMMARY" : {
+      "AUTH" : true,
+      "URI" : "api/1/powerwalls/{battery_id}/status",
+      "TYPE" : "GET"
+   },
+   "PAYMENTS_GET_SIGNED_USER_TOKEN_V4" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/payments/v4/signed-user-token",
+      "TYPE" : "POST"
+   },
+   "ONBOARDING_EXPERIENCE" : {
+      "AUTH" : true,
+      "URI" : "api/1/users/onboarding_data",
+      "TYPE" : "GET"
+   },
+   "FINANCING_VALIDATE_E_SIGN_DETAILS" : {
+      "TYPE" : "POST",
+      "URI" : "bff/v2/mobile-app/financing/esign-validate-details",
+      "AUTH" : true
+   },
+   "DOCUMENTS_DOWNLOAD_INVOICE" : {
+      "URI" : "bff/v2/mobile-app/documents/invoices/{invoiceId}",
+      "AUTH" : true,
+      "TYPE" : "GET"
+   },
+   "ENERGY_DOCUMENTS_DOWNLOAD_DOCUMENT" : {
+      "URI" : "bff/v2/mobile-app/energy-documents/documents/{documentId}",
+      "AUTH" : true,
+      "TYPE" : "GET"
+   },
+   "MANAGE_GET_BILL_ME_LATER_LIST" : {
+      "URI" : "bff/v2/mobile-app/bill-me-later/pending-orders",
+      "AUTH" : true,
+      "TYPE" : "GET"
+   },
+   "SERVICE_MESSAGES_MARK_READ" : {
+      "URI" : "bff/v2/mobile-app/service/messages/{serviceVisitID}",
+      "AUTH" : true,
+      "TYPE" : "PATCH"
+   },
+   "MANAGE_GET_BILL_ME_LATER_TOGGLE" : {
+      "TYPE" : "GET",
+      "URI" : "bff/v2/mobile-app/bill-me-later/security-toggle",
+      "AUTH" : true
+   },
+   "SERVICE_CENTER_IS_BODY_SHOP" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/service/locations/body-shop"
+   },
+   "SERVICE_MACGYVER_ALERTS" : {
+      "TYPE" : "GET",
+      "URI" : "bff/v2/mobile-app/macgyver/alerts",
+      "AUTH" : true
+   },
+   "SITE_DATA" : {
+      "AUTH" : true,
+      "URI" : "api/1/energy_sites/{site_id}/live_status",
+      "TYPE" : "GET"
+   },
+   "SITE_TARIFF" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "api/1/energy_sites/{site_id}/tariff_rate"
+   },
+   "SERVICE_SURVEY_ANSWER_QUESTIONS" : {
+      "TYPE" : "PUT",
+      "URI" : "bff/v2/mobile-app/service/surveys",
+      "AUTH" : true
+   },
+   "COMMERCE_POST_VEHICLES" : {
+      "AUTH" : true,
+      "URI" : "commerce-api/vehicles/v1{locale}",
+      "TYPE" : "POST"
+   },
+   "SPEED_LIMIT_SET_LIMIT" : {
+      "URI" : "api/1/vehicles/{vehicle_id}/command/speed_limit_set_limit",
+      "AUTH" : true,
+      "TYPE" : "POST"
+   },
+   "SERVICE_CREATE_SERVICE_VISIT" : {
+      "URI" : "bff/v2/mobile-app/service/appointments",
+      "AUTH" : true,
+      "TYPE" : "POST"
+   },
+   "MESSAGE_CENTER_MESSAGE_ACTION_UPDATE" : {
+      "AUTH" : true,
+      "URI" : "api/1/messages/{message_id}/actions",
+      "TYPE" : "POST"
+   },
+   "RESET_VALET_PIN" : {
+      "AUTH" : true,
+      "URI" : "api/1/vehicles/{vehicle_id}/command/reset_valet_pin",
+      "TYPE" : "POST"
+   },
+   "SEND_TO_VEHICLE" : {
+      "AUTH" : true,
+      "URI" : "api/1/vehicles/{vehicle_id}/command/share",
+      "TYPE" : "POST"
+   },
+   "START_CHARGE" : {
+      "AUTH" : true,
+      "URI" : "api/1/vehicles/{vehicle_id}/command/charge_start",
+      "TYPE" : "POST"
+   },
+   "SERVICE_LOCATIONS_BY_TRT_ID" : {
+      "TYPE" : "GET",
+      "URI" : "bff/v2/mobile-app/service/center/locations-by-trtid",
+      "AUTH" : true
+   },
+   "SERVICE_GET_ESTIMATE_APPROVAL_STATUS" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/service/tracker/{serviceVisitID}/estimate-status"
+   },
+   "RETRIEVE_NOTIFICATION_PREFERENCES" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "api/1/notification_preferences"
+   },
+   "BATTERY_POWER_TIMESERIES_DATA" : {
+      "URI" : "api/1/powerwalls/{battery_id}/powerhistory",
+      "AUTH" : true,
+      "TYPE" : "GET"
+   },
+   "CHARGING_BALANCE_PAYMENT" : {
+      "TYPE" : "POST",
+      "URI" : "bff/v2/mobile-app/charging/payment/complete",
+      "AUTH" : true
+   },
+   "DASHCAM_SAVE_CLIP" : {
+      "TYPE" : "POST",
+      "URI" : "api/1/vehicles/{vehicle_id}/command/dashcam_save_clip",
+      "AUTH" : true
+   },
+   "CHARGING_AMPS" : {
+      "TYPE" : "POST",
+      "URI" : "api/1/vehicles/{vehicle_id}/command/set_charging_amps",
+      "AUTH" : true
+   },
+   "RETRIEVE_NOTIFICATION_SUBSCRIPTIONS" : {
+      "TYPE" : "GET",
+      "URI" : "api/1/subscriptions",
+      "AUTH" : true
+   },
+   "ENERGY_SITE_ENROLL_PROGRAM" : {
+      "TYPE" : "POST",
+      "URI" : "api/1/energy_sites/{site_id}/program",
+      "AUTH" : true
+   },
+   "REFERRAL_PAGE" : {
+      "AUTH" : true,
+      "URI" : "referral_page",
+      "TYPE" : "GET",
+      "CONTENT" : "HTML"
+   },
+   "REFERRAL_GET_PAST_HISTORY" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/referrals/past-referral-history"
+   },
+   "CHANGE_CHARGE_LIMIT" : {
+      "URI" : "api/1/vehicles/{vehicle_id}/command/set_charge_limit",
+      "AUTH" : true,
+      "TYPE" : "POST"
+   },
+   "SERVICE_DELETE_ACTIVITIES" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/service/activities/{serviceVisitId}",
+      "TYPE" : "PATCH"
+   },
+   "ENERGY_EVENT" : {
+      "URI" : "api/1/energy_sites/energy_event",
+      "AUTH" : true,
+      "TYPE" : "POST"
+   },
+   "PAYMENTS_UPDATE_BILLING_ADDRESS" : {
+      "URI" : "bff/v2/mobile-app/billing-address",
+      "AUTH" : true,
+      "TYPE" : "PUT"
+   },
+   "SET_SENTRY_MODE" : {
+      "AUTH" : true,
+      "URI" : "api/1/vehicles/{vehicle_id}/command/set_sentry_mode",
+      "TYPE" : "POST"
+   },
+   "TRIGGER_VEHICLE_SCREENSHOT" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "api/1/vehicles/{vehicle_id}/screenshot"
+   },
+   "COMMERCE_CART_UPDATE" : {
+      "TYPE" : "PUT",
+      "AUTH" : true,
+      "URI" : "commerce-api/carts/{cartId}/items/{lineItemId}/v1{locale}"
+   },
+   "CHANGE_CHARGE_MAX" : {
+      "AUTH" : true,
+      "URI" : "api/1/vehicles/{vehicle_id}/command/charge_max_range",
+      "TYPE" : "POST"
+   },
+   "BACKUP_RESERVE" : {
+      "TYPE" : "POST",
+      "URI" : "api/1/energy_sites/{site_id}/backup",
+      "AUTH" : true
+   },
+   "SET_CABIN_OVERHEAT_PROTECTION" : {
+      "URI" : "api/1/vehicles/{vehicle_id}/command/set_cabin_overheat_protection",
+      "AUTH" : true,
+      "TYPE" : "POST"
+   },
+   "ROADSIDE_COUNTRIES" : {
+      "URI" : "bff/v2/mobile-app/roadside/countries",
+      "AUTH" : true,
+      "TYPE" : "GET"
+   },
+   "SERVICE_ACCEPT_LOANER_AGREEMENT" : {
+      "TYPE" : "POST",
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/service/loaner/{serviceVisitId}"
+   },
+   "ENERGY_OWNERSHIP_GET_TOGGLES" : {
+      "URI" : "bff/v2/mobile-app/energy/feature-flags",
+      "AUTH" : true,
+      "TYPE" : "GET"
+   },
+   "OFF_GRID_VEHICLE_CHARGING_RESERVE" : {
+      "URI" : "api/1/energy_sites/{site_id}/off_grid_vehicle_charging_reserve",
+      "AUTH" : true,
+      "TYPE" : "POST"
+   },
+   "HERMES_AUTHORIZATION" : {
+      "AUTH" : true,
+      "URI" : "api/1/users/jwt/hermes",
+      "TYPE" : "POST"
+   },
+   "REMOTE_SEAT_HEATER_REQUEST" : {
+      "TYPE" : "POST",
+      "AUTH" : true,
+      "URI" : "api/1/vehicles/{vehicle_id}/command/remote_seat_heater_request"
+   },
+   "SET_VEHICLE_NAME" : {
+      "URI" : "api/1/vehicles/{vehicle_id}/command/set_vehicle_name",
+      "AUTH" : true,
+      "TYPE" : "POST"
+   },
+   "ROADSIDE_ASSISTANCE_PAGE" : {
+      "URI" : "roadside_assistance_page",
+      "AUTH" : true,
+      "TYPE" : "GET",
+      "CONTENT" : "HTML"
+   },
+   "APP_FEEDBACK_ENTITLEMENTS" : {
+      "AUTH" : true,
+      "URI" : "api/1/diagnostics",
+      "TYPE" : "GET"
+   },
+   "CHARGING_HISTORY_VEHICLE_IMAGES" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/charging/vehicle-images",
+      "TYPE" : "GET"
+   },
+   "SERVICE_SEND_MESSAGE" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/service/messages/{serviceVisitID}",
+      "TYPE" : "POST"
+   },
+   "SITE_TARIFFS" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "api/1/energy_sites/{site_id}/tariff_rates"
+   },
+   "LOOTBOX_PAST_REFERRAL_DATA" : {
+      "TYPE" : "GET",
+      "URI" : "bff/v2/mobile-app/referrals/past-referrals",
+      "AUTH" : true
+   },
+   "REMOTE_START" : {
+      "URI" : "api/1/vehicles/{vehicle_id}/command/remote_start_drive",
+      "AUTH" : true,
+      "TYPE" : "POST"
+   },
+   "BATTERY_DATA" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "api/1/powerwalls/{battery_id}"
+   },
+   "SERVICE_LOCATIONS" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/service/center/locations",
+      "TYPE" : "GET"
+   },
+   "BATTERY_SITE_NAME" : {
+      "AUTH" : true,
+      "URI" : "api/1/powerwalls/{battery_id}/site_name",
+      "TYPE" : "POST"
+   },
+   "SERVICE_FEATURE_FLAG_MACGYVER" : {
+      "TYPE" : "GET",
+      "URI" : "bff/v2/mobile-app/feature-flag/tao-4109-use-macgyver-mobile-app",
+      "AUTH" : true
+   },
+   "SEND_SC_TO_VEHICLE" : {
+      "TYPE" : "POST",
+      "URI" : "api/1/vehicles/{vehicle_id}/command/navigation_sc_request",
+      "AUTH" : true
+   },
+   "CHARGING_BALANCE_CREATE_OFFLINE_ORDER" : {
+      "URI" : "bff/v2/mobile-app/charging/payment",
+      "AUTH" : true,
+      "TYPE" : "POST"
+   },
+   "VEHICLE_SERVICE_DATA" : {
+      "URI" : "api/1/vehicles/{vehicle_id}/service_data",
+      "AUTH" : true,
+      "TYPE" : "GET"
+   },
+   "CHARGING_GET_SITE" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/charging/site/{id}",
+      "TYPE" : "GET"
+   },
+   "SERVICE_GET_SERVICE_APPOINTMENTS" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/service/service-appointments"
+   },
+   "FINANCING_DOWNLOAD_DOCUMENT" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/financing/document",
+      "TYPE" : "GET"
+   },
+   "FLASH_LIGHTS" : {
+      "TYPE" : "POST",
+      "AUTH" : true,
+      "URI" : "api/1/vehicles/{vehicle_id}/command/flash_lights"
+   },
+   "ENERGY_SITE_TELEMETRY_HISTORY" : {
+      "TYPE" : "GET",
+      "URI" : "api/1/energy_sites/{site_id}/telemetry_history",
+      "AUTH" : true
+   },
+   "SEND_DEVICE_KEY" : {
+      "TYPE" : "POST",
+      "URI" : "api/1/users/keys",
+      "AUTH" : true
+   },
+   "OPERATION_MODE" : {
+      "TYPE" : "POST",
+      "URI" : "api/1/energy_sites/{site_id}/operation",
+      "AUTH" : true
+   },
+   "COMMERCE_GET_STORE_INFO" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "commerce-api/storeconfigurations/v1{locale}"
+   },
+   "SPEED_LIMIT_DEACTIVATE" : {
+      "TYPE" : "POST",
+      "URI" : "api/1/vehicles/{vehicle_id}/command/speed_limit_deactivate",
+      "AUTH" : true
+   },
+   "BATTERY_BACKUP_RESERVE" : {
+      "URI" : "api/1/powerwalls/{battery_id}/backup",
+      "AUTH" : true,
+      "TYPE" : "POST"
+   },
+   "UPGRADES_GET_ELIGIBLE_UPGRADES" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/upgrades/eligible",
+      "TYPE" : "GET"
+   },
+   "SAFETY_RATING_GET_ESTIMATED_SAFETY_SCORE" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/insurance/calculate-safety-rating",
+      "TYPE" : "POST"
+   },
+   "CHANGE_CLIMATE_TEMPERATURE_SETTING" : {
+      "AUTH" : true,
+      "URI" : "api/1/vehicles/{vehicle_id}/command/set_temps",
+      "TYPE" : "POST"
+   },
+   "FINANCING_GET_E_SIGN_DOCUMENTS_STATUS" : {
+      "URI" : "bff/v2/mobile-app/financing/documents-status",
+      "AUTH" : true,
+      "TYPE" : "GET"
+   },
+   "ENERGY_SERVICE_GET_SERVICE_CASES" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/energy-service/appointments"
+   },
+   "SCHEDULE_SOFTWARE_UPDATE" : {
+      "URI" : "api/1/vehicles/{vehicle_id}/command/schedule_software_update",
+      "AUTH" : true,
+      "TYPE" : "POST"
+   },
+   "APP_FEEDBACK_LOGS" : {
+      "AUTH" : true,
+      "URI" : "api/1/reports",
+      "TYPE" : "POST"
+   },
+   "MEDIA_NEXT_FAVORITE" : {
+      "URI" : "api/1/vehicles/{vehicle_id}/command/media_next_fav",
+      "AUTH" : true,
+      "TYPE" : "POST"
+   },
+   "FINANCING_GET_FEATURE_FLAGS" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/financing/feature-flags",
+      "TYPE" : "GET"
+   },
+   "CHANGE_SUNROOF_STATE" : {
+      "TYPE" : "POST",
+      "URI" : "api/1/vehicles/{vehicle_id}/command/sun_roof_control",
+      "AUTH" : true
+   },
+   "CALENDAR_HISTORY_DATA" : {
+      "AUTH" : true,
+      "URI" : "api/1/energy_sites/{site_id}/calendar_history",
+      "TYPE" : "GET"
+   },
+   "SPEED_LIMIT_ACTIVATE" : {
+      "TYPE" : "POST",
+      "URI" : "api/1/vehicles/{vehicle_id}/command/speed_limit_activate",
+      "AUTH" : true
+   },
+   "SERVICE_GET_FINAL_INVOICE_AMOUNT_DUE" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/service/tracker/{serviceVisitID}/amount-due",
+      "TYPE" : "GET"
+   },
+   "ROADSIDE_CREATE_INCIDENT" : {
+      "URI" : "bff/v2/mobile-app/roadside/incidents",
+      "AUTH" : true,
+      "TYPE" : "POST"
+   },
+   "SERVICE_MOBILE_APPOINTMENT_DETAILS" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/service/mobile/{appointmentId}"
+   },
+   "UPGRADE_ELIGIBILITY" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "api/1/vehicles/{vehicle_id}/eligible_upgrades"
+   },
+   "COMMERCE_INVENTORY" : {
+      "URI" : "commerce-api/inventory/v2{locale}",
+      "AUTH" : true,
+      "TYPE" : "POST"
+   },
+   "LOOTBOX_USER_INFO" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/referrals"
+   },
+   "SERVICE_MACGYVER_POST_CUSTOMER_ANSWERS" : {
+      "URI" : "bff/v2/mobile-app/macgyver/customer-answers",
+      "AUTH" : true,
+      "TYPE" : "POST"
+   },
+   "SUBSCRIPTIONS_CREATE_OFFLINE_ORDER" : {
+      "TYPE" : "GET",
+      "URI" : "bff/v2/mobile-app/subscriptions/offline-order",
+      "AUTH" : true
+   },
+   "SERVICE_UPDATE_FILE_METADATA" : {
+      "URI" : "bff/v2/mobile-app/files/{uuid}/metadata",
+      "AUTH" : true,
+      "TYPE" : "PATCH"
+   },
+   "SUBSCRIPTIONS_GET_ELIGIBLE" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/subscriptions"
+   },
+   "SOLAR_SAVINGS_FORECAST" : {
+      "AUTH" : true,
+      "URI" : "api/1/energy_sites/{site_id}/savings_forecast",
+      "TYPE" : "GET"
+   },
+   "SERVICE_ACTIVITY_INFO" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/macgyver/activity-info/{serviceVisitID}"
+   },
+   "VEHICLE_LIST" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "api/1/vehicles"
+   },
+   "ROADSIDE_WARRANTY" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/roadside/warranty"
+   },
+   "VEHICLE_DATA_LEGACY" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "api/1/vehicles/{vehicle_id}/data"
+   },
+   "MEDIA_VOLUME_UP" : {
+      "TYPE" : "POST",
+      "AUTH" : true,
+      "URI" : "api/1/vehicles/{vehicle_id}/command/media_volume_up"
+   },
+   "FINANCING_GET_BILLING_ADDRESS" : {
+      "URI" : "bff/v2/mobile-app/financing/billing-address",
+      "AUTH" : true,
+      "TYPE" : "GET"
+   },
+   "SPLUNK_TELEMETRY" : {
+      "URI" : "api/1/logs",
+      "AUTH" : true,
+      "TYPE" : "POST"
+   },
+   "REFERRAL_POST_CONTACT_LIST" : {
+      "TYPE" : "POST",
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/referrals/contact-list"
+   },
+   "COMMERCE_PROCESSPAYMENT" : {
+      "AUTH" : true,
+      "URI" : "commerce-api/purchases/{purchaseNumber}/processpayment/v1{locale}",
+      "TYPE" : "POST"
+   },
+   "ENERGY_SITE_PROGRAMS" : {
+      "TYPE" : "GET",
+      "URI" : "api/1/energy_sites/{site_id}/programs",
+      "AUTH" : true
+   },
+   "MANAGE_CANCEL_BILL_ME_LATER_ORDER" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/bill-me-later/cancel",
+      "TYPE" : "POST"
+   },
+   "MEDIA_PREVIOUS_TRACK" : {
+      "AUTH" : true,
+      "URI" : "api/1/vehicles/{vehicle_id}/command/media_prev_track",
+      "TYPE" : "POST"
+   },
+   "ENERGY_SERVICE_GET_SITE_INFORMATION" : {
+      "URI" : "bff/v2/mobile-app/energy-service/site-information",
+      "AUTH" : true,
+      "TYPE" : "GET"
+   },
+   "CHARGE_PORT_DOOR_CLOSE" : {
+      "TYPE" : "POST",
+      "AUTH" : true,
+      "URI" : "api/1/vehicles/{vehicle_id}/command/charge_port_door_close"
+   },
+   "ENERGY_SITE_BACKUP_TIME_REMAINING" : {
+      "AUTH" : true,
+      "URI" : "api/1/energy_sites/{site_id}/backup_time_remaining",
+      "TYPE" : "GET"
+   },
+   "UPGRADES_COMPLETE_OFFLINE_ORDER" : {
+      "TYPE" : "POST",
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/upgrades/payment/offline-purchase-complete/v2"
+   },
+   "UPGRADES_GET_PURCHASED_UPGRADES" : {
+      "TYPE" : "GET",
+      "URI" : "bff/v2/mobile-app/upgrades/purchased",
+      "AUTH" : true
+   },
+   "COMMERCE_PURCHASE_HISTORY" : {
+      "AUTH" : true,
+      "URI" : "commerce-api/purchases/v1{locale}",
+      "TYPE" : "GET"
+   },
+   "POWERWALL_ORDER_PAGE" : {
+      "TYPE" : "GET",
+      "URI" : "powerwall_order_page",
+      "AUTH" : true,
+      "CONTENT" : "HTML"
+   },
+   "STATIC_SUPERCHARGER_FILE" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "static/superchargers/{file_path}"
+   },
+   "DEACTIVATE_DEVICE_TOKEN" : {
+      "TYPE" : "POST",
+      "AUTH" : true,
+      "URI" : "api/1/device/{device_token}/deactivate"
+   },
+   "MESSAGE_CENTER_MESSAGE_LIST" : {
+      "TYPE" : "GET",
+      "URI" : "api/1/messages",
+      "AUTH" : true
+   },
+   "ENERGY_GET_TROUBLESHOOTING_GUIDE" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/energy-service/troubleshooting/{troubleshootingFlow}?version=2",
+      "TYPE" : "GET"
+   },
+   "CHARGING_BALANCE_ZERO_DOLLAR_TX" : {
+      "TYPE" : "GET",
+      "URI" : "bff/v2/mobile-app/charging/signed-token",
+      "AUTH" : true
+   },
+   "ENERGY_SITE_IMPORT_EXPORT_CONFIG" : {
+      "URI" : "api/1/energy_sites/{site_id}/grid_import_export",
+      "AUTH" : true,
+      "TYPE" : "POST"
+   },
+   "SERVICE_MOBILE_OPEN_SLOTS" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/service/locations/mobile/slots",
+      "TYPE" : "GET"
+   },
+   "OWNERSHIP_TRANSLATIONS" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/static/protected/translations/{path}"
+   },
+   "REMOVE_VEHICLE_SHARE_DRIVER" : {
+      "TYPE" : "DELETE",
+      "URI" : "api/1/vehicles/{vehicle_id}/drivers/{share_user_id}",
+      "AUTH" : true
+   },
+   "UPGRADES_CREATE_OFFLINE_ORDER" : {
+      "URI" : "bff/v2/mobile-app/upgrades/payment/offline-order",
+      "AUTH" : true,
+      "TYPE" : "POST"
+   },
+   "COMMERCE_CART_DELETE" : {
+      "AUTH" : true,
+      "URI" : "commerce-api/carts/{cartId}/items/{lineItemId}/v1{locale}",
+      "TYPE" : "DELETE"
+   },
+   "SERVICE_UPDATE_MOBILE_APPOINTMENT" : {
+      "URI" : "bff/v2/mobile-app/service/mobile/{appointmentId}",
+      "AUTH" : true,
+      "TYPE" : "PATCH"
+   },
+   "FINANCING_ONE_TIME_PAYMENT_SIGNED_TOKEN" : {
+      "TYPE" : "POST",
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/financing/one-time-payment-signed-token"
+   },
+   "USER_ACCOUNT_GET_DETAILS" : {
+      "URI" : "bff/v2/mobile-app/account/details",
+      "AUTH" : true,
+      "TYPE" : "GET"
+   },
+   "SERVICE_UPDATE_ACTIVITIES" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/service/activities/{serviceVisitId}",
+      "TYPE" : "PUT"
+   },
+   "COMMERCE_GET_VEHICLES" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "commerce-api/vehicles/v1{locale}"
+   },
+   "REMOTE_AUTO_SEAT_CLIMATE_REQUEST" : {
+      "TYPE" : "POST",
+      "AUTH" : true,
+      "URI" : "api/1/vehicles/{vehicle_id}/command/remote_auto_seat_climate_request"
+   },
+   "MEDIA_VOLUME_DOWN" : {
+      "AUTH" : true,
+      "URI" : "api/1/vehicles/{vehicle_id}/command/media_volume_down",
+      "TYPE" : "POST"
+   },
+   "FINANCING_GET_CAR_DETAILS" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/financing/car-details"
+   },
+   "CHARGING_GET_BILLING_ADDRESS" : {
+      "TYPE" : "GET",
+      "URI" : "bff/v2/mobile-app/charging/billing-address",
+      "AUTH" : true
+   },
+   "AUTH_GENERATE_INSTANT_LOGIN" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/auth/generate-instant-login",
+      "TYPE" : "POST"
+   },
+   "SITE_LOCK_GET_SITES" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/charging-cn/get-locks"
+   },
+   "SITE_CONFIG" : {
+      "AUTH" : true,
+      "URI" : "api/1/energy_sites/{site_id}/site_info",
+      "TYPE" : "GET"
+   },
+   "COMMERCE_TOKEN" : {
+      "TYPE" : "POST",
+      "URI" : "commerce-api/tokens/v1{locale}",
+      "AUTH" : true
+   },
+   "TIME_OF_USE_SETTINGS" : {
+      "TYPE" : "POST",
+      "URI" : "api/1/energy_sites/{site_id}/time_of_use_settings",
+      "AUTH" : true
+   },
+   "CALENDAR_SYNC" : {
+      "TYPE" : "POST",
+      "URI" : "api/1/vehicles/{vehicle_id}/command/upcoming_calendar_entries",
+      "AUTH" : true
+   },
+   "COMMERCE_GET_ADDRESS" : {
+      "URI" : "commerce-api/addresses/v1{locale}",
+      "AUTH" : true,
+      "TYPE" : "GET"
+   },
+   "DRIVING_PLAN" : {
+      "AUTH" : true,
+      "URI" : "api/1/vehicles/driving_plan",
+      "TYPE" : "POST"
+   },
+   "SITE_LOCK_GET_STATUS" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/charging-cn/get-lock-status",
+      "TYPE" : "GET"
+   },
+   "FEATURE_CONFIG" : {
+      "TYPE" : "GET",
+      "URI" : "api/1/users/feature_config",
+      "AUTH" : true
+   },
+   "COMMERCE_ADD_CART" : {
+      "TYPE" : "POST",
+      "AUTH" : true,
+      "URI" : "commerce-api/carts/items/v1{locale}"
+   },
+   "VEHICLE_PSEUDONYM_DIRECTIVES" : {
+      "AUTH" : true,
+      "URI" : "api/1/directives/products",
+      "TYPE" : "POST"
+   },
+   "COMMERCE_POST_INVOICE" : {
+      "TYPE" : "POST",
+      "AUTH" : true,
+      "URI" : "commerce-api/purchases/invoices/v1{locale}"
+   },
+   "SERVICE_TRACKER_DETAILS" : {
+      "URI" : "bff/v2/mobile-app/service/tracker/{serviceVisitID}",
+      "AUTH" : true,
+      "TYPE" : "GET"
+   },
+   "CHARGING_SET_BILLING_ADDRESS" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/charging/billing-address",
+      "TYPE" : "POST"
+   },
+   "FINANCING_UPDATE_ENROLLMENT_SETTINGS" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/financing/update-enrollment-settings",
+      "TYPE" : "POST"
+   },
+   "REDEEM_VEHICLE_SHARE_INVITE" : {
+      "TYPE" : "POST",
+      "AUTH" : true,
+      "URI" : "api/1/invitations/redeem"
+   },
+   "COMMERCE_RECOMMENDATIONS_CATEGORIES" : {
+      "URI" : "commerce-api/recommendations/categories/v1{locale}",
+      "AUTH" : true,
+      "TYPE" : "POST"
+   },
+   "SERVICE_SWITCH_TO_CENTER_APPOINTMENT" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/service/mobile/{appointmentId}/convert-to-center",
+      "TYPE" : "POST"
+   },
+   "SUBSCRIPTIONS_PURCHASE" : {
+      "TYPE" : "POST",
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/subscriptions"
+   },
+   "LOOTBOX_GET_ONBOARDING_COPY" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "mobile-app/referrals/getOnboardingCopy"
+   },
+   "COMMERCE_ADDRESS_VALIDATION" : {
+      "URI" : "commerce-api/addresses/validations/v1{locale}",
+      "AUTH" : true,
+      "TYPE" : "POST"
+   },
+   "REMOTE_STEERING_WHEEL_HEATER_REQUEST" : {
+      "AUTH" : true,
+      "URI" : "api/1/vehicles/{vehicle_id}/command/remote_steering_wheel_heater_request",
+      "TYPE" : "POST"
+   },
+   "ENERGY_DOCUMENTS_GET_DOCUMENTS" : {
+      "URI" : "bff/v2/mobile-app/energy-documents/documents",
+      "AUTH" : true,
+      "TYPE" : "GET"
+   },
+   "REFERRAL_GET_PRODUCT_INFO" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/referrals/product-info"
+   },
+   "HERMES_VEHICLE_AUTHORIZATION" : {
+      "AUTH" : true,
+      "URI" : "api/1/vehicles/{id}/jwt/hermes",
+      "TYPE" : "POST"
+   },
+   "SERVICE_CREATE_MOBILE_APPOINTMENT" : {
+      "TYPE" : "POST",
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/service/mobile"
+   },
+   "SERVICE_CREATE_ACTIVITIES" : {
+      "URI" : "bff/v2/mobile-app/service/activities/{serviceVisitId}",
+      "AUTH" : true,
+      "TYPE" : "POST"
+   },
+   "COMMERCE_PURCHASE_BY_ORDERNUMBER" : {
+      "URI" : "commerce-api/purchases/{orderNumber}/v1{locale}",
+      "AUTH" : true,
+      "TYPE" : "GET"
+   },
+   "SERVICE_CENTER_APPOINTMENT_DETAILS" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/service/center/{appointmentId}"
+   },
+   "CHARGING_HISTORY" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/charging/history",
+      "TYPE" : "GET"
+   },
+   "PAYMENTS_POST_SIGNED_USER_TOKEN" : {
+      "TYPE" : "POST",
+      "URI" : "bff/v2/mobile-app/payments/signed-user-token",
+      "AUTH" : true
+   },
+   "SERVICE_MACGYVER_OUTSTANDING_WORK" : {
+      "URI" : "bff/v2/mobile-app/macgyver/categories",
+      "AUTH" : true,
+      "TYPE" : "GET"
+   },
+   "FINANCING_UPDATE_ONE_TIME_PAYMENT_STATUS" : {
+      "URI" : "bff/v2/mobile-app/financing/update-one-time-payment-status",
+      "AUTH" : true,
+      "TYPE" : "POST"
+   },
+   "REFERRAL_DATA" : {
+      "TYPE" : "GET",
+      "URI" : "api/1/users/referral_data",
+      "AUTH" : true
+   },
+   "COMMERCE_GET_CART" : {
+      "URI" : "commerce-api/carts/v1{locale}",
+      "AUTH" : true,
+      "TYPE" : "GET"
+   },
+   "VEHICLE_DOWNLOAD_VAULT" : {
+      "AUTH" : true,
+      "URI" : "api/1/users/vault_profile",
+      "TYPE" : "GET"
+   },
+   "ENERGY_SERVICE_POST_SERVICE_CASE" : {
+      "URI" : "bff/v2/mobile-app/energy-service/appointments",
+      "AUTH" : true,
+      "TYPE" : "POST"
+   },
+   "SITE_LOCK_SEND_UNLOCK_REQUEST" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/charging-cn/open-lock",
+      "TYPE" : "POST"
+   },
+   "SERVICE_CANCEL_APPOINTMENT" : {
+      "TYPE" : "PATCH",
+      "URI" : "mobile-app/service/appointments/{serviceVisitId}",
+      "AUTH" : true
+   },
+   "COMMERCE_GET_INSTALLERS" : {
+      "AUTH" : true,
+      "URI" : "commerce-api/installers/v1{locale}",
+      "TYPE" : "GET"
+   },
+   "PAYMENTS_GET_BILLING_ADDRESS" : {
+      "TYPE" : "GET",
+      "URI" : "bff/v2/mobile-app/billing-address",
+      "AUTH" : true
+   },
+   "VEHICLE_DATA" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "api/1/vehicles/{vehicle_id}/vehicle_data"
+   },
+   "PAYMENTS_FETCH_CN_ENTITY" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/payments/entity",
+      "TYPE" : "GET"
+   },
+   "USER_ACCOUNT_PUT_DETAILS" : {
+      "URI" : "bff/v2/mobile-app/account/details",
+      "AUTH" : true,
+      "TYPE" : "PUT"
+   },
+   "FINANCING_GET_E_SIGN_SUMMARY" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/financing/esign-summary"
+   },
+   "SERVICE_GET_FILE_LIST" : {
+      "TYPE" : "GET",
+      "URI" : "bff/v2/mobile-app/files/metadata",
+      "AUTH" : true
+   },
+   "DOWNLOAD_CHARGING_SUBSCRIPTION_INVOICE" : {
+      "TYPE" : "GET",
+      "URI" : "bff/v2/mobile-app/charging/subscription/invoice/{invoiceId}",
+      "AUTH" : true
+   },
+   "SAFETY_RATING_GET_ELIGIBLE_FOR_TELEMATICS" : {
+      "URI" : "bff/v2/mobile-app/insurance/eligible-for-telematics",
+      "AUTH" : true,
+      "TYPE" : "GET"
+   },
+   "UPGRADES_SUBMIT_REFUND" : {
+      "URI" : "bff/v2/mobile-app/upgrades/refunds/v2",
+      "AUTH" : true,
+      "TYPE" : "POST"
+   },
+   "CHARGING_BALANCE_CHARGE_TYPE_FLAG" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/feature-flag/tao-9296-filter-by-charge-type"
+   },
+   "FINANCING_UPDATE_BILLING_ADDRESS" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/financing/billing-address",
+      "TYPE" : "POST"
+   },
+   "CHARGING_BALANCE" : {
+      "URI" : "bff/v2/mobile-app/charging/balance",
+      "AUTH" : true,
+      "TYPE" : "GET"
+   },
+   "ENERGY_SITE_PREFERENCE" : {
+      "URI" : "api/1/energy_sites/{site_id}/preference",
+      "AUTH" : true,
+      "TYPE" : "POST"
+   },
+   "HONK_HORN" : {
+      "URI" : "api/1/vehicles/{vehicle_id}/command/honk_horn",
+      "AUTH" : true,
+      "TYPE" : "POST"
+   },
+   "SERVICE_MESSAGES" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/service/messages/{serviceVisitID}"
+   },
+   "SERVICE_SAVE_CENTER_APPOINTMENT" : {
+      "TYPE" : "POST",
+      "URI" : "bff/v2/mobile-app/service/center",
+      "AUTH" : true
+   },
+   "MANAGE_GET_SUBSCRIPTION_INVOICES" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/subscriptions/invoices"
+   },
+   "SERVICE_GET_FILE" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/files/{uuid}"
+   },
+   "NEARBY_CHARGING_SITES" : {
+      "URI" : "api/1/vehicles/{vehicle_id}/nearby_charging_sites",
+      "AUTH" : true,
+      "TYPE" : "GET"
+   },
+   "MANAGE_POST_BILL_ME_LATER_TOGGLE" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/bill-me-later/security-toggle",
+      "TYPE" : "POST"
+   },
+   "REFERRAL_GET_CREDIT_HISTORY" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/referrals/credit-history",
+      "TYPE" : "GET"
+   },
+   "VEHICLE_ORDER_LIST" : {
+      "AUTH" : true,
+      "URI" : "api/1/users/orders",
+      "TYPE" : "GET"
+   },
+   "REFERRAL_GET_FEATURE_FLAG" : {
+      "URI" : "bff/v2/mobile-app/feature-flag/tao-69420-treasure",
+      "AUTH" : true,
+      "TYPE" : "GET"
+   },
+   "USER_ACCOUNT_UPLOAD_PROFILE_PICTURE" : {
+      "TYPE" : "POST",
+      "URI" : "bff/v2/mobile-app/account/profile-pic",
+      "AUTH" : true
+   },
+   "MANAGE_PATCH_AUTO_RENEW_SUBSCRIPTIONS" : {
+      "TYPE" : "PATCH",
+      "URI" : "bff/v2/mobile-app/subscriptions/v2",
+      "AUTH" : true
+   },
+   "PAYMENTS_GET_SIGNED_USER_TOKEN" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/payments/signed-user-token"
+   },
+   "SERVICE_MACGYVER_DIAGNOSTIC_RESULT" : {
+      "TYPE" : "GET",
+      "URI" : "mobile-app/macgyver/urgent-autodiag-result",
+      "AUTH" : true
+   },
+   "SERVICE_MACGYVER_DISMISS_CUSTOMER_ANSWERS" : {
+      "TYPE" : "PUT",
+      "URI" : "bff/v2/mobile-app/macgyver/customer-answers",
+      "AUTH" : true
+   },
+   "SERVICE_FEATURE_FLAG_ALLOW_FILE_UPLOAD" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/feature-flag/service-scheduling-allow-file-upload"
+   },
+   "CONTACT_US_CONTENT_CATALOG" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "mobile-app/contact-us/content-catalog"
+   },
+   "FINANCING_GET_E_SIGN_DOCUMENT" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/financing/esign-document"
+   },
+   "SERVICE_FEATURE_FLAG_SCHEDULING_FALLBACK" : {
+      "TYPE" : "GET",
+      "URI" : "mobile-app/feature-flag/TAO-13782-no-estimate-schedule-fallback",
+      "AUTH" : true
+   },
+   "MAX_DEFROST" : {
+      "TYPE" : "POST",
+      "AUTH" : true,
+      "URI" : "api/1/vehicles/{vehicle_id}/command/set_preconditioning_max"
+   },
+   "VEHICLE_UPLOAD_PSEUDONYM_DIRECTIVE" : {
+      "URI" : "api/1/directives/discover",
+      "AUTH" : true,
+      "TYPE" : "POST"
+   },
+   "CHARGING_STOP_SESSION" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/charging/session/stop/{id}"
+   },
+   "COMMERCE_ITEM" : {
+      "URI" : "commerce-api/items/v1{locale}",
+      "AUTH" : true,
+      "TYPE" : "POST"
+   },
+   "SPEED_LIMIT_CLEAR_PIN" : {
+      "URI" : "api/1/vehicles/{vehicle_id}/command/speed_limit_clear_pin",
+      "AUTH" : true,
+      "TYPE" : "POST"
+   },
+   "ROADSIDE_CANCEL_INCIDENT" : {
+      "URI" : "bff/v2/mobile-app/roadside/incidents/{incidentsId}",
+      "AUTH" : true,
+      "TYPE" : "PUT"
+   },
+   "REVERSE_GEOCODING" : {
+      "TYPE" : "GET",
+      "URI" : "maps/reverse_geocoding/v3/",
+      "AUTH" : true
+   },
+   "COMMERCE_GEOGRAPHIES" : {
+      "URI" : "commerce-api/geographies/v1{locale}",
+      "AUTH" : true,
+      "TYPE" : "GET"
+   },
+   "HVAC_BIOWEAPON_MODE" : {
+      "TYPE" : "POST",
+      "AUTH" : true,
+      "URI" : "api/1/vehicles/{vehicle_id}/command/set_bioweapon_mode"
+   },
+   "SAFETY_RATING_GET_DAILY_BREAKDOWN" : {
+      "URI" : "bff/v2/mobile-app/insurance/daily-breakdown",
+      "AUTH" : true,
+      "TYPE" : "GET"
+   },
+   "UNLOCK" : {
+      "AUTH" : true,
+      "URI" : "api/1/vehicles/{vehicle_id}/command/door_unlock",
+      "TYPE" : "POST"
+   },
+   "ENERGY_SERVICE_CANCEL_APPOINTMENT" : {
+      "TYPE" : "PUT",
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/energy-service/appointments"
+   },
+   "POWERWALL_ORDER_SESSION_DATA" : {
+      "URI" : "api/1/users/powerwall_order_entry_data",
+      "AUTH" : true,
+      "TYPE" : "GET"
+   },
+   "SERVICE_GET_SERVICE_VISITS" : {
+      "TYPE" : "GET",
+      "URI" : "bff/v2/mobile-app/service/appointments",
+      "AUTH" : true
+   },
+   "COMMERCE_POST_CANCELORDER" : {
+      "TYPE" : "POST",
+      "AUTH" : true,
+      "URI" : "commerce-api/cancellation/v1{locale}"
+   },
+   "VEHICLE_SUMMARY" : {
+      "TYPE" : "GET",
+      "URI" : "api/1/vehicles/{vehicle_id}",
+      "AUTH" : true
+   },
+   "BATTERY_ENERGY_TIMESERIES_DATA" : {
+      "TYPE" : "GET",
+      "URI" : "api/1/powerwalls/{battery_id}/energyhistory",
+      "AUTH" : true
+   },
+   "COMMERCE_POST_RETURNORDER" : {
+      "TYPE" : "POST",
+      "AUTH" : true,
+      "URI" : "commerce-api/returns/v1{locale}"
+   },
+   "COMMERCE_ADDRESS" : {
+      "AUTH" : true,
+      "URI" : "commerce-api/addresses/v1{locale}",
+      "TYPE" : "POST"
+   },
+   "COMMERCE_POST_CHECKOUT_INVOICE" : {
+      "URI" : "commerce-api/checkout/invoices/v1{locale}",
+      "AUTH" : true,
+      "TYPE" : "POST"
+   },
+   "SERVICE_SURVEY_ELIGIBILITY" : {
+      "TYPE" : "GET",
+      "URI" : "bff/v2/mobile-app/service/surveys",
+      "AUTH" : true
+   },
+   "FINANCING_SUBMIT_FINANCING_ACTION" : {
+      "TYPE" : "POST",
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/financing/manage-financing-action"
+   },
+   "ENERGY_SERVICE_GET_APPOINTMENT_SUGGESTIONS" : {
+      "URI" : "bff/v2/mobile-app/energy-service/appointment-suggestions",
+      "AUTH" : true,
+      "TYPE" : "GET"
+   },
+   "FINANCING_GET_EXTENSION_QUOTE" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/financing/extension-quote",
+      "TYPE" : "GET"
+   },
+   "UPGRADES_SUBSCRIPTIONS_SHARED_BILLING_ADDRESS_FEATURE_FLAG" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/billing-address/feature-flag/TAO-8065-in-app-BillingBlock-Enable",
+      "TYPE" : "GET"
+   },
+   "MESSAGE_CENTER_MESSAGE_COUNT" : {
+      "URI" : "api/1/messages/count",
+      "AUTH" : true,
+      "TYPE" : "GET"
+   },
+   "MESSAGE_CENTER_MESSAGE" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "api/1/messages/{message_id}"
+   },
+   "USER" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/user",
+      "TYPE" : "GET"
+   },
+   "ENERGY_SERVICE_GET_POWERWALL_WARRANTY_DETAILS" : {
+      "URI" : "bff/v2/mobile-app/energy-service/warranty-details",
+      "AUTH" : true,
+      "TYPE" : "GET"
+   },
+   "ENERGY_SITE_COMMAND" : {
+      "TYPE" : "POST",
+      "AUTH" : true,
+      "URI" : "api/1/energy_sites/{site_id}/command"
+   },
+   "SERVICE_HISTORY" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/service/history",
+      "TYPE" : "GET"
+   },
+   "FETCH_VEHICLE_SHARE_INVITES" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "api/1/vehicles/{vehicle_id}/invitations"
+   },
+   "SERVICE_MACGYVER_SERVICE_TYPE" : {
+      "TYPE" : "POST",
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/macgyver/service-type"
+   },
+   "SERVICE_SWITCH_TO_MOBILE_APPOINTMENT" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/service/center/{appointmentId}/convert-to-mobile",
+      "TYPE" : "POST"
+   },
+   "GET_UPCOMING_SERVICE_VISIT_DATA" : {
+      "URI" : "api/1/users/service_scheduling_data",
+      "AUTH" : true,
+      "TYPE" : "GET"
+   },
+   "BATTERY_OPERATION_MODE" : {
+      "TYPE" : "POST",
+      "AUTH" : true,
+      "URI" : "api/1/powerwalls/{battery_id}/operation"
+   },
+   "REFERRAL_GET_TERMS_AND_CONDITIONS" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/referrals/terms-conditions"
+   },
+   "OWNERSHIP_VEHICLE_SPECS_REQUEST" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/ownership/vehicle-details",
+      "TYPE" : "GET"
+   },
+   "SERVICE_FEATURE_FLAG_SERVICE_TRACKER" : {
+      "URI" : "bff/v2/mobile-app/feature-flag/mobile-app-service-tracker",
+      "AUTH" : true,
+      "TYPE" : "GET"
+   },
+   "SERVICE_COMPLETE_OFFLINE_ORDER" : {
+      "TYPE" : "POST",
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/service/payment/complete-offline-order"
+   },
+   "SCHEDULED_DEPARTURE" : {
+      "URI" : "api/1/vehicles/{vehicle_id}/command/set_scheduled_departure",
+      "AUTH" : true,
+      "TYPE" : "POST"
+   },
+   "CHARGING_DOWNLOAD_CSV" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/charging/export"
+   },
+   "MEDIA_NEXT_TRACK" : {
+      "URI" : "api/1/vehicles/{vehicle_id}/command/media_next_track",
+      "AUTH" : true,
+      "TYPE" : "POST"
+   },
+   "RATE_TARIFFS" : {
+      "TYPE" : "GET",
+      "URI" : "api/1/energy_sites/rate_tariffs",
+      "AUTH" : true
+   },
+   "SERVICE_MOBILE_NEAREST_LOCATIONS" : {
+      "TYPE" : "GET",
+      "URI" : "mobile-app/service/locations/mobile/nearest",
+      "AUTH" : true
+   },
+   "COMMERCE_CONTENT" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "commerce-api/content/v2?file={fileName}"
+   },
+   "MESSAGE_CENTER_CTA_PAGE" : {
+      "CONTENT" : "HTML",
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "messages_cta_page"
+   },
+   "SAFETY_RATING_GET_TRIPS" : {
+      "URI" : "bff/v2/mobile-app/insurance/trips",
+      "AUTH" : true,
+      "TYPE" : "GET"
+   },
+   "STATIC_CHARGER_FILE" : {
+      "AUTH" : true,
+      "URI" : "static/chargers/{file_path}",
+      "TYPE" : "GET"
+   },
+   "FETCH_VEHICLE_SHARED_DRIVERS" : {
+      "AUTH" : true,
+      "URI" : "api/1/vehicles/{vehicle_id}/drivers",
+      "TYPE" : "GET"
+   },
+   "OWNERSHIP_WARRANTY_DETAILS_REQUEST" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/ownership/warranty-details"
+   },
+   "COMMERCE_FEATURE_FLAG" : {
+      "AUTH" : true,
+      "URI" : "mobile-app/commerce/feature-flags",
+      "TYPE" : "GET"
+   },
+   "SITE_SUMMARY" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "api/1/energy_sites/{site_id}/site_status"
+   },
+   "REMOTE_SEAT_COOLING_REQUEST" : {
+      "TYPE" : "POST",
+      "URI" : "api/1/vehicles/{vehicle_id}/command/remote_seat_cooler_request",
+      "AUTH" : true
+   },
+   "REFERRAL_GET_PAST_HISTORY_COUNT" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/referrals/past-referral-history/count",
+      "TYPE" : "GET"
+   },
+   "PAYMENTS_GET_INSTRUMENT" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/payments/instrument"
+   },
+   "COMMERCE_SEARCH_PRODUCTS" : {
+      "AUTH" : true,
+      "URI" : "commerce-api/searches/v1{locale}",
+      "TYPE" : "POST"
+   },
+   "SERVICE_MOBILE_ISSUES" : {
+      "URI" : "bff/v2/mobile-app/feature-flag/mobile-service-issues",
+      "AUTH" : true,
+      "TYPE" : "GET"
+   },
+   "PLACE_SUGGESTIONS" : {
+      "AUTH" : true,
+      "URI" : "api/1/vehicles/place_suggestions",
+      "TYPE" : "POST"
+   },
+   "SITE_NAME" : {
+      "AUTH" : true,
+      "URI" : "api/1/energy_sites/{site_id}/site_name",
+      "TYPE" : "POST"
+   },
+   "SERVICE_FEATURE_FLAG_MOBILE_SERVICE" : {
+      "TYPE" : "GET",
+      "URI" : "bff/v2/mobile-app/feature-flag/show-mobile-service",
+      "AUTH" : true
+   },
+   "SERVICE_GET_APPOINTMENT_INVOICES" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/service/tracker/{serviceVisitID}/invoices"
+   },
+   "COMMERCE_POST_INSTALLER_VENDOR" : {
+      "TYPE" : "POST",
+      "URI" : "commerce-api/checkout/auditrecords/v1/{locale}",
+      "AUTH" : true
+   },
+   "COMMERCE_GET_SERVICECENTERS" : {
+      "AUTH" : true,
+      "URI" : "commerce-api/servicecenters/v1{locale}",
+      "TYPE" : "GET"
+   },
+   "FINANCING_FETCH_DETAILS" : {
+      "TYPE" : "GET",
+      "URI" : "bff/v2/mobile-app/financing/details",
+      "AUTH" : true
+   },
+   "CHARGE_PORT_DOOR_OPEN" : {
+      "TYPE" : "POST",
+      "URI" : "api/1/vehicles/{vehicle_id}/command/charge_port_door_open",
+      "AUTH" : true
+   },
+   "LOCK" : {
+      "TYPE" : "POST",
+      "URI" : "api/1/vehicles/{vehicle_id}/command/door_lock",
+      "AUTH" : true
+   },
+   "SEND_GPS_TO_VEHICLE" : {
+      "TYPE" : "POST",
+      "AUTH" : true,
+      "URI" : "api/1/vehicles/{vehicle_id}/command/navigation_gps_request"
+   },
+   "SERVICE_SURVEY_QUESTIONS" : {
+      "TYPE" : "POST",
+      "URI" : "bff/v2/mobile-app/service/surveys",
+      "AUTH" : true
+   },
+   "SERVICE_UPDATE_APPOINTMENT" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/service/appointments/{serviceVisitId}",
+      "TYPE" : "PUT"
+   },
+   "STATUS" : {
+      "AUTH" : false,
+      "URI" : "status",
+      "TYPE" : "GET"
+   },
+   "MESSAGE_CENTER_COUNTS" : {
+      "AUTH" : true,
+      "URI" : "api/1/messages/count",
+      "TYPE" : "GET"
+   },
+   "ACTUATE_TRUNK" : {
+      "TYPE" : "POST",
+      "URI" : "api/1/vehicles/{vehicle_id}/command/actuate_trunk",
+      "AUTH" : true
+   },
+   "MEDIA_PREVIOUS_FAVORITE" : {
+      "URI" : "api/1/vehicles/{vehicle_id}/command/media_prev_fav",
+      "AUTH" : true,
+      "TYPE" : "POST"
+   },
+   "SERVICE_DELETE_UPLOADED_FILE" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/files/{uuid}",
+      "TYPE" : "PUT"
+   },
+   "PLAN_TRIP" : {
+      "TYPE" : "POST",
+      "AUTH" : true,
+      "URI" : "api/1/vehicles/plan_trip"
+   },
+   "CHARGING_BALANCE_GET_IS_BLOCKED" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/charging-cn/supercharger-status",
+      "TYPE" : "GET"
+   },
+   "GET_OWNERSHIP_XP_CONFIG" : {
+      "TYPE" : "GET",
+      "URI" : "api/1/users/app_config",
+      "AUTH" : true
+   },
+   "VEHICLE_CHARGE_HISTORY" : {
+      "TYPE" : "POST",
+      "URI" : "api/1/vehicles/{vehicle_id}/charge_history",
+      "AUTH" : true
+   },
+   "VIDEO_GUIDES_GET_VIDEO_LIST" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/video-guides"
+   },
+   "ROADSIDE_ASSISTANCE_DATA" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "api/1/users/roadside_assistance_data"
+   },
+   "GET_WALLET_FEATURE_FLAG" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/feature-flag/enable-subscriptions-wallet-channel",
+      "TYPE" : "GET"
+   },
+   "MATTERMOST" : {
+      "AUTH" : true,
+      "URI" : "Just a placeholder",
+      "TYPE" : "POST"
+   },
+   "SUBSCRIPTIONS_POST_CREATE_OFFLINE_ORDER" : {
+      "URI" : "bff/v2/mobile-app/subscriptions/offline-order",
+      "AUTH" : true,
+      "TYPE" : "GET"
+   },
+   "VEHICLE_COMPLETE_PSEUDONYM_DIRECTIVE" : {
+      "TYPE" : "POST",
+      "AUTH" : true,
+      "URI" : "api/1/directives/products/complete"
+   },
+   "GET_MANAGE_DRIVER_FLAG" : {
+      "URI" : "bff/v2/mobile-app/feature-flag/TAO-14025-add-driver-flow",
+      "AUTH" : true,
+      "TYPE" : "GET"
+   },
+   "REFERRAL_GET_USER_INFO" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/referrals/user-info"
+   },
+   "MANAGE_UPGRADE_BILL_ME_LATER_GET_OFFLINE_TOKEN" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/bill-me-later/token",
+      "TYPE" : "POST"
+   },
+   "DOWNLOAD_CHARGING_INVOICE" : {
+      "TYPE" : "GET",
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/charging/invoice/{uuid}"
+   },
+   "STORM_MODE_SETTINGS" : {
+      "URI" : "api/1/energy_sites/{site_id}/storm_mode",
+      "AUTH" : true,
+      "TYPE" : "POST"
+   },
+   "SERVICE_GET_ESTIMATE_COST_DETAILS" : {
+      "URI" : "bff/v2/mobile-app/service/tracker/invoices/{invoiceId}",
+      "AUTH" : true,
+      "TYPE" : "GET"
+   },
+   "APP_FEEDBACK_METADATA" : {
+      "URI" : "api/1/diagnostics",
+      "AUTH" : true,
+      "TYPE" : "POST"
+   },
+   "TAKE_DRIVENOTE" : {
+      "URI" : "api/1/vehicles/{vehicle_id}/command/take_drivenote",
+      "AUTH" : true,
+      "TYPE" : "POST"
+   },
+   "FINANCING_FETCH_DOCUMENT_LIST" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/financing/document-list",
+      "TYPE" : "GET"
+   },
+   "CONTACT_US_CLASSIFICATION" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/contact-us/classify-narrative",
+      "TYPE" : "POST"
+   },
+   "COMMERCE_CATEGORIES" : {
+      "URI" : "commerce-api/categories/v1{locale}",
+      "AUTH" : true,
+      "TYPE" : "GET"
+   },
+   "USER_ACCOUNT_DOWNLOAD_PROFILE_PICTURE" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/account/profile-pic",
+      "TYPE" : "GET"
+   },
+   "COMMERCE_CLEAR_CART" : {
+      "URI" : "commerce-api/carts/v1{locale}",
+      "AUTH" : true,
+      "TYPE" : "DELETE"
+   },
+   "WINDOW_CONTROL" : {
+      "TYPE" : "POST",
+      "URI" : "api/1/vehicles/{vehicle_id}/command/window_control",
+      "AUTH" : true
+   },
+   "VEHICLE_UPLOAD_VAULT" : {
+      "AUTH" : true,
+      "URI" : "api/1/users/vault_profile",
+      "TYPE" : "POST"
+   },
+   "SERVICE_CREATE_OFFLINE_ORDER" : {
+      "TYPE" : "POST",
+      "URI" : "bff/v2/mobile-app/service/payment/create-offline-order",
+      "AUTH" : true
+   },
+   "BILLING_ADDRESS_FORM_FEATURE_FLAG" : {
+      "TYPE" : "GET",
+      "URI" : "bff/v2/mobile-app/billing-address/feature-flag/tao-8202-ownership-mobile-app-billing-address",
+      "AUTH" : true
+   },
+   "FINANCING_IS_ENABLED" : {
+      "TYPE" : "GET",
+      "URI" : "bff/v2/mobile-app/financing/is-captive",
+      "AUTH" : true
+   },
+   "REFERRAL_GET_CONTACT_LIST" : {
+      "TYPE" : "GET",
+      "URI" : "bff/v2/mobile-app/referrals/contact-list",
+      "AUTH" : true
+   },
+   "SET_VALET_MODE" : {
+      "TYPE" : "POST",
+      "AUTH" : true,
+      "URI" : "api/1/vehicles/{vehicle_id}/command/set_valet_mode"
+   },
+   "CHARGING_GET_SITES_BOUNDING_BOX" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/charging/sites",
+      "TYPE" : "POST"
+   },
+   "SEND_NOTIFICATION_PREFERENCES" : {
+      "AUTH" : true,
+      "URI" : "api/1/notification_preferences",
+      "TYPE" : "POST"
+   },
+   "CLIMATE_ON" : {
+      "TYPE" : "POST",
+      "URI" : "api/1/vehicles/{vehicle_id}/command/auto_conditioning_start",
+      "AUTH" : true
+   },
+   "MANAGE_COMPLETE_BILL_ME_LATER_ORDER" : {
+      "AUTH" : true,
+      "URI" : "bff/v2/mobile-app/bill-me-later/purchase-complete",
+      "TYPE" : "POST"
+   },
+   "STOP_CHARGE" : {
+      "AUTH" : true,
+      "URI" : "api/1/vehicles/{vehicle_id}/command/charge_stop",
+      "TYPE" : "POST"
+   },
+   "ROADSIDE_LOCATIONS" : {
+      "TYPE" : "GET",
+      "URI" : "bff/v2/mobile-app/roadside/locations",
+      "AUTH" : true
+   },
+   "ENERGY_SERVICE_CANCEL_SERVICE_CASE" : {
+      "URI" : "bff/v2/mobile-app/energy-service/service-case",
+      "AUTH" : true,
+      "TYPE" : "PUT"
+   },
+   "SERVICE_APPROVE_ESTIMATE" : {
+      "URI" : "bff/v2/mobile-app/service/tracker/{serviceVisitID}/estimate-status",
+      "AUTH" : true,
+      "TYPE" : "POST"
+   }
+}

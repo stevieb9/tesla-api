@@ -1,11 +1,14 @@
 Revision history for Tesla-API
 
 0.08 UNREL
-    -
+    - We now store endpoints.json and option_codes.json in a share directory
+      with the library (closes #4)
+    - Added update_data_files(), updates the endpoints.json and
+      option_codes.json files this library uses if they have in fact been
+      changed
 
 0.07    2022-03-21
     - POD corrections
-    -
 
 0.06    2022-03-20
     - Made "API CACHE METHODS" section a head1 in POD
