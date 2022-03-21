@@ -169,7 +169,6 @@ sub endpoints {
         }
 
         my $perl_endpoints = decode_json($json_endpoints);
-        printf "endpoints(): %d\n", scalar keys %$perl_endpoints;
         $self->{endpoints} = $perl_endpoints;
     }
 
