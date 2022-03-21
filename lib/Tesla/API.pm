@@ -13,7 +13,7 @@ use MIME::Base64 qw(encode_base64url);
 use WWW::Mechanize;
 use URI;
 
-our $VERSION = '0.07';
+our $VERSION = '0.08';
 
 my $home_dir;
 
