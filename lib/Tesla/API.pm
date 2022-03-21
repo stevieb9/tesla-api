@@ -657,7 +657,7 @@ We've employed a complex caching mechanism for data received from Tesla's API.
 
 By default, we cache retrieved data for every endpoint/ID pair in the cache for
 two seconds (modifiable by C<api_cache_timeout()>, or C<api_cache_timeout> in
-new()).
+C<new()>).
 
 This means that if you call three methods in a row that all extract information
 from the data returned via a single endpoint/ID pair, you may get back the
@@ -677,7 +677,7 @@ Change it to 10:
 
 ...or:
 
-    my $car = Tesla::Vehicle(api_cache_timeout => 10);
+    my $car = Tesla::Vehicle->new(api_cache_timeout => 10);
 
 ...or:
 
@@ -689,7 +689,7 @@ Change it to 10:
 
 ...or:
 
-    my $car = Tesla::Vehicle(api_cache_timeout => 0);
+    my $car = Tesla::Vehicle->new(api_cache_timeout => 0);
 
 ...or:
 
@@ -709,7 +709,7 @@ Change it to 10:
 
 ...or:
 
-    my $car = Tesla::Vehicle(api_cache_persist => 1);
+    my $car = Tesla::Vehicle->new(api_cache_persist => 1);
 
 ...or:
 
