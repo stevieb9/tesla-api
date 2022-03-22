@@ -70,7 +70,11 @@ sub new {
     return $self;
 }
 sub api {
-    my ($self, $endpoint_name, $id, $api_params) = @_;
+    my ($self, %params) = @_;
+
+    my $endpoint_name   = $params{endpoint};
+    my $id              = $params{id};
+    my $api_params      = $params{api_params};
 
     if (! defined $endpoint_name) {
         croak "Tesla::API::api() requires an endpoint name sent in";
@@ -575,9 +579,23 @@ Tesla::API - Interface to Tesla's API
     my $endpoint_name   = 'VEHICLE_DATA';
     my $vehicle_id      = 3234234242124;
 
-    my $car_data = $tesla->api($endpoint_name, $vehicle_id);
+    # Get the entire list of car data
 
-    if ($tesla->api('ACTUATE_TRUNK', $vehicle_id, {which_trunk => 'rear'})) {
+    my $car_data = $tesla->api(
+        endpoint    => $endpoint_name,
+        id          => $vehicle_id
+    );
+
+    # Send the open trunk command
+
+    $tesla->api(
+        endpoint    => 'ACTUATE_TRUNK',
+        id          => $vehicle_id,
+        api_params  => {which_trunk => 'rear'}
+    );
+
+    if ($tesla->trunk_rear) {
+        # Trunk is open
         put_stuff_in_trunk();
     }
 
@@ -642,24 +660,26 @@ to Tesla every time.
 
 I<Return>: Integer, the number of seconds we're caching Tesla API data for.
 
-=head2 api($endpoint, $id, $api_params)
+=head2 api(%params)
 
 Responsible for disseminating the endpoints and retrieving data through the
 Tesla API.
 
+All parameters are to be sent in as a hash.
+
 B<Parameters>:
 
-    $endpoint
+    endpoint
 
 I<Mandatory, String>: A valid Tesla API endpoint name. The entire list can be
 found in the C<t/test_data/endpoints.json> file for the time being.
 
-    $id
+    id
 
 I<Optional, Integer>: Some endpoints require an ID sent in (eg. vehicle ID,
 Powerwall ID etc).
 
-    $api_params
+    api_params
 
 I<Optional, Hash Reference>: Some API calls require additional parameters. Send
 in a hash reference where the keys are the API parameter name, and the value is,
@@ -887,7 +907,7 @@ See L<Tesla::Vehicle> for vehicle specific methods.
     my $tesla = Tesla::API->new;
     my $vehicle_id = 1234238782349137;
 
-    print Dumper $tesla->api('VEHICLE_DATA', $vehicle_id);
+    print Dumper $tesla->api(endpoint => 'VEHICLE_DATA', id => $vehicle_id);
 
 Output (massively and significantly snipped for brevity):
 
