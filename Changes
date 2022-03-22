@@ -1,7 +1,10 @@
 Revision history for Tesla-API
 
 0.09 UNREL
-    -
+    - In CI script, manually install File::ShareDir::Install, as it doesn't get
+      installed by default the way we configure the test run (was throwing "! No
+      MYMETA file is found after configure. Your toolchain is too old?" error on
+      the 'cpanm --installdeps .' command).
 
 0.08    2022-03-22
     - We now store endpoints.json and option_codes.json in a share directory
