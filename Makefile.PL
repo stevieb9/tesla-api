@@ -28,7 +28,7 @@ my %WriteMakefileArgs = (
     },
     CONFIGURE_REQUIRES => {
         'ExtUtils::MakeMaker'     => '0',
-        'File::ShareDir::Install' => '0',
+#        'File::ShareDir::Install' => '0',
     },
     TEST_REQUIRES => {
         'Test::More' => '0',
