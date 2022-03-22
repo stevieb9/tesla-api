@@ -217,7 +217,7 @@ sub option_codes {
     }
 
     if ($code) {
-        if (! exists $self->{endpoints}{$code}) {
+        if (! exists $self->{option_codes}{$code}) {
             croak "Tesla API option code $code does not exist";
         }
         return $self->{option_codes}{$code};
@@ -704,6 +704,13 @@ Returns the L<WWW::Mechanize> object we've instantiated internally.
 Returns a hash reference of the data we've collected for you and stashed
 within the object. This does not reflect the entire object, just the data
 returned from Tesla's API.
+
+=head2 option_codes
+
+B<NOTE>: I'm unsure if the option codes are vehicle specific, or general for
+all Tesla products, so I'm leaving this method here for now.
+
+Returns a hash reference of 'option code' => 'description' pairs.
 
 =head2 update_data_files
 
