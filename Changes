@@ -1,5 +1,8 @@
 Revision history for Tesla-API
 
+0.09 UNREL
+    -
+
 0.08    2022-03-22
     - We now store endpoints.json and option_codes.json in a share directory
       with the library (closes #4)
