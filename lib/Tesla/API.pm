@@ -594,11 +594,6 @@ Tesla::API - Interface to Tesla's API
         api_params  => {which_trunk => 'rear'}
     );
 
-    if ($tesla->trunk_rear) {
-        # Trunk is open
-        put_stuff_in_trunk();
-    }
-
 =head1 DESCRIPTION
 
 This distribution provides access to the Tesla API.
