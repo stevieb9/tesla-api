@@ -2,6 +2,7 @@ Revision history for Tesla-API
 
 0.10 UNREL
     - Remove erroneous call example from Tesla::Vehicle from the SYNOPSIS
+    - Added prereq of LWP::Protocol::https
 
 0.09    2022-03-22
     - In CI script, manually install File::ShareDir::Install, as it doesn't get
