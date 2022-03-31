@@ -193,7 +193,7 @@ sub mech {
     my $www_mech = WWW::Mechanize->new(
         agent       => $self->_useragent_string,
         autocheck   => 0,
-        timeout     => 3,
+        timeout     => 6,
         cookie_jar  => {}
     );
 
