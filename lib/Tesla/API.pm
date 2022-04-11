@@ -364,7 +364,12 @@ sub _access_token_generate {
         redirect_uri  => "https://auth.tesla.com/void/callback",
     };
 
-    my $request = HTTP::Request->new('POST', $url, $header, encode_json($request_data));
+    my $request = HTTP::Request->new(
+        'POST',
+        $url,
+        $header,
+        JSON->new->allow_nonref->encode($request_data)
+    );
 
     my $response = $self->mech->request($request);
 
@@ -428,7 +433,12 @@ sub _access_token_refresh {
         client_id     => 'ownerapi',
     };
 
-    my $request = HTTP::Request->new('POST', $url, $header, encode_json($request_data));
+    my $request = HTTP::Request->new(
+        'POST',
+        $url,
+        $header,
+        JSON->new->allow_nonref->encode($request_data)
+    );
 
     my $response = $self->mech->request($request);
 
@@ -460,7 +470,8 @@ sub _access_token_update {
     $self->_access_token_data($token_data);
 
     open my $fh, '>', CACHE_FILE or die $!;
-    print $fh encode_json($token_data);
+
+    print $fh JSON->new->allow_nonref->encode($token_data);
 }
 sub _authentication_code {
     # If an access token is unavailable, prompt the user with a URL to

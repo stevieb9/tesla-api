@@ -6,6 +6,9 @@ Revision history for Tesla-API
     - Remove WWW::Mechanize timeout (it defaults to 180 secs in LWP::UserAgent)
     - Add API_TIMEOUT_RETRIES; If a Tesla API call times out, try it again this
       many times
+    - Accept PR #9 (fix compatibility with JSON < 4) and apply that change to
+      all instances of encode_json()
+    -
 
 0.09    2022-03-22
     - In CI script, manually install File::ShareDir::Install, as it doesn't get
