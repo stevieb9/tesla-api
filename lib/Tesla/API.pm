@@ -122,7 +122,7 @@ sub api {
         push @$header, 'Authorization' => $token_string;
     }
 
-    my $request = HTTP::Request->new($type, $url, $header, encode_json($api_params));
+    my $request = HTTP::Request->new($type, $url, $header, JSON->new->allow_nonref->encode($api_params));
 
     my $response;
 
