@@ -622,8 +622,6 @@ Tesla::API - Interface to Tesla's API
 
 This distribution provides access to the Tesla API.
 
-B<WARNING>: This is an initial, beta release. The interface may change.
-
 This class is designed to be subclassed. For example, I have already begun a
 new L<Tesla::Vehicle> distribution which will have access and update methods
 that deal specifically with Tesla autos, then a C<Tesla::Powerwall>

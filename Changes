@@ -1,6 +1,6 @@
 Revision history for Tesla-API
 
-0.10 UNREL
+0.10    2022-04-11
     - Remove erroneous call example from Tesla::Vehicle from the SYNOPSIS
     - Added prereq of LWP::Protocol::https
     - Remove WWW::Mechanize timeout (it defaults to 180 secs in LWP::UserAgent)
@@ -8,7 +8,6 @@ Revision history for Tesla-API
       many times
     - Accept PR #9 (fix compatibility with JSON < 4) and apply that change to
       all instances of encode_json()
-    -
 
 0.09    2022-03-22
     - In CI script, manually install File::ShareDir::Install, as it doesn't get
