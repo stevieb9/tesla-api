@@ -3,10 +3,18 @@ use strict;
 
 use Data::Dumper;
 use Tesla::API;
+use Tesla::Vehicle;
 use feature 'say';
 
 my $tesla = Tesla::API->new;
+my $car = Tesla::Vehicle->new;
 
-say $tesla->my_vehicle_name;
+$tesla->api(endpoint => 'VEHICLE_SUMMARY', id => $car->id);
+$tesla->api(endpoint => 'VEHICLE_SUMMARY', id => $car->id);
+$tesla->api(endpoint => 'VEHICLE_SUMMARY', id => $car->id);
+$tesla->api(endpoint => 'VEHICLE_SUMMARY', id => $car->id);
+$tesla->api(endpoint => 'VEHICLE_SUMMARY', id => $car->id);
+$tesla->api(endpoint => 'VEHICLE_SUMMARY', id => $car->id);
 
-print Dumper $tesla->vehicle_data;
+sleep 5;
+$tesla->api(endpoint => 'VEHICLE_SUMMARY', id => $car->id);

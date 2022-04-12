@@ -16,18 +16,17 @@ use MIME::Base64 qw(encode_base64url);
 use WWW::Mechanize;
 use URI;
 
-our $VERSION = '0.10';
+our $VERSION = '0.11';
 
 $| = 1;
 
 my $home_dir;
 
 # The %api_cache hash is a cache for Tesla API call data across all objects.
-# The $api_cache_alive_time is a timestamp of last cache write for a particular
-# endpoint/ID pair, and is relative to API_CACHE_TIMEOUT_SECONDS
+# Each cache slot contains the time() that it was stored, and will time out
+# after API_CACHE_TIMEOUT_SECONDS
 
 my %api_cache;
-my $api_cache_alive_time = time;
 
 BEGIN {
     $home_dir = File::HomeDir->my_home;
@@ -97,20 +96,13 @@ sub api {
     # Return early if all cache mechanisms check out
 
     if ($self->api_cache_persist || $self->api_cache_time) {
-        if (DEBUG_CACHE) {
-            printf(
-                "Cache - Alive: $api_cache_alive_time, Timeout: %.2f, Persist: %d\n",
-                $self->api_cache_time,
-                $self->api_cache_persist
-            );
-        }
-        if ($self->api_cache_persist || time - $api_cache_alive_time <= $self->api_cache_time) {
-            if ($self->_cache(endpoint => $endpoint_name, id => $id)) {
+        my $cache = $self->_cache(endpoint => $endpoint_name, id => $id);
+        if ($cache) {
+            if ($self->api_cache_persist || time - $cache->{time} <= $self->api_cache_time) {
                 print "Returning cache for $endpoint_name/$id pair...\n" if DEBUG_CACHE;
-                return $self->_cache(endpoint => $endpoint_name, id => $id);
+                return $cache->{data};
             }
         }
-        print "No cache present for $endpoint_name/$id pair...\n" if DEBUG_CACHE;
     }
 
     my $url = URI->new(URL_API . $uri);
@@ -552,8 +544,8 @@ sub _cache {
     }
 
     if ($data) {
-        $api_cache{$endpoint}{$id} = $data;
-        $api_cache_alive_time = time;
+        $api_cache{$endpoint}{$id}{data} = $data;
+        $api_cache{$endpoint}{$id}{time} = time;
     }
 
     return $api_cache{$endpoint}{$id};
