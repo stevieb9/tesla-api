@@ -1,6 +1,8 @@
 Revision history for Tesla-API
 
 0.11 UNREL
+    - Each API cache object now contains the time it was stored. This allows
+      each cache object to time out individually (fixes #10)
     -
 
 0.10    2022-04-11
