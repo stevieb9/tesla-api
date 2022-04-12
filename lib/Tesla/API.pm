@@ -122,7 +122,12 @@ sub api {
         push @$header, 'Authorization' => $token_string;
     }
 
-    my $request = HTTP::Request->new($type, $url, $header, JSON->new->allow_nonref->encode($api_params));
+    my $request = HTTP::Request->new(
+        $type,
+        $url,
+        $header,
+        JSON->new->allow_nonref->encode($api_params)
+    );
 
     my $response;
 
@@ -142,7 +147,7 @@ sub api {
 
             return $response_data;
         }
-        elsif ($response->code == 500){
+        elsif ($response->code == 500) {
             next;
         }
     }
