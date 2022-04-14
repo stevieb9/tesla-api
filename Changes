@@ -3,7 +3,16 @@ Revision history for Tesla-API
 0.11 UNREL
     - Each API cache object now contains the time it was stored. This allows
       each cache object to time out individually (fixes #10)
-    -
+    - Added useragent_string() and useragent_timeout() (overrides constants)
+    - Added new POD section detailing the constants/overrides
+    - Fix issue in token validation where the token would always be classified
+      as expired
+    - All Tesla API calls are now routed through a new _tesla_api_call() method;
+      accepts a $request, returns a $response. This allows all calls to route
+      through the API retry functionality
+    - Added _api_attempts(); returns the number of attempts we've made for each
+      individual call to Tesla's API
+    - Renamed _cache() to _api_cache()
 
 0.10    2022-04-11
     - Remove erroneous call example from Tesla::Vehicle from the SYNOPSIS
