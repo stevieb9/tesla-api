@@ -45,7 +45,10 @@ use constant {
     URL_API                     => 'https://owner-api.teslamotors.com/',
     URL_ENDPOINTS               => 'https://raw.githubusercontent.com/tdorssers/TeslaPy/master/teslapy/endpoints.json',
     URL_OPTION_CODES            => 'https://raw.githubusercontent.com/tdorssers/TeslaPy/master/teslapy/option_codes.json',
-    URL_AUTH                    => 'https://auth.tesla.com/oauth2/v3/authorize', URL_TOKEN                   => 'https://auth.tesla.com/oauth2/v3/token', USERAGENT_STRING            => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:98.0) Gecko/20100101 Firefox/98.0', USERAGENT_TIMEOUT           => 180,
+    URL_AUTH                    => 'https://auth.tesla.com/oauth2/v3/authorize',
+    URL_TOKEN                   => 'https://auth.tesla.com/oauth2/v3/token',
+    USERAGENT_STRING            => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:98.0) Gecko/20100101 Firefox/98.0',
+    USERAGENT_TIMEOUT           => 180,
 };
 
 # Public object methods
