@@ -321,9 +321,7 @@ sub _access_token {
         $self->_access_token_generate;
     }
 
-    my $valid_token = $self->_access_token_validate;
-
-    if (! $valid_token) {
+    if (! $self->_access_token_valid) {
         $self->_access_token_refresh;
     }
 
@@ -385,7 +383,7 @@ sub _access_token_generate {
 
     return $token_data;
 }
-sub _access_token_validate {
+sub _access_token_valid {
     # Checks the validity of an existing token
 
     my ($self) = @_;

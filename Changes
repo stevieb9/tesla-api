@@ -18,6 +18,7 @@ Revision history for Tesla-API
       AUTH_CACHE_FILE path to something custom (primarily for testing)
     - Moved call to _authentication_code() from _access_token() to
       _access_token_generate()
+    - Rename _access_token_validate() to _access_token_valid()
 
 0.10    2022-04-11
     - Remove erroneous call example from Tesla::Vehicle from the SYNOPSIS
