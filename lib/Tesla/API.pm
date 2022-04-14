@@ -38,17 +38,14 @@ use constant {
     API_CACHE_PERSIST           => 0,
     API_CACHE_TIMEOUT_SECONDS   => 2,
     API_TIMEOUT_RETRIES         => 3,
-    CACHE_FILE                  => "$home_dir/tesla_api_cache.json",
+    AUTH_CACHE_FILE             => "$home_dir/tesla_auth_cache.json",
     ENDPOINTS_FILE              => dist_file('Tesla-API', 'endpoints.json'),
     OPTION_CODES_FILE           => dist_file('Tesla-API', 'option_codes.json'),
     TOKEN_EXPIRY_WINDOW         => 5,
     URL_API                     => 'https://owner-api.teslamotors.com/',
     URL_ENDPOINTS               => 'https://raw.githubusercontent.com/tdorssers/TeslaPy/master/teslapy/endpoints.json',
     URL_OPTION_CODES            => 'https://raw.githubusercontent.com/tdorssers/TeslaPy/master/teslapy/option_codes.json',
-    URL_AUTH                    => 'https://auth.tesla.com/oauth2/v3/authorize',
-    URL_TOKEN                   => 'https://auth.tesla.com/oauth2/v3/token',
-    USERAGENT_STRING            => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:98.0) Gecko/20100101 Firefox/98.0',
-    USERAGENT_TIMEOUT           => 180,
+    URL_AUTH                    => 'https://auth.tesla.com/oauth2/v3/authorize', URL_TOKEN                   => 'https://auth.tesla.com/oauth2/v3/token', USERAGENT_STRING            => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:98.0) Gecko/20100101 Firefox/98.0', USERAGENT_TIMEOUT           => 180,
 };
 
 # Public object methods
@@ -317,7 +314,7 @@ sub _access_token {
 
     my ($self) = @_;
 
-    if (! -e CACHE_FILE) {
+    if (! -e $self->_authentication_cache_file) {
         my $auth_code = $self->_authentication_code;
         $self->_access_token_generate($auth_code);
     }
@@ -342,7 +339,11 @@ sub _access_token_data {
     return $self->{cache_data} if $self->{cache_data};
 
     {
-        open my $fh, '<', CACHE_FILE or die "Can't open Tesla cache file " . CACHE_FILE . ": $!";
+        open my $fh, '<', $self->_authentication_cache_file or die
+            "Can't open Tesla cache file " .
+            $self->_authentication_cache_file .
+            ": $!";
+
         my $json = <$fh>;
         $self->{cache_data} = decode_json($json);
     }
@@ -463,7 +464,7 @@ sub _access_token_update {
 
     $self->_access_token_data($token_data);
 
-    open my $fh, '>', CACHE_FILE or die $!;
+    open my $fh, '>', $self->_authentication_cache_file or die $!;
 
     print $fh JSON->new->allow_nonref->encode($token_data);
 }
@@ -477,6 +478,15 @@ sub _api_attempts {
     }
 
     return $self->{api_attempts} || 0;
+}
+sub _authentication_cache_file {
+    my ($self, $filename) = @_;
+
+    if (defined $filename) {
+        $self->{authentication_cache_file} = $filename;
+    }
+
+    return $self->{authentication_cache_file} || AUTH_CACHE_FILE;
 }
 sub _authentication_code {
     # If an access token is unavailable, prompt the user with a URL to
@@ -662,8 +672,8 @@ be redirected again to a "Page Not Found" page, in which you must copy the URL
 from the address bar and paste it back into the console.
 
 We then internally generate an access token for you, store it in a
-C<tesla_api_cache.json> file in your home directory, and use it on all subsequent
-accesses.
+C<tesla_auth_cache.json> file in your home directory, and use it on all
+subsequent accesses.
 
 B<NOTE>: If you do not have a Tesla account, you can still instantiate a
 L<Tesla::API> object by supplying the C<< unauthenticated => 1 >> parameter
@@ -1085,14 +1095,14 @@ I<Default>: C<3>
 
 I<Override>: None
 
-=head2 CACHE_FILE
+=head2 AUTH_CACHE_FILE
 
 The path and filename of the file we'll store the Tesla API access token
 information.
 
 I<Default>: C<$home_dir/tesla_api_cache.json>
 
-I<Override>: None
+I<Override>: C<_authentication_cache_file()>, used primarily for unit testing.
 
 =head2 ENDPOINTS_FILE
 

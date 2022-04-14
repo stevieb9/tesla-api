@@ -13,6 +13,10 @@ Revision history for Tesla-API
     - Added _api_attempts(); returns the number of attempts we've made for each
       individual call to Tesla's API
     - Renamed _cache() to _api_cache()
+    - Renamed CACHE_FILE to AUTH_CACHE_FILE
+    - Added _authentication_cache_file() which allows changing the default
+      AUTH_CACHE_FILE path to something custom (primarily for testing)
+    -
 
 0.10    2022-04-11
     - Remove erroneous call example from Tesla::Vehicle from the SYNOPSIS
