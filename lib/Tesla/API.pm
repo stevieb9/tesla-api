@@ -318,8 +318,7 @@ sub _access_token {
     my ($self) = @_;
 
     if (! -e $self->_authentication_cache_file) {
-        my $auth_code = $self->_authentication_code;
-        $self->_access_token_generate($auth_code);
+        $self->_access_token_generate;
     }
 
     my $valid_token = $self->_access_token_validate;
@@ -356,11 +355,9 @@ sub _access_token_data {
 sub _access_token_generate {
     # Generates an access token and stores it in the cache file
 
-    my ($self, $auth_code) = @_;
+    my ($self) = @_;
 
-    if (! defined $auth_code) {
-        croak "_access_token_generate() requires an \$auth_code parameter";
-    }
+    my $auth_code = $self->_authentication_code;
 
     my $url = URI->new(URL_TOKEN);
     my $header = ['Content-Type' => 'application/json; charset=UTF-8'];
