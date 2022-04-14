@@ -333,7 +333,7 @@ sub _access_token {
     return $self->{access_token};
 }
 sub _access_token_data {
-    # Fetches and stores the cache data file dat
+    # Fetches and stores the access token data to the AUTH_CACHE_FILE
 
     my ($self, $data) = @_;
 
@@ -482,6 +482,25 @@ sub _api_attempts {
 
     return $self->{api_attempts} || 0;
 }
+sub _api_cache {
+    # Stores the Tesla API fetched data
+    my ($self, %params) = @_;
+
+    my $endpoint = $params{endpoint};
+    my $id = $params{id} // 0;
+    my $data = $params{data};
+
+    if (! $endpoint) {
+        croak "_api_cache() requires an endpoint name sent in";
+    }
+
+    if ($data) {
+        $api_cache{$endpoint}{$id}{data} = $data;
+        $api_cache{$endpoint}{$id}{time} = time;
+    }
+
+    return $api_cache{$endpoint}{$id};
+}
 sub _authentication_cache_file {
     my ($self, $filename) = @_;
 
@@ -552,25 +571,6 @@ sub _authentication_code_verifier {
 
     return $self->{authentication_code_verifier} = $code_verifier;
 }
-sub _api_cache {
-    # Stores the Tesla API fetched data
-    my ($self, %params) = @_;
-
-    my $endpoint = $params{endpoint};
-    my $id = $params{id} // 0;
-    my $data = $params{data};
-
-    if (! $endpoint) {
-        croak "_api_cache() requires an endpoint name sent in";
-    }
-
-    if ($data) {
-        $api_cache{$endpoint}{$id}{data} = $data;
-        $api_cache{$endpoint}{$id}{time} = time;
-    }
-
-    return $api_cache{$endpoint}{$id};
-}
 sub _decode {
     # Decode JSON to Perl
     my ($json) = @_;
@@ -578,7 +578,7 @@ sub _decode {
     return $perl;
 }
 sub _random_string {
-    # Returns a proper length alpha-num string for token code
+    # Returns a proper length alpha-num string for Tesla API token code
     # verification key
 
     my @chars = ('A' .. 'Z', 'a' .. 'z', 0 .. 9);
