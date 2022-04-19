@@ -254,22 +254,22 @@ sub update_data_files {
         my $data_differs;
 
         if (scalar keys %$new_data != scalar keys %$existing_data) {
-                                                               $data_differs = 1;
-                                                               }
+           $data_differs = 1;
+        }
 
         if (! $data_differs) {
             for my $key (keys %$new_data) {
-                                      if (! exists $existing_data->{$key}) {
-                                      $data_differs = 1;
-                                      last;
-                                      }
-                                      }
+                if (! exists $existing_data->{$key}) {
+                    $data_differs = 1;
+                    last;
+                }
+            }
             for my $key (keys %$existing_data) {
-                                           if (! exists $new_data->{$key}) {
-                                           $data_differs = 1;
-                                           last;
-                                           }
-                                           }
+                if (! exists $new_data->{$key}) {
+                    $data_differs = 1;
+                    last;
+                }
+            }
         }
 
         if ($data_differs) {
