@@ -1,6 +1,6 @@
 Revision history for Tesla-API
 
-1.00 UNREL
+1.00    2022-04-19
     - This version is now deemed stable; The user-facing API calls will now
       remain consistent going forward
     - Each API cache object now contains the time it was stored. This allows

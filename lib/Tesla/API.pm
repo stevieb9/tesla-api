@@ -837,7 +837,7 @@ I<Optional, Integer/Float>: The timeout in seconds or fractions of a second.
 
 I<Return>: Integer/Float, the currently set value.
 
-=ead1 METHODS - API CACHE
+=head1 METHODS - API CACHE
 
 =head2 api_cache_clear
 
