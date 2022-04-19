@@ -1,7 +1,6 @@
 use warnings;
 use strict;
 
-use JSON;
 use Tesla::API;
 use Test::More;
 

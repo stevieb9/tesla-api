@@ -512,6 +512,41 @@ sub _authentication_code {
     # token
 
     my ($self) = @_;
+
+    my $auth_url = $self->_authentication_code_url;
+
+    print "\n$auth_url\n";
+
+    print "\nPaste URL here: ";
+
+    my $code_url = <STDIN>;
+    chomp $code_url;
+
+    my $code = $self->_authentication_code_extract($code_url);
+
+    return $code;
+}
+sub _authentication_code_extract {
+    # Pull in the pasted URL with the code, extract the code,
+    # and return it
+
+    my ($self, $code_url) = @_;
+
+    my $code;
+
+    if ($code_url =~ /code=(.*?)\&/) {
+        $code = $1;
+    }
+    else {
+        croak "Could not extract the authorization code from the URL";
+    }
+
+    return $code;
+}
+sub _authentication_code_url {
+    # Generate Tesla's authentication URL
+
+    my ($self) = @_;
     my $auth_url = URI->new(URL_AUTH);
 
     my %params = (
@@ -534,21 +569,7 @@ sub _authentication_code {
 
     print "\n$auth_url\n";
 
-    print "\nPaste URL here: ";
-
-    my $code_url = <STDIN>;
-    chomp $code_url;
-
-    my $code;
-
-    if ($code_url =~ /code=(.*?)\&/) {
-        $code = $1;
-    }
-    else {
-        croak "Could not extract the authorization code from the URL";
-    }
-
-    return $code;
+    return $auth_url;
 }
 sub _authentication_code_verifier {
     # When generating an access token, generate and store a code

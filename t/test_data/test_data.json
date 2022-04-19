@@ -1,0 +1,3 @@
+{
+  "auth_url_extract": "https://auth.tesla.com/void/callback?code=2B51b8031f2b4ad4db52873da125b729497593e6c15c4a2dd591e698777f&state=123&issuer=https%3A%2F%2Fauth.tesla.com%2Foauth2%2Fv3"
+}

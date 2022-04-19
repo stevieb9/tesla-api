@@ -5,9 +5,11 @@ MANIFEST			This list of files
 MANIFEST.SKIP
 share/endpoints.json
 share/option_codes.json
-t/00-load.t
-t/05-endpoints.t
-t/10-api_unauth.t
+t/002-auth_cache_file.t
+t/005-auth_code_verifier.t
+t/008-auth_code.t
+t/100-endpoints.t
+t/101-api_unauth.t
 t/manifest.t
 t/pod-coverage.t
 t/pod.t
