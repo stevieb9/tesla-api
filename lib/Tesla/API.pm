@@ -195,6 +195,8 @@ sub mech {
     );
 
     $self->{mech} = $www_mech;
+
+    return $self->{mech};
 }
 sub object_data {
     my ($self) = @_;
