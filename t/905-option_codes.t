@@ -23,14 +23,23 @@ is
     "option_codes() returns the proper number of option codes ok";
 
 for my $option (keys %$known_options) {
-
     is
         $api_options->{$option},
         $known_options->{$option},
         "Value for option $option is correct";
 }
 
-my $missing_ok = eval { $tesla->coption_codes('NON_EXIST'); 1; };
-is $missing_ok, undef, "If an option code doesn't exist, we croak";
+my $missing_opt_code_succeeded = eval {
+    $tesla->option_codes('NON_EXIST');
+    1;
+};
+
+is
+    $missing_opt_code_succeeded,
+    undef,
+    "If an option code doesn't exist, we croak ok";
+
+like $@, qr/does not exist/, "...and error message is sane";
+
 
 done_testing();
