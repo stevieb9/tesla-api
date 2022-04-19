@@ -12,7 +12,7 @@ my $t = Tesla::API->new(unauthenticated => 1);
 
 like
     $t->_authentication_cache_file,
-    /.*\/$default_file/,
+    qr/.*\/$default_file/,
     "Default auth token cache file is ok";
 
 $t->_authentication_cache_file($temp_file);
