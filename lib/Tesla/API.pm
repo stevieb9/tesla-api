@@ -151,6 +151,9 @@ sub api_cache_persist {
 sub api_cache_time {
     my ($self, $cache_seconds) = @_;
     if (defined $cache_seconds) {
+        if ($cache_seconds !~ /^\d+$/) {
+            croak "api_cache_time() requires an int as \$cache_seconds param";
+        }
         $self->{api_cache_time} = $cache_seconds;
     }
     return $self->{api_cache_time} // API_CACHE_TIMEOUT_SECONDS;

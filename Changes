@@ -28,6 +28,7 @@ Revision history for Tesla-API
     - useragent_timeout() now croaks if timeout param isn't an int or float
     - Removed object_data(). Wasn't being used, and essentially just stored the
       api_cache() anyways
+    - api_cache_time() croaks if an int isn't sent in
 
 0.10    2022-04-11
     - Remove erroneous call example from Tesla::Vehicle from the SYNOPSIS
