@@ -31,4 +31,7 @@ for my $endpoint (keys %$known_endpoints) {
     }
 }
 
+my $missing_ok = eval { $tesla->endpoint('NON_EXIST'); 1; };
+is $missing_ok, undef, "If an endpoint doesn't exist, we croak";
+
 done_testing();
