@@ -304,6 +304,9 @@ sub useragent_timeout {
     my ($self, $timeout) = @_;
 
     if (defined $timeout) {
+        if ($timeout !~ /^\d+?(?:\.\d+)?$/) {
+            croak "useragent_timeout() requires an integer or float";
+        }
         $self->{useragent_timeout} = $timeout;
     }
 
