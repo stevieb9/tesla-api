@@ -501,6 +501,10 @@ sub _api_cache {
 
     return $api_cache{$endpoint}{$id};
 }
+sub _api_cache_data {
+    # Returns the entire API cache (for testing)
+    return %api_cache;
+}
 sub _authentication_cache_file {
     my ($self, $filename) = @_;
 

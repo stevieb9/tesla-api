@@ -29,6 +29,8 @@ Revision history for Tesla-API
     - Removed object_data(). Wasn't being used, and essentially just stored the
       api_cache() anyways
     - api_cache_time() croaks if an int isn't sent in
+    - Added api_cache_data(), returns the entire API cache (primarily for
+      testing)
 
 0.10    2022-04-11
     - Remove erroneous call example from Tesla::Vehicle from the SYNOPSIS
