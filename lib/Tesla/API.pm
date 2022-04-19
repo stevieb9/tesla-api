@@ -813,12 +813,24 @@ Takes no parameters, there is no return. C<croak()>s on failure.
 
 Sets/gets the useragent string we send to the Tesla API.
 
+I<Optional, String>: The user agent browser string to send to the Tesla API.
+
+I<Return>: String, the currently set value.
+
 =head2 useragent_timeout($timeout)
 
 Sets/gets the timeout we use in the L<WWW::Mechanize|/mech> object that we
 communicate to the Tesla API with.
 
-=head1 METHODS - API CACHE
+Parameters:
+
+    $timeout
+
+I<Optional, Integer/Float>: The timeout in seconds or fractions of a second.
+
+I<Return>: Integer/Float, the currently set value.
+
+=ead1 METHODS - API CACHE
 
 =head2 api_cache_clear
 
