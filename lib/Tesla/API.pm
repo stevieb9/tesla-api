@@ -198,10 +198,6 @@ sub mech {
 
     return $self->{mech};
 }
-sub object_data {
-    my ($self) = @_;
-    return $self->{data};
-}
 sub option_codes {
     my ($self, $code) = @_;
 
@@ -798,12 +794,6 @@ To get a list of endpoint names:
 =head2 mech
 
 Returns the L<WWW::Mechanize> object we've instantiated internally.
-
-=head2 object_data
-
-Returns a hash reference of the data we've collected for you and stashed
-within the object. This does not reflect the entire object, just the data
-returned from Tesla's API.
 
 =head2 option_codes
 

@@ -25,6 +25,9 @@ Revision history for Tesla-API
       $response->decoded_content
     - Add tests for nearly the entire authentication and access token routines
     - Add prereq of Mock::Sub for test suite
+    - useragent_timeout() now croaks if timeout param isn't an int or float
+    - Removed object_data(). Wasn't being used, and essentially just stored the
+      api_cache() anyways
 
 0.10    2022-04-11
     - Remove erroneous call example from Tesla::Vehicle from the SYNOPSIS
