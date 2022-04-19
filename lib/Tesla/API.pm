@@ -16,7 +16,7 @@ use MIME::Base64 qw(encode_base64url);
 use WWW::Mechanize;
 use URI;
 
-our $VERSION = '0.11';
+our $VERSION = '1.00';
 
 $| = 1;
 
