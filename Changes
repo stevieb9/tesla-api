@@ -1,6 +1,8 @@
 Revision history for Tesla-API
 
-0.11 UNREL
+1.00 UNREL
+    - This version is now deemed stable; The user-facing API calls will now
+      remain consistent going forward
     - Each API cache object now contains the time it was stored. This allows
       each cache object to time out individually (fixes #10)
     - Added useragent_string() and useragent_timeout() (overrides constants)
@@ -22,6 +24,7 @@ Revision history for Tesla-API
     - _tesla_api_call() now returns $status, $code and
       $response->decoded_content
     - Add tests for nearly the entire authentication and access token routines
+    - Add prereq of Mock::Sub for test suite
 
 0.10    2022-04-11
     - Remove erroneous call example from Tesla::Vehicle from the SYNOPSIS
