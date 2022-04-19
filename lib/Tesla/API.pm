@@ -126,16 +126,16 @@ sub api {
         JSON->new->allow_nonref->encode($api_params)
     );
 
-    my $response = $self->_tesla_api_call($request);
-    my $response_data = _decode($response->decoded_content)->{response};
+    my ($success, $code, $response_data) = $self->_tesla_api_call($request);
+    my $data = _decode($response_data)->{response};
 
     $self->_api_cache(
         endpoint => $endpoint_name,
         id       => $id,
-        data     => $response_data
+        data     => $data
     );
 
-    return $response_data;
+    return $data;
 }
 sub api_cache_clear {
     my ($self) = @_;
@@ -246,9 +246,8 @@ sub update_data_files {
 
         my $request = HTTP::Request->new('GET', $url,);
 
-        my $response = $self->_tesla_api_call($request);
-
-        my $new_data = decode_json($response->decoded_content);
+        my ($success, $code, $response_data) = $self->_tesla_api_call($request);
+        my $new_data = decode_json($response_data);
         my $existing_data = $self->$data_method;
 
         my $data_differs;
@@ -339,6 +338,7 @@ sub _access_token_data {
     return $self->{cache_data} if $self->{cache_data};
 
     {
+        local $/;
         open my $fh, '<', $self->_authentication_cache_file or die
             "Can't open Tesla cache file " .
             $self->_authentication_cache_file .
@@ -375,8 +375,9 @@ sub _access_token_generate {
         JSON->new->allow_nonref->encode($request_data)
     );
 
-    my $response = $self->_tesla_api_call($request);
-    my $token_data = decode_json($response->decoded_content);
+    my ($success, $code, $response_data)= $self->_tesla_api_call($request);
+
+    my $token_data = decode_json($response_data);
 
     $token_data = $self->_access_token_set_expiry($token_data);
     $self->_access_token_update($token_data);
@@ -437,10 +438,10 @@ sub _access_token_refresh {
         JSON->new->allow_nonref->encode($request_data)
     );
 
-    my $response = $self->_tesla_api_call($request);
+    my ($success, $code, $response_data) = $self->_tesla_api_call($request);
 
     # Extract the token data
-    my $token_data = decode_json($response->decoded_content);
+    my $token_data = decode_json($response_data);
 
     # Re-add the existing refresh token; its still valid
     $token_data->{refresh_token} = $refresh_token;
@@ -513,6 +514,8 @@ sub _authentication_code {
 
     my ($self) = @_;
 
+    return $self->{authentication_code} if $self->{authentication_code};
+
     my $auth_url = $self->_authentication_code_url;
 
     print "\n$auth_url\n";
@@ -523,6 +526,8 @@ sub _authentication_code {
     chomp $code_url;
 
     my $code = $self->_authentication_code_extract($code_url);
+
+    $self->{authentication_code} = $code;
 
     return $code;
 }
@@ -563,11 +568,9 @@ sub _authentication_code_url {
     $auth_url->query_form(%params);
 
     print
-        "Please follow the URL displayed below in your browser and log into Tesla, " .
+        "\nPlease follow the URL displayed below in your browser and log into Tesla, " .
         "then paste the URL from the resulting 'Page Not Found' page's address bar, " .
         "then hit ENTER:\n";
-
-    print "\n$auth_url\n";
 
     return $auth_url;
 }
@@ -628,7 +631,11 @@ sub _tesla_api_call {
         croak $error_string;
     }
 
-    return $response;
+    return (
+        $response->is_success,
+        $response->code,
+        $response->decoded_content
+    );
 }
 
 1;

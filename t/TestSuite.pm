@@ -22,5 +22,11 @@ sub data {
 
     return $perl;
 }
+sub access_token_file {
+    my ($self, $tesla) = @_;
+    my $token_data = $self->data->{token_data};
+    $tesla->_access_token_set_expiry($token_data);
+    $tesla->_access_token_update($token_data);
+}
 
 1;
