@@ -27,6 +27,11 @@ for my $option (keys %$known_options) {
         $api_options->{$option},
         $known_options->{$option},
         "Value for option $option is correct";
+
+    is
+        $tesla->option_codes($option),
+        $known_options->{$option},
+        "Value for option $option is correct via option_codes($option)";
 }
 
 my $missing_opt_code_succeeded = eval {
