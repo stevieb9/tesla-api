@@ -18,7 +18,6 @@ my $ts = TestSuite->new;
 
 # We want a warning cache is being used
 
-
 my $cache_warning = 0;
 
 $SIG{__WARN__} = sub {

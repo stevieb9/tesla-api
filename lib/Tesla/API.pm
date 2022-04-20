@@ -1127,7 +1127,9 @@ are only modifiable by updating the actual value in the file.
 
 Prints to C<STDOUT> debugging output from the caching mechanism.
 
-I<Override>: C<$ENV{DEBUG_TESLA_API_CACHE}>
+I<Override>: C<$ENV{DEBUG_TESLA_API_CACHE}>. Note that this must be configured
+within a C<BEGIN> block, prior to the C<use Tesla::API> line for it to have
+effect.
 
 =head2 API_CACHE_PERSIST
 
