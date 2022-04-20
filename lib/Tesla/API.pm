@@ -531,19 +531,17 @@ sub _authentication_code {
 
     my $auth_url = $self->_authentication_code_url;
 
-    print "\n$auth_url\n";
-
-    print "\nPaste URL here: ";
-
-    my $code_url;
-
     # If we're in testing mode, we don't want to be waiting for
     # a read from STDIN
+
+    my $code_url;
 
     if ($ENV{TESLA_API_TESTING}) {
         $code_url = $ENV{TESLA_API_TESTING_CODE_URL};
     }
     else {
+        print "\n$auth_url\n";
+        print "\nPaste URL here: ";
         $code_url = <STDIN>;
     }
 
