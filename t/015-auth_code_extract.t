@@ -19,8 +19,6 @@ my $url = $data->{auth_url_extract};
 my $code = $t->_authentication_code_extract($url);
 is $code, $known_code, "Extracted code is correct ok";
 
-$url =~ s/code/asdf/;
-
 my $ok = eval { $t->_authentication_code_extract($url); 1; };
 
 is $ok, undef, "If the auth code can't be extracted, we croak ok";

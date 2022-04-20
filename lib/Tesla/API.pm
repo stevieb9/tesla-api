@@ -530,7 +530,15 @@ sub _authentication_code {
 
     print "\nPaste URL here: ";
 
-    my $code_url = <STDIN>;
+    my $code_url;
+
+    if ($ENV{TESLA_API_TESTING}) {
+        $code_url = $ENV{TESLA_API_TESTING_CODE_URL};
+    }
+    else {
+        $code_url = <STDIN>;
+    }
+
     chomp $code_url;
 
     my $code = $self->_authentication_code_extract($code_url);
