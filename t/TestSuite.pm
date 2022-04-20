@@ -3,6 +3,7 @@ package TestSuite;
 use warnings;
 use strict;
 
+use Data::Dumper;
 use JSON;
 
 my $file = 't/test_data/test_data.json';
@@ -21,6 +22,18 @@ sub data {
     }
 
     return $perl;
+}
+sub json {
+    my ($self, $want) = @_;
+
+    my $data = data();
+
+    if (! $want) {
+        return encode_json($data);
+    }
+    else {
+        return encode_json($data->{$want});
+    }
 }
 sub access_token_file {
     my ($self, $tesla) = @_;
