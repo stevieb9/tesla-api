@@ -12,7 +12,7 @@ use TestSuite;
 my $ms = Mock::Sub->new;
 my $ts = TestSuite->new;
 
-my $access_token_sub = $ms->mock('Tesla::API::_access_token');
+my $access_token_sub = $ms->mock('Tesla::API::_access_token', return_value => 'ABCD');
 my $tesla_api_sub = $ms->mock('Tesla::API::_tesla_api_call');
 
 my $end_non_id = 'VEHICLE_LIST';

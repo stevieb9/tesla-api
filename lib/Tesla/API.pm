@@ -98,13 +98,15 @@ sub api {
         $uri =~ s/\{.*?\}/$id/;
     }
 
+    $id //= 0;
+
     # Return early if all cache mechanisms check out
 
     if ($self->api_cache_persist || $self->api_cache_time) {
         my $cache = $self->_api_cache(endpoint => $endpoint_name, id => $id);
         if ($cache) {
             if ($self->api_cache_persist || time - $cache->{time} <= $self->api_cache_time) {
-                print "Returning cache for $endpoint_name/$id pair...\n" if DEBUG_CACHE;
+                warn "Returning cache for $endpoint_name/$id pair...\n" if DEBUG_CACHE;
                 return $cache->{data};
             }
         }
