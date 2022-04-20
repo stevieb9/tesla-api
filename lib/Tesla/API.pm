@@ -127,7 +127,7 @@ sub api {
     );
 
     my ($success, $code, $response_data) = $self->_tesla_api_call($request);
-    my $data = _decode($response_data)->{response};
+    my $data = $self->_decode($response_data)->{response};
 
     $self->_api_cache(
         endpoint => $endpoint_name,
@@ -600,7 +600,7 @@ sub _authentication_code_verifier {
 }
 sub _decode {
     # Decode JSON to Perl
-    my ($json) = @_;
+    my ($self, $json) = @_;
     my $perl = decode_json($json);
     return $perl;
 }

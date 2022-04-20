@@ -1,7 +1,7 @@
 Revision history for Tesla-API
 
 1.01 UNREL
-    -
+    - _decode() is now an object method as opposed to a simple function
 
 1.00    2022-04-19
     - This version is now deemed stable; The user-facing API calls will now
