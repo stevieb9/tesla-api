@@ -477,7 +477,12 @@ sub _api_attempts {
     my ($self, $add) = @_;
 
     if (defined $add) {
-        $self->{api_attempts}++;
+        if ($add) {
+            $self->{api_attempts}++;
+        }
+        else {
+            $self->{api_attempts} = 0;
+        }
     }
 
     return $self->{api_attempts} || 0;
@@ -531,6 +536,9 @@ sub _authentication_code {
     print "\nPaste URL here: ";
 
     my $code_url;
+
+    # If we're in testing mode, we don't want to be waiting for
+    # a read from STDIN
 
     if ($ENV{TESLA_API_TESTING}) {
         $code_url = $ENV{TESLA_API_TESTING_CODE_URL};
@@ -625,6 +633,8 @@ sub _tesla_api_call {
     # Responsible for all calls to the Tesla API
 
     my ($self, $request) = @_;
+
+    $self->_api_attempts(0);
 
     my $response;
 

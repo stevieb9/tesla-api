@@ -24,4 +24,10 @@ is
     $t->_authentication_code,
     $known_code,
     "Full run of _authentication_code() in test mode works ok";
+
+is
+    $t->_authentication_code,
+    $known_code,
+    "Full run of _authentication_code() in test mode works on second run";
+
 done_testing();
