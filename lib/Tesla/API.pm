@@ -773,7 +773,7 @@ B<Parameters>:
     endpoint
 
 I<Mandatory, String>: A valid Tesla API endpoint name. The entire list can be
-found in the C<t/test_data/endpoints.json> file for the time being.
+found in the C<share/endpoints.json> file for the time being.
 
     id
 
