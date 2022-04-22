@@ -1,5 +1,8 @@
 Revision history for Tesla-API
 
+1.02 UNREL
+    -
+
 1.01    2022-04-22
     - Unit test suite now has 90% coverage
     - _decode() is now an object method as opposed to a simple function
