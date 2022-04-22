@@ -7,8 +7,8 @@ use Tesla::Vehicle;
 use feature 'say';
 
 my $tesla = Tesla::API->new;
-say "new: " . $tesla->_api_attempts;
-my $car = Tesla::Vehicle->new;
 
-say $tesla->api(endpoint => 'VEHICLE_SUMMARY', id => $car->id);
+#$tesla->useragent_timeout(0.1);
+
+$tesla->api(endpoint => 'VEHICLE_LIST');
 say "endpoint: " . $tesla->_api_attempts;

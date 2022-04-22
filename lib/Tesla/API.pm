@@ -129,15 +129,19 @@ sub api {
     );
 
     my ($success, $code, $response_data) = $self->_tesla_api_call($request);
-    my $data = $self->_decode($response_data)->{response};
+    my $data = $self->_decode($response_data);
+
+    if ($data->{error}) {
+        return $data;
+    }
 
     $self->_api_cache(
         endpoint => $endpoint_name,
         id       => $id,
-        data     => $data
+        data     => $data->{response}
     );
 
-    return $data;
+    return $data->{response};
 }
 sub api_cache_clear {
     my ($self) = @_;
@@ -190,7 +194,9 @@ sub endpoints {
 sub mech {
     my ($self) = @_;
 
-    return $self->{mech} if $self->{mech};
+    if ($self->{mech} && ! $self->{mech_reset}) {
+        return $self->{mech};
+    }
 
     my $www_mech = WWW::Mechanize->new(
         agent      => $self->useragent_string,
@@ -200,6 +206,7 @@ sub mech {
     );
 
     $self->{mech} = $www_mech;
+    $self->{mech_reset} = 0;
 
     return $self->{mech};
 }
@@ -313,6 +320,7 @@ sub useragent_string {
 
     if (defined $ua_string) {
         $self->{useragent_string} = $ua_string;
+        $self->{mech_reset} = 1;
     }
 
     return $self->{useragent_string} // USERAGENT_STRING;
@@ -325,6 +333,7 @@ sub useragent_timeout {
             croak "useragent_timeout() requires an integer or float";
         }
         $self->{useragent_timeout} = $timeout;
+        $self->{mech_reset} = 1;
     }
 
     return $self->{useragent_timeout} // USERAGENT_TIMEOUT;
@@ -664,20 +673,20 @@ sub _tesla_api_call {
         }
     }
 
-    if (! $response->is_success) {
-        my $error_string = sprintf(
-            "Error - Tesla API said: '%s'",
-            $self->mech->response->status_line
-        );
+    my $success = $response->is_success;
+    my $code = $response->code;
+    my $decoded_content = $response->decoded_content;
 
-        croak $error_string;
+    if (! $response->is_success) {
+        my $error_msg = $response->status_line;
+
+        my $error_string = "Error - Tesla API said: '$error_msg'";
+        warn $error_string;
+
+        $decoded_content = "{\"error\" : \"$error_msg\"}";
     }
 
-    return (
-        $response->is_success,
-        $response->code,
-        $response->decoded_content
-    );
+    return ($success, $code, $decoded_content);
 }
 
 1;
