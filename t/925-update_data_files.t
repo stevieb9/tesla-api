@@ -180,10 +180,15 @@ unlink $optcodes_file or die $!;
 
 my @files = glob 't/test_data/*.json.*';
 
-is scalar @files, 2, "Proper number of file backups ok";
+is scalar @files > 1, 1, "Proper number of file backups ok";
+
+my $delete_count = 0;
 
 for (@files) {
-    unlink $_ or die !$;
+    unlink $_ or die $!;
+    $delete_count++;
 }
+
+is $delete_count, scalar @files, "Proper number of backup files deleted ok";
 
 done_testing();
