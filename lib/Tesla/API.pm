@@ -811,7 +811,9 @@ I<Optional, Hash Reference>: Some API calls require additional parameters. Send
 in a hash reference where the keys are the API parameter name, and the value is,
 well, the value.
 
-I<Return>: Hash or array reference, depending on the endpoint.
+I<Return>: Hash or array reference, depending on the endpoint. If an error
+occurs while communicating with the Tesla API, we'll send back a hash reference
+containing C<< error => 'Tesla error message' >>.
 
 =head2 endpoints
 
