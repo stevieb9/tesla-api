@@ -113,7 +113,7 @@ for my $type ('endpoints', 'option_codes') {
             $t->update_data_files($type);
 
             $api_endpoints = $t->endpoints;
-            is keys %{$t->$type}, keys %$api_endpoints, "$type has proper entries ok";
+            is keys %{$endpoints}, keys %$api_endpoints, "$type has proper entries ok";
         }
         else {
             my $api_optcodes = $t->option_codes;
@@ -129,8 +129,43 @@ for my $type ('endpoints', 'option_codes') {
             $t->update_data_files($type);
 
             $api_optcodes = $t->option_codes;
-            is keys %{$t->$type}, keys %$api_optcodes, "$type has proper entries ok";
+            is keys %{$optcodes}, keys %$api_optcodes, "$type has proper entries ok";
         }
+    }
+}
+
+# Individual element changed (new)
+{
+    my $api_endpoints = $t->endpoints;
+
+    delete $endpoints->{TRIGGER_HOMELINK};
+    $endpoints->{TRIGGER_NONHOMELINK} = {};
+
+    is exists $api_endpoints->{TRIGGER_HOMELINK}, 1, "existing elem exist in endpoints()";
+    is exists $endpoints->{TRIGGER_HOMELINK}, '', "existing elem doesn't exist in new data";
+
+    is exists $api_endpoints->{TRIGGER_NONHOMELINK}, '', "New elem doesn't exist in endpoints()";
+    is exists $endpoints->{TRIGGER_NONHOMELINK}, 1, "New elem exists in new data";
+
+    my $return = encode_json($endpoints);
+
+    $api_sub->return_value(
+        1,
+        200,
+        $return
+    );
+
+    $t->update_data_files('endpoints');
+
+    $api_endpoints = $t->endpoints;
+    is keys %{$endpoints}, keys %$api_endpoints, "new data has proper entries ok";
+
+    for (keys %{ $api_endpoints }) {
+        is exists $endpoints->{$_}, 1, "new data has $_ ok";
+    }
+
+    for (keys %{ $endpoints }) {
+        is exists $api_endpoints->{$_}, 1, "endpoints() has $_ ok" ;
     }
 }
 

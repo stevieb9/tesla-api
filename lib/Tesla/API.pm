@@ -279,12 +279,6 @@ sub update_data_files {
                     last;
                 }
             }
-            for my $key (keys %$existing_data) {
-                if (! exists $new_data->{$key}) {
-                    $data_differs = 1;
-                    last;
-                }
-            }
         }
 
         if ($data_differs) {
@@ -849,12 +843,19 @@ all Tesla products, so I'm leaving this method here for now.
 
 Returns a hash reference of 'option code' => 'description' pairs.
 
-=head2 update_data_files
+=head2 update_data_files($type)
 
 Checks to see if there are any updates to the C<endpoints.json> or
 C<option_codes.json> files online, and updates them locally.
 
-Takes no parameters, there is no return. C<croak()>s on failure.
+Parameters:
+
+    $type
+
+I<Optional, String>: One of B<endpoints> or B<option_codes>. If set, we'll
+operate on only that file.
+
+I<Return>: None. C<croak()>s on faiure.
 
 =head2 useragent_string($ua_string)
 
