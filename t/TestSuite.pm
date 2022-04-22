@@ -3,6 +3,7 @@ package TestSuite;
 use warnings;
 use strict;
 
+use Carp qw(croak);
 use Data::Dumper;
 use JSON;
 
@@ -17,6 +18,22 @@ sub data {
     {
         local $/;
         open my $fh, '<', $file or die $!;
+        my $json = <$fh>;
+        $perl = decode_json($json);
+    }
+
+    return $perl;
+}
+sub file_data {
+    my ($self, $filename) = @_;
+
+    croak "Need filename as param" if ! defined $filename;
+
+    my $perl;
+
+    {
+        local $/;
+        open my $fh, '<', $filename or die $!;
         my $json = <$fh>;
         $perl = decode_json($json);
     }

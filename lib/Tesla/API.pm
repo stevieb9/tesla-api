@@ -39,8 +39,8 @@ use constant {
     API_CACHE_TIMEOUT_SECONDS   => 2,
     API_TIMEOUT_RETRIES         => 3,
     AUTH_CACHE_FILE             => "$home_dir/tesla_auth_cache.json",
-    ENDPOINTS_FILE              => dist_file('Tesla-API', 'endpoints.json'),
-    OPTION_CODES_FILE           => dist_file('Tesla-API', 'option_codes.json'),
+    ENDPOINTS_FILE              => $ENV{TESLA_API_ENDPOINTS_FILE} // dist_file('Tesla-API', 'endpoints.json'),
+    OPTION_CODES_FILE           => $ENV{TESLA_API_OPTIONCODES_FILE} // dist_file('Tesla-API', 'option_codes.json'),
     TOKEN_EXPIRY_WINDOW         => 5,
     URL_API                     => 'https://owner-api.teslamotors.com/',
     URL_ENDPOINTS               => 'https://raw.githubusercontent.com/tdorssers/TeslaPy/master/teslapy/endpoints.json',
@@ -163,8 +163,8 @@ sub api_cache_time {
 sub endpoints {
     my ($self, $endpoint) = @_;
 
-    if (! $self->{endpoints} || $self->{reset_data}) {
-        $self->{reset_data} = 0;
+    if (! $self->{endpoints} || $self->{reset_endpoints_data}) {
+        $self->{reset_endpoints_data} = 0;
 
         my $json_endpoints;
         {
@@ -206,7 +206,10 @@ sub mech {
 sub option_codes {
     my ($self, $code) = @_;
 
-    if (! $self->{option_codes}) {
+    if (! $self->{option_codes} || $self->{reset_option_codes_data}) {
+        print "RESET DATA\n";
+        $self->{reset_option_codes_data} = 0;
+
         my $json_option_codes;
         {
             local $/;
@@ -230,9 +233,19 @@ sub option_codes {
     return $self->{option_codes};
 }
 sub update_data_files {
-    my ($self) = @_;
+    my ($self, $url_type) = @_;
 
-    for my $data_url (URL_ENDPOINTS, URL_OPTION_CODES) {
+    my @urls_to_process;
+
+    if (defined $url_type) {
+        push @urls_to_process, URL_ENDPOINTS if $url_type eq 'endpoints';
+        push @urls_to_process, URL_OPTION_CODES if $url_type eq 'option_codes';
+    }
+    else {
+        @urls_to_process = (ENDPOINTS_FILE, OPTION_CODES_FILE);
+    }
+
+    for my $data_url (@urls_to_process) {
         my $filename;
 
         if ($data_url =~ /.*\/(\w+\.json)$/) {
@@ -275,8 +288,17 @@ sub update_data_files {
         }
 
         if ($data_differs) {
-            $self->{reset_data} = 1;
-            my $file = dist_file('Tesla-API', $filename);
+
+            my $file = $filename =~ /endpoints/
+                ? ENDPOINTS_FILE
+                : OPTION_CODES_FILE ;
+
+            if ($filename =~ /endpoints/) {
+                $self->{reset_endpoints_data} = 1;
+            }
+            else {
+                $self->{reset_option_codes_data} = 1;
+            }
 
             # Make a backup copy
 
@@ -1171,7 +1193,9 @@ file.
 
 I<Default>: C<dist_file('Tesla-API', 'endpoints.json')>
 
-I<Override>: None
+I<Override>: C<$ENV{TESLA_API_ENDPOINTS_FILE}>. Note that this must be
+configured within a C<BEGIN> block, prior to the C<use Tesla::API> line for it
+to have effect.
 
 =head2 OPTION_CODES_FILE
 
@@ -1180,7 +1204,9 @@ for Tesla products.
 
 I<Default>: C<dist_file('Tesla-API', 'option_codes.json')>
 
-I<Override>: None
+I<Override>: C<$ENV{TESLA_API_OPTIONCODES_FILE}>. Note that this must be
+configured within a C<BEGIN> block, prior to the C<use Tesla::API> line for it
+to have effect.
 
 =head2 TOKEN_EXPIRY_WINDOW
 
