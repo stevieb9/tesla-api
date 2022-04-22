@@ -96,6 +96,44 @@ for my $type ('endpoints', 'option_codes') {
     }
 }
 
+# Files all updated
+{
+    for my $type ('endpoints', 'option_codes') {
+        if ($type eq 'endpoints') {
+            my $api_endpoints = $t->endpoints;
+
+            my $return = encode_json($endpoints);
+
+            $api_sub->return_value(
+                1,
+                200,
+                $return
+            );
+
+            $t->update_data_files($type);
+
+            $api_endpoints = $t->endpoints;
+            is keys %{$t->$type}, keys %$api_endpoints, "$type has proper entries ok";
+        }
+        else {
+            my $api_optcodes = $t->option_codes;
+
+            my $return = encode_json($optcodes);
+
+            $api_sub->return_value(
+                1,
+                200,
+                $return
+            );
+
+            $t->update_data_files($type);
+
+            $api_optcodes = $t->option_codes;
+            is keys %{$t->$type}, keys %$api_optcodes, "$type has proper entries ok";
+        }
+    }
+}
+
 my $endpoints_end = $ts->file_data($endpoints_file);
 my $optcodes_end = $ts->file_data($optcodes_file);
 
