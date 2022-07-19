@@ -1,7 +1,7 @@
 Revision history for Tesla-API
 
 1.02 UNREL
-    -
+    - Add uri(); Generates and returns a new URI object (to be inherited)
 
 1.01    2022-04-22
     - Unit test suite now has 90% coverage

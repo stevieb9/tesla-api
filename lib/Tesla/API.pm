@@ -112,7 +112,7 @@ sub api {
         }
     }
 
-    my $url = URI->new(URL_API . $uri);
+    my $url = $self->uri(URL_API . $uri);
 
     my $header = ['Content-Type' => 'application/json; charset=UTF-8'];
 
@@ -265,7 +265,7 @@ sub update_data_files {
 
         (my $data_method = $filename) =~ s/\.json//;
 
-        my $url = URI->new($data_url);
+        my $url = $self->uri($data_url);
 
         my $request = HTTP::Request->new('GET', $url,);
 
@@ -314,6 +314,15 @@ sub update_data_files {
             print $fh JSON->new->pretty->encode($new_data);
         }
     }
+}
+sub uri {
+    my ($self, $url) = @_;
+
+    if (! defined $url) {
+        croak "The uri() method requires a URL string sent in";
+    }
+
+    return URI->new($url);
 }
 sub useragent_string {
     my ($self, $ua_string) = @_;
@@ -388,7 +397,7 @@ sub _access_token_generate {
 
     my $auth_code = $self->_authentication_code;
 
-    my $url = URI->new(URL_TOKEN);
+    my $url = $self->uri(URL_TOKEN);
     my $header = ['Content-Type' => 'application/json; charset=UTF-8'];
 
     my $request_data = {
@@ -451,7 +460,7 @@ sub _access_token_refresh {
 
     my ($self) = @_;
 
-    my $url = URI->new(URL_TOKEN);
+    my $url = $self->uri(URL_TOKEN);
     my $header = ['Content-Type' => 'application/json; charset=UTF-8'];
 
     my $refresh_token = $self->_access_token_data->{refresh_token};
@@ -601,7 +610,7 @@ sub _authentication_code_url {
     # Generate Tesla's authentication URL
 
     my ($self) = @_;
-    my $auth_url = URI->new(URL_AUTH);
+    my $auth_url = $self->uri(URL_AUTH);
 
     my %params = (
         client_id             => 'ownerapi',
@@ -867,6 +876,16 @@ I<Optional, String>: One of B<endpoints> or B<option_codes>. If set, we'll
 operate on only that file.
 
 I<Return>: None. C<croak()>s on faiure.
+
+=head2 uri($url)
+
+Parameters:
+
+    $url
+
+I<Mandatory, String>: The URL to instantiate the object with.
+
+Instantiates and returns a new L</URI> object ready to be used.
 
 =head2 useragent_string($ua_string)
 
