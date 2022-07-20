@@ -538,7 +538,8 @@ sub _api_attempts {
     return $self->{api_attempts} || 0;
 }
 sub _api_cache {
-    # Stores the Tesla API fetched data
+    # Stores in the object's API cache slot the Tesla API fetched data
+
     my ($self, %params) = @_;
 
     my $endpoint = $params{endpoint};
@@ -557,7 +558,7 @@ sub _api_cache {
     return $api_cache{$self->uuid}->{$endpoint}{$id};
 }
 sub _api_cache_data {
-    # Returns the entire API cache (for testing)
+    # Returns the object's API cache slot data (for unit testing)
 
     my ($self) = @_;
     return %{ $api_cache{$self->uuid} };
