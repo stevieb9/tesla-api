@@ -15,6 +15,7 @@ use JSON;
 use MIME::Base64 qw(encode_base64url);
 use WWW::Mechanize;
 use URI;
+use UUID;
 
 our $VERSION = '1.02';
 
@@ -58,6 +59,8 @@ sub new {
     my $self = bless {}, $class;
 
     $self->endpoints;
+
+    $self->uuid;
 
     # Return early if the user specifies that they are
     # not authenticated. Use this param for unit tests
@@ -145,7 +148,7 @@ sub api {
 }
 sub api_cache_clear {
     my ($self) = @_;
-    %api_cache = ();
+    $api_cache{$self->uuid} = {};
 }
 sub api_cache_persist {
     my ($self, $persist) = @_;
@@ -347,7 +350,15 @@ sub useragent_timeout {
 
     return $self->{useragent_timeout} // USERAGENT_TIMEOUT;
 }
+sub uuid {
+    my ($self) = @_;
 
+    if (! defined $self->{uuid}) {
+        $self->{uuid} = UUID::uuid();
+    }
+
+    return $self->{uuid};
+}
 # Private methods
 
 sub _access_token {
@@ -536,15 +547,17 @@ sub _api_cache {
     }
 
     if ($data) {
-        $api_cache{$endpoint}{$id}{data} = $data;
-        $api_cache{$endpoint}{$id}{time} = time;
+        $api_cache{$self->uuid}->{$endpoint}{$id}{data} = $data;
+        $api_cache{$self->uuid}->{$endpoint}{$id}{time} = time;
     }
 
-    return $api_cache{$endpoint}{$id};
+    return $api_cache{$self->uuid}->{$endpoint}{$id};
 }
 sub _api_cache_data {
     # Returns the entire API cache (for testing)
-    return %api_cache;
+
+    my ($self) = @_;
+    return %{ $api_cache{$self->uuid} };
 }
 sub _authentication_cache_file {
     my ($self, $filename) = @_;
@@ -908,6 +921,15 @@ I<Optional, Integer/Float>: The timeout in seconds or fractions of a second.
 
 I<Return>: Integer/Float, the currently set value.
 
+=head2 uuid
+
+Each L</Tesla::API> object is identified internally by a unique identifier
+string. This method returns it for you.
+
+Example:
+
+    5A7C01A5-0C47-4815-8B33-9AE3A475FF01
+
 =head1 METHODS - API CACHE
 
 =head2 api_cache_clear
@@ -960,6 +982,12 @@ I<Return>: Integer, the number of seconds we're caching Tesla API data for.
 =head1 API CACHING
 
 We've employed a complex caching mechanism for data received from Tesla's API.
+
+Each L<Tesla::API> object you instantiate has its own cache storage.
+Modifications to the cache or any cache attributes or parameters will not
+affect the caching of other objects whether they be created in the same or a
+different process/script. The cache is kept separate by using the stored UUID
+of each object.
 
 By default, we cache retrieved data for every endpoint/ID pair in the cache for
 two seconds (modifiable by C<api_cache_timeout()>, or C<api_cache_timeout> in
