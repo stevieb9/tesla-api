@@ -220,7 +220,6 @@ sub option_codes {
     my ($self, $code) = @_;
 
     if (! $self->{option_codes} || $self->{reset_option_codes_data}) {
-        print "RESET DATA\n";
         $self->{reset_option_codes_data} = 0;
 
         my $json_option_codes;
@@ -756,8 +755,8 @@ Tesla::API - Interface to Tesla's API
 
 This distribution provides access to the Tesla API.
 
-This class is designed to be subclassed. For example, I have already begun a
-new L<Tesla::Vehicle> distribution which will have access and update methods
+This class is designed to be subclassed. For example, there's a new
+L<Tesla::Vehicle> distribution that has access and update methods
 that deal specifically with Tesla autos, then a C<Tesla::Powerwall>
 distribution for their battery storage etc.
 
