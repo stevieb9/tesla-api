@@ -24,8 +24,11 @@ $| = 1;
 my $home_dir;
 
 # The %api_cache hash is a cache for Tesla API call data across all objects.
-# It is managed by the _api_cache() private method. Each cache slot contains the
-# time() that it was stored, and will time out after
+# Each object which is identified by an internal UUID has a slot in this global
+# cache hash; each object has access only to its own slot.
+
+# The cache is managed by the _api_cache() private method. Each object's cache
+# slot contains the time() that it was stored, and will time out after
 # API_CACHE_TIMEOUT_SECONDS/api_cache_time()
 
 my %api_cache;
