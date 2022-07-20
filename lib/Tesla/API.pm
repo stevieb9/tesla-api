@@ -21,8 +21,6 @@ our $VERSION = '1.03';
 
 $| = 1;
 
-my $home_dir;
-
 # The %api_cache hash is a cache for Tesla API call data across all objects.
 # Each object which is identified by an internal UUID has a slot in this global
 # cache hash; each object has access only to its own slot.
@@ -32,6 +30,8 @@ my $home_dir;
 # API_CACHE_TIMEOUT_SECONDS/api_cache_time()
 
 my %api_cache;
+
+my $home_dir;
 
 BEGIN {
     $home_dir = File::HomeDir->my_home;
