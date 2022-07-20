@@ -13,9 +13,9 @@ use File::Share qw(:all);
 use HTTP::Request;
 use JSON;
 use MIME::Base64 qw(encode_base64url);
-use WWW::Mechanize;
 use URI;
 use UUID;
+use WWW::Mechanize;
 
 our $VERSION = '1.03';
 
