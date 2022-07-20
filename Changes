@@ -1,6 +1,6 @@
 Revision history for Tesla-API
 
-1.02 UNREL
+1.02    2022-07-19
     - Add uri(); Generates and returns a new URI object (to be inherited)
     - Add uuid(); Each object now has its own cache. All cache data and related
       mechanism attributes are confined and will not be modified by other
