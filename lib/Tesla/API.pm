@@ -901,7 +901,7 @@ Parameters:
 
 I<Mandatory, String>: The URL to instantiate the object with.
 
-Instantiates and returns a new L</URI> object ready to be used.
+Instantiates and returns a new L<URI> object ready to be used.
 
 =head2 useragent_string($ua_string)
 
@@ -926,7 +926,7 @@ I<Return>: Integer/Float, the currently set value.
 
 =head2 uuid
 
-Each L</Tesla::API> object is identified internally by a unique identifier
+Each L<Tesla::API> object is identified internally by a unique identifier
 string. This method returns it for you.
 
 Example:
