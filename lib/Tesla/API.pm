@@ -387,9 +387,9 @@ sub _access_token_data {
 
     my ($self, $data) = @_;
 
-    $self->{cache_data} = $data if defined $data;
+    $self->{auth_cache_data} = $data if defined $data;
 
-    return $self->{cache_data} if $self->{cache_data};
+    return $self->{auth_cache_data} if $self->{auth_cache_data};
 
     {
         local $/;
@@ -399,10 +399,10 @@ sub _access_token_data {
             ": $!";
 
         my $json = <$fh>;
-        $self->{cache_data} = decode_json($json);
+        $self->{auth_cache_data} = decode_json($json);
     }
 
-    return $self->{cache_data};
+    return $self->{auth_cache_data};
 }
 sub _access_token_generate {
     # Generates an access token and stores it in the cache file
