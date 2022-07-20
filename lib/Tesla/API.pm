@@ -361,6 +361,7 @@ sub uuid {
 
     return $self->{uuid};
 }
+
 # Private methods
 
 sub _access_token {
