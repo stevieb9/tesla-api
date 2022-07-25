@@ -1,0 +1,10 @@
+#!/usr/bin/env perl
+
+use warnings;
+use strict;
+
+use Tesla::API;
+
+my $api = Tesla::API->new;
+
+$api->update_data_files();

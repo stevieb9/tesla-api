@@ -1,7 +1,9 @@
 Revision history for Tesla-API
 
 1.03 UNREL
-    -
+    - Fix bug in update_data_files() where when a parameter wasn't sent in, we'd
+      try to use the file path and name instead of the URLs in the fetch HTTP
+      calls
 
 1.02    2022-07-19
     - Add uri(); Generates and returns a new URI object (to be inherited)

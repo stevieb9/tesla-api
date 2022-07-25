@@ -254,7 +254,7 @@ sub update_data_files {
         push @urls_to_process, URL_OPTION_CODES if $url_type eq 'option_codes';
     }
     else {
-        @urls_to_process = (ENDPOINTS_FILE, OPTION_CODES_FILE);
+        @urls_to_process = (URL_ENDPOINTS, URL_OPTION_CODES);
     }
 
     for my $data_url (@urls_to_process) {
@@ -263,7 +263,6 @@ sub update_data_files {
         if ($data_url =~ /.*\/(\w+\.json)$/) {
             $filename = $1;
         }
-
         if (! defined $filename) {
             croak "Couldn't extract the filename from '$data_url'";
         }
