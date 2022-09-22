@@ -49,11 +49,11 @@ my $t = Tesla::API->new(unauthenticated => 1);
 
     my @ret = $t->_tesla_api_call(10);
 
-    is $req_sub->called_count, 3, "request() was called only once ok";
-    is $t->_api_attempts, 3, "_tesla_api_call() only called once ok";
+    is $req_sub->called_count, 3, "request() was called three times ok";
+    is $t->_api_attempts, 3, "_tesla_api_call() called three times ok";
 
-    is $ret[0], 0, "is_success() returned 1 ok";
-    is $ret[1], 500, "code() returned 200 ok";
+    is $ret[0], 0, "is_success() returned 0 ok";
+    is $ret[1], 500, "code() returned 500 ok";
     is $ret[2], '{"error" : "500 - Timeout"}', "decoded_content() returned ok";
 }
 
