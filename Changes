@@ -4,6 +4,9 @@ Revision history for Tesla-API
     - Fix bug in update_data_files() where when a parameter wasn't sent in, we'd
       try to use the file path and name instead of the URLs in the fetch HTTP
       calls
+    - Add new X-Tesla-UserAgent constant; it's used in the Tesla API call for
+      retrieving specific data (Charging History) (PR from 'jankratochvil',
+      Thanks!)
 
 1.02    2022-07-19
     - Add uri(); Generates and returns a new URI object (to be inherited)

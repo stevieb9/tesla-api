@@ -46,6 +46,7 @@ use constant {
     ENDPOINTS_FILE              => $ENV{TESLA_API_ENDPOINTS_FILE} // dist_file('Tesla-API', 'endpoints.json'),
     OPTION_CODES_FILE           => $ENV{TESLA_API_OPTIONCODES_FILE} // dist_file('Tesla-API', 'option_codes.json'),
     TOKEN_EXPIRY_WINDOW         => 5,
+    TESLA_USER_AGENT            => 'TeslaApp/4.10.0', # Used for charging_history
     URL_API                     => 'https://owner-api.teslamotors.com/',
     URL_ENDPOINTS               => 'https://raw.githubusercontent.com/tdorssers/TeslaPy/master/teslapy/endpoints.json',
     URL_OPTION_CODES            => 'https://raw.githubusercontent.com/tdorssers/TeslaPy/master/teslapy/option_codes.json',
@@ -122,8 +123,7 @@ sub api {
 
     my $header = [
         'Content-Type' => 'application/json; charset=UTF-8',
-	# This header is required for charge_history.
-        'X-Tesla-User-Agent' => 'TeslaApp/4.10.0',
+        'X-Tesla-User-Agent' => TESLA_USER_AGENT,
     ];
 
     if ($auth) {
