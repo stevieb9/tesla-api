@@ -120,7 +120,11 @@ sub api {
 
     my $url = $self->uri(URL_API . $uri);
 
-    my $header = ['Content-Type' => 'application/json; charset=UTF-8'];
+    my $header = [
+        'Content-Type' => 'application/json; charset=UTF-8',
+	# This header is required for charge_history.
+        'X-Tesla-User-Agent' => 'TeslaApp/4.10.0',
+    ];
 
     if ($auth) {
         my $token_string = "Bearer " . $self->_access_token;
