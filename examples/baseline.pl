@@ -10,5 +10,5 @@ my $tesla = Tesla::API->new;
 
 #$tesla->useragent_timeout(0.1);
 
-print Dumper $tesla->api(endpoint => 'VEHICLE_LIST');
-say "endpoint: " . $tesla->_api_attempts;
+#print Dumper $tesla->api(endpoint => 'VEHICLE_LIST');
+#say "endpoint: " . $tesla->_api_attempts;

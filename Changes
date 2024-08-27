@@ -7,6 +7,9 @@ Revision history for Tesla-API
     - Add new X-Tesla-UserAgent constant; it's used in the Tesla API call for
       retrieving specific data (Charging History) (PR from 'jankratochvil',
       Thanks!)
+    - Fix 403 - Forbidden error, where in endpoints.json, 'vehicles' had changed
+      to 'products'. Issue submitted, and PR #14 created by jankratochvil.
+      Thanks! (fixes #15)
 
 1.02    2022-07-19
     - Add uri(); Generates and returns a new URI object (to be inherited)
