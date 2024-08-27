@@ -636,7 +636,7 @@
    "VEHICLE_LIST" : {
       "TYPE" : "GET",
       "AUTH" : true,
-      "URI" : "api/1/vehicles"
+      "URI" : "api/1/products"
    },
    "ROADSIDE_WARRANTY" : {
       "TYPE" : "GET",
